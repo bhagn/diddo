@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_cisco_diddo_entity_Task" items="${tasks}" z="ihTA9SSYOAHWf70KNGa/eacHo10=">
+        <table:table data="${tasks}" id="l_com_cisco_diddo_entity_Task" path="/tasks" z="YdAlAnkTuoy95EmyIg20hIX8Imk=">
+            <table:column id="c_com_cisco_diddo_entity_Task_taskNumber" property="taskNumber" z="FPNOQj5+fRVw++CQVaCeyZcgwkk="/>
+            <table:column id="c_com_cisco_diddo_entity_Task_description" property="description" z="Pz2ucCeS7sJlXi8dUyAyMtg8Pxc="/>
+            <table:column id="c_com_cisco_diddo_entity_Task_dots" property="dots" z="Q1gTWQfqGD4Q6FGqt50LY84N+hw="/>
+            <table:column id="c_com_cisco_diddo_entity_Task_status" property="status" z="s3isPKZyJyqY3QIauH0QJVm+MaI="/>
+            <table:column calendar="true" dateTimePattern="${task_startdate_date_format}" id="c_com_cisco_diddo_entity_Task_startDate" property="startDate" z="E4BZuVyP8yj3AbeHR9/KKWSIh4Y="/>
+            <table:column calendar="true" dateTimePattern="${task_enddate_date_format}" id="c_com_cisco_diddo_entity_Task_endDate" property="endDate" z="OrVpmA2WNamijGLBQ6xVpLHNhuA="/>
+        </table:table>
+    </page:list>
+</div>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_cisco_diddo_entity_Team" modelAttribute="team" path="/teams" versionField="none" z="KgmQFrAhIxP8kWokQbXh/73uieU=">
+        <field:input field="name" id="c_com_cisco_diddo_entity_Team_name" required="true" z="lCp2ceoMTXG2W5hMxXWrPuo2hPg="/>
+        <field:input field="email" id="c_com_cisco_diddo_entity_Team_email" required="true" validationMessageCode="field_invalid_email" z="3ZP0enBzR/6D8uk9PIgAeAyKzMA="/>
+    </form:update>
+</div>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_cisco_diddo_entity_Sprint" object="${sprint}" path="/sprints" z="os58/VkFYTGIOQ6LPGltpI+4tI8=">
+        <field:display field="sprintNo" id="s_com_cisco_diddo_entity_Sprint_sprintNo" object="${sprint}" z="EzXEB7D23iZe4QurRs85wSX653s="/>
+        <field:display calendar="true" dateTimePattern="${sprint_startdate_date_format}" field="startDate" id="s_com_cisco_diddo_entity_Sprint_startDate" object="${sprint}" z="Jv2Gt/CYnE1i/3pJBb557jd4rvI="/>
+        <field:display calendar="true" dateTimePattern="${sprint_enddate_date_format}" field="endDate" id="s_com_cisco_diddo_entity_Sprint_endDate" object="${sprint}" z="B+TOk2aG61mDnRRTIaB1ps4NSzk="/>
+        <field:display field="releaseVersion" id="s_com_cisco_diddo_entity_Sprint_releaseVersion" object="${sprint}" z="gwko105m1w+1LKuX8P31YSfpfak="/>
+    </page:show>
+</div>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition extends="default" name="scrummasters/list">
+        <put-attribute name="body" value="/WEB-INF/views/scrummasters/list.jspx"/>
+    </definition>
+<definition extends="default" name="scrummasters/show">
+        <put-attribute name="body" value="/WEB-INF/views/scrummasters/show.jspx"/>
+    </definition>
+<definition extends="default" name="scrummasters/create">
+        <put-attribute name="body" value="/WEB-INF/views/scrummasters/create.jspx"/>
+    </definition>
+<definition extends="default" name="scrummasters/update">
+        <put-attribute name="body" value="/WEB-INF/views/scrummasters/update.jspx"/>
+    </definition>
+</tiles-definitions>

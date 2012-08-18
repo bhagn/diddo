@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_cisco_diddo_entity_ExitCriteria" object="${exitcriteria}" path="/exitcriterias" z="boS0ZPdMUkOCoKEQNaueAgVTXNk=">
+        <field:display field="userStory" id="s_com_cisco_diddo_entity_ExitCriteria_userStory" object="${exitcriteria}" z="vtbvHyKGsYWmT2xJnTVI9o9S7js="/>
+        <field:display field="description" id="s_com_cisco_diddo_entity_ExitCriteria_description" object="${exitcriteria}" z="077Vkm0gqXq6ICmMUJxQshiPAG0="/>
+        <field:display field="done" id="s_com_cisco_diddo_entity_ExitCriteria_done" object="${exitcriteria}" z="60oCTk1PBilrxfZyvxg6nb7vJp4="/>
+    </page:show>
+</div>

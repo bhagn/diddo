@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_cisco_diddo_entity_UserStory" items="${userstorys}" z="Vj7X0br2t99HyqffRPOPlFTSmKo=">
+        <table:table data="${userstorys}" id="l_com_cisco_diddo_entity_UserStory" path="/userstorys" z="vw8qUCXaZOAUOTHAX6UEYAwtXcI=">
+            <table:column id="c_com_cisco_diddo_entity_UserStory_friendlyID" property="friendlyID" z="zmduav2Q5RmluYqKRqaPLruxWO0="/>
+            <table:column id="c_com_cisco_diddo_entity_UserStory_title" property="title" z="NWYzyRMpeTT3TaaisojsILWlNcw="/>
+            <table:column id="c_com_cisco_diddo_entity_UserStory_description" property="description" z="JXtCsBOurHr5qSxABAc8xary0h8="/>
+            <table:column id="c_com_cisco_diddo_entity_UserStory_points" property="points" z="H5fTlP0+uek0VsIuQCAgqEnp/bI="/>
+            <table:column id="c_com_cisco_diddo_entity_UserStory_burntPoints" property="burntPoints" z="yo878D4UbwgKO3Hx5EfnDkg+1qM="/>
+            <table:column calendar="true" dateTimePattern="${userStory_startdate_date_format}" id="c_com_cisco_diddo_entity_UserStory_startDate" property="startDate" z="dDTG08aq1ZMFzUpavva5AjqGlck="/>
+        </table:table>
+    </page:list>
+</div>

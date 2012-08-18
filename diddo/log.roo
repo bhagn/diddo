@@ -1,0 +1,78 @@
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-08-18 13:03:54
+project --topLevelPackage com.cisco.diddo
+mongo setup 
+entity mongo --class ~.entity.Team --testAutomatically 
+field string --fieldName name --notNull --unique --comment "Name of the Team"
+field string --fieldName email --notNull --comment "Mailer ID the Team"
+entity mongo --class ~.entity.User --testAutomatically 
+field string --fieldName username --notNull --unique --comment "Username of the User"
+field strin --fieldName email --notNull --comment "Email ID of the User"
+field reference --fieldName team --type ~.entity.Team --comment "The Team to which the User belongs to"
+entity mongo --class ~.entity.ScrumMaster --testAutomatically 
+field reference --fieldName scrumMaster --type ~.entity.User
+field reference --fieldName team --type ~.entity.Team
+field boolean --fieldName scrumMaster --value false --class ~.entity.User --comment "Is this user a Scrum Master"
+entity mongo --class ~.entity.Sprint --testAutomatically 
+field string --fieldName sprintNo --notNull --comment "A string/number representing the Sprint"
+field date --fieldName startDate --notNull --comment "The date on which Sprint starts" --type java.util.Calendar
+field date --fieldName endDate --comment "The date on which the Sprint ends" --type java.util.Calendar
+field string --fieldName releaseVersion --notNull --comment "The release for which the sprint is being created"
+entity mongo --class ~.entity.UserStory --testAutomatically 
+field string --fieldName friendlyID --notNull --comment "A friendly ID representing the User Story - ex: US-1"
+field string --fieldName title --notNull --comment "A Title representing the User Story"
+field string --fieldName description --sizeMax 1024 --comment "Description of the User Story"
+field number --fieldName points --notNull --type short --min 0 --comment "The number of points allotted to the User Story"
+field number --fieldName burntPoints --type short --min 0 --comment "The number of points burnt working on the User Story in the current sprint"
+field date --fieldName startDate --comment "The date on which US starts" --type java.util.Calendar
+field date --fieldName endDate --comment "The date on which US ends" --type java.util.Calendar
+field string --fieldName color --comment "Color of the Note that represents the User Story"
+field boolean --fieldName spillOver --value false --comment "Is this US spilled over"
+field boolean --fieldName unplanned --value false --comment "Is this an Unplanned User Story"
+field reference --fieldName sprint --type ~.entity.Sprint --notNull --comment "The sprint to which the User Story belongs to" --cardinality ONE_TO_ONE 
+field reference --fieldName team --type ~.entity.Team --comment "Which Team owns the User Story"
+entity mongo --class ~.entity.Task --testAutomatically 
+field string --fieldName taskNumber --notNull --comment "A String/Number identifying the Task - for display purpose"
+field string --fieldName description --sizeMax 1024 --comment "A brief description of the Task"
+field number --fieldName dots --type short --min 0 --comment "Spill Over value for Task"
+enum type --class ~.constants.TASK
+// [failed] enum constant --name NEW
+enum type --class ~.constants.TASK --permitReservedWords 
+// [failed] enum constant --name NEW
+enum constant --name NEW_TASK
+enum constant --name IN_PROGRESS
+enum constant --name COMPLETED
+field enum --fieldName status --type ~.constants.TASK --notNull --class ~.entity.Task --comment "The Status of the task"
+field date --fieldName startDate --comment "The date on which Task starts" --type java.util.Calendar
+field date --fieldName endDate --comment "The date on which Task ends" --type java.util.Calendar
+field boolean --fieldName complex --notNull --value false --comment "Is this a complex task?"
+field boolean --fieldName unplanned --notNull --value false --comment "Is this an unplanned Task?"
+field reference --fieldName owner --type ~.entity.User --comment "User who is going to work on this task"
+field reference --fieldName userStory --type ~.entity.UserStory --comment "The User Story to which this Task belongs to"
+entity mongo --class ~.entity.ExitCriteria --testAutomatically 
+field reference --fieldName userStory --type ~.entity.UserStory --comment "User story for which this exit criteria is being defined"
+// [failed] field reference --fieldName userStory --type ~.entity.UserStory --notNull  --comment "User story for which this exit criteria is being defined"
+field string --fieldName description --sizeMax 256 --notNull --comment "A brief description of the exit criteria"
+field boolean --fieldName done --value false --comment "Is this exit critera met?"
+entity mongo --class ~.entity.Impediment --testAutomatically 
+field string --fieldName description --notNull --sizeMax 1024 --comment "Description of the Impediment"
+field reference --fieldName sprint --type ~.entity.Sprint --notNull --comment "The sprint during which this impediment was raised"
+field reference --fieldName submitter --notNull --type ~.entity.User --comment "User who submitted the impediment"
+field date --fieldName submittedDate --comment "The date on which the impediment was raised" --type java.util.Calendar
+field boolean --fieldName closed --value false --comment "Is this Impediment handled and closed?"
+repository mongo --interface ~.dao.TeamDao --entity ~.entity.Team
+repository mongo --interface ~.dao.UserDao --entity ~.entity.User
+repository mongo --interface ~.dao.ScrumMasterDao --entity ~.entity.ScrumMaster
+repository mongo --interface ~.dao.SprintDao --entity ~.entity.Sprint
+repository mongo --interface ~.dao.UserStoryDao --entity ~.entity.UserStory
+repository mongo --interface ~.dao.TaskDao --entity ~.entity.Task
+repository mongo --interface ~.dao.ExitCriteraDao --entity ~.entity.ExitCriteria
+repository mongo --interface ~.dao.ImpedimentDao --entity ~.entity.Impediment
+web mvc setup
+web mvc all --package ~.web
+json all
+web mvc json all
+security setup
+quit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-08-18 14:56:57
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-08-18 15:18:32
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-08-18 15:47:00

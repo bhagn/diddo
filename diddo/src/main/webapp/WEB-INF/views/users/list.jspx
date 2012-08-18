@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_cisco_diddo_entity_User" items="${users}" z="0IB9ozeykCjTDw1Z1QgM18WDdm4=">
+        <table:table data="${users}" id="l_com_cisco_diddo_entity_User" path="/users" z="2nnx2+veHSFMZ51vH16ldzAisrQ=">
+            <table:column id="c_com_cisco_diddo_entity_User_username" property="username" z="UOkRl/gfGAvMzVX4qIUvwcKbKCM="/>
+            <table:column id="c_com_cisco_diddo_entity_User_email" property="email" z="F2rAMldZEz0l+Z2rvuXJfdfYqsY="/>
+            <table:column id="c_com_cisco_diddo_entity_User_team" property="team" z="imZnQYMacYuBvxua0GVLaq1k+BE="/>
+            <table:column id="c_com_cisco_diddo_entity_User_scrumMaster" property="scrumMaster" z="W9nW6rr26W9GlUsZREdnkZIIVF8="/>
+        </table:table>
+    </page:list>
+</div>

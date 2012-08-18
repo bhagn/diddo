@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_cisco_diddo_entity_ScrumMaster" items="${scrummasters}" z="mnYymcy8q8ak1aJ/ROwSaA9ZFQ8=">
+        <table:table data="${scrummasters}" id="l_com_cisco_diddo_entity_ScrumMaster" path="/scrummasters" z="q7i7SZB8UWKSlBPxxIpjNRm4fho=">
+            <table:column id="c_com_cisco_diddo_entity_ScrumMaster_scrumMaster" property="scrumMaster" z="59mgr1Vm7t8nrhlfEdPXLfRFkhc="/>
+            <table:column id="c_com_cisco_diddo_entity_ScrumMaster_team" property="team" z="n2U5ywS1/88/W1s7uKWc1Gx0IKk="/>
+        </table:table>
+    </page:list>
+</div>

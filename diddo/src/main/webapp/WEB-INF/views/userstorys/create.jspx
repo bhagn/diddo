@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:create id="fc_com_cisco_diddo_entity_UserStory" modelAttribute="userStory" path="/userstorys" render="${empty dependencies}" z="4tF/qbc14MG3ZOjND3hPQsIdHLc=">
+        <field:input field="friendlyID" id="c_com_cisco_diddo_entity_UserStory_friendlyID" required="true" z="P8hPbPHjCgLY4qfDP0DeoT5Q3uM="/>
+        <field:input field="title" id="c_com_cisco_diddo_entity_UserStory_title" required="true" z="btNDCocOyKtbJdVWeiGY9Qxxj7Y="/>
+        <field:textarea field="description" id="c_com_cisco_diddo_entity_UserStory_description" z="GS/a6rEqrHmqo+xEOe2Sc/EOW74="/>
+        <field:input field="points" id="c_com_cisco_diddo_entity_UserStory_points" min="0" required="true" z="e2YY7mSs/BQtx9Qs6XBnSG/9dx0="/>
+        <field:input field="burntPoints" id="c_com_cisco_diddo_entity_UserStory_burntPoints" min="0" required="true" z="Y9R0v9/a3q6NcQWC4hrqjYwM2Z8="/>
+        <field:datetime dateTimePattern="${userStory_startdate_date_format}" field="startDate" id="c_com_cisco_diddo_entity_UserStory_startDate" z="VMlM/+wPkjb2UsLjC45LoWHQlZo="/>
+        <field:datetime dateTimePattern="${userStory_enddate_date_format}" field="endDate" id="c_com_cisco_diddo_entity_UserStory_endDate" z="gmPM9apzblALHTXZFieoZ7ok2Ag="/>
+        <field:input field="color" id="c_com_cisco_diddo_entity_UserStory_color" z="qGUfX7EXNhQROgpWIahsOUYuAUc="/>
+        <field:checkbox field="spillOver" id="c_com_cisco_diddo_entity_UserStory_spillOver" z="bc4+B1FB5LIQ+IzVCKTqVL+GMzc="/>
+        <field:checkbox field="unplanned" id="c_com_cisco_diddo_entity_UserStory_unplanned" z="WEKkskiBRN5834uKIplGbAzqyBs="/>
+        <field:select field="sprint" id="c_com_cisco_diddo_entity_UserStory_sprint" itemValue="id" items="${sprints}" path="/sprints" required="true" z="PavtUBHJasLNTu5S+I5SaelLQO0="/>
+        <field:select field="team" id="c_com_cisco_diddo_entity_UserStory_team" itemValue="id" items="${teams}" path="/teams" z="HK+8IS2bYYKlRGAKFCWPL0evWsU="/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_com_cisco_diddo_entity_UserStory" render="${not empty dependencies}" z="c0+Ft4hn/QMV+98141JeWih8Zjw="/>
+</div>

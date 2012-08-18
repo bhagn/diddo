@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_cisco_diddo_entity_Sprint" modelAttribute="sprint" path="/sprints" versionField="none" z="OWyixiIMeaDVGWTWrwyCNlSa05E=">
+        <field:input field="sprintNo" id="c_com_cisco_diddo_entity_Sprint_sprintNo" required="true" z="FHU5ZK4wfUi92ZigYtIyuUvPTas="/>
+        <field:datetime dateTimePattern="${sprint_startdate_date_format}" field="startDate" id="c_com_cisco_diddo_entity_Sprint_startDate" required="true" z="cnv891ZeMMWPhV+qfKx6o86VcXM="/>
+        <field:datetime dateTimePattern="${sprint_enddate_date_format}" field="endDate" id="c_com_cisco_diddo_entity_Sprint_endDate" z="mvUqECnR35WJf1kQpAMnGhJuk4c="/>
+        <field:input field="releaseVersion" id="c_com_cisco_diddo_entity_Sprint_releaseVersion" required="true" z="qCeHQivulfhYtdtavhzSL/y6atM="/>
+    </form:update>
+</div>

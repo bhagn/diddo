@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_cisco_diddo_entity_Impediment" object="${impediment}" path="/impediments" z="STzGKuP5TE0/0Dah7dn2Rtb5JsI=">
+        <field:display field="description" id="s_com_cisco_diddo_entity_Impediment_description" object="${impediment}" z="XkWKROyNbH/5imUtIcp4Zf94rmQ="/>
+        <field:display field="sprint" id="s_com_cisco_diddo_entity_Impediment_sprint" object="${impediment}" z="8O4WkId2oQ+Oe4hUZtRjLeetstY="/>
+        <field:display field="submitter" id="s_com_cisco_diddo_entity_Impediment_submitter" object="${impediment}" z="2ouztb26FISJQRzRS+aH4W/e/fs="/>
+        <field:display calendar="true" dateTimePattern="${impediment_submitteddate_date_format}" field="submittedDate" id="s_com_cisco_diddo_entity_Impediment_submittedDate" object="${impediment}" z="ZgjeMHcTVVIIJx0PFiRoKwVsBqw="/>
+        <field:display field="closed" id="s_com_cisco_diddo_entity_Impediment_closed" object="${impediment}" z="fFo4zj/4NfEUV/0+akBMp+zj7VI="/>
+    </page:show>
+</div>
