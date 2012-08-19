@@ -25,11 +25,11 @@ body {
   display: block;
   margin-top: 50px;
 }
-.titleContainer > .green-text {
+.green-text {
   font-weight: 500;
   color: rgb(146, 208, 80);
 }
-.titleContainer > .red-text {
+.red-text {
   color: rgb(255, 192, 0);
   font-weight: 900;
 }

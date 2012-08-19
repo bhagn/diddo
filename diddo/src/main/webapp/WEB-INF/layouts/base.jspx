@@ -16,7 +16,10 @@
   	<body class="claro">
   	  <div class="container">
 		    <tiles:insertAttribute name="header-new" ignore="true" />
-	    	<tiles:insertAttribute name="body"/>
+		    <div style="margin-top:50px">
+		      <tiles:insertAttribute name="menu" ignore="true" />
+	    	  <tiles:insertAttribute name="body"/>
+	    	</div>
 	  </div>
 	</body>
 </html>

@@ -18,6 +18,7 @@
   
   <definition name="default-base" template="/WEB-INF/layouts/base.jspx">
     <put-attribute name="header-new" value="/WEB-INF/views/header-new.jsp" />
+    <put-attribute name="menu" value="/WEB-INF/views/menu.jspx" />
   </definition>
   
   <definition name="public-base" template="/WEB-INF/layouts/base.jspx">
