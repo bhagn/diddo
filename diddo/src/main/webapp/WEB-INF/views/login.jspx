@@ -3,20 +3,56 @@
   <jsp:output omit-xml-declaration="yes" />
   
   <div class="loginContainer">
-    <div class="titleContainer pull-left">
+    <div id="title" class="titleContainer pull-left">
       <span class="green-text">Did</span><span class="red-text">DO</span><br/>
       <span class="subtitle">Scrum Anywhere, Anytime..</span>
     </div>
+    <div id="loading" style="display: none;width:700px;margin-top:50px;text-align:right;">
+     <img src="resources/img/loader.gif"/>
+    </div>
     <spring:url value="/resources/j_spring_security_check" var="form_url" />
-    <form name="f" action="${fn:escapeXml(form_url)}" method="POST" class="loginFormContainer pull-right">
+    <form id="loginForm" name="f" action="${fn:escapeXml(form_url)}" method="POST" class="loginFormContainer pull-right">
       <span class="loginFormLabel">Username</span>
       <input type="text" placeholder="Username" name="j_username" />
       <span class="loginFormLabel">Password</span>
       <input type="password" placeholder="Password" name="j_password" />
       <br/>
-      <input type="submit" value="Login" class="btn btn-success btn-mini" style="margin-top: 5px;display:block; float:right;" />
+      <input id="login" type="button" value="Login" class="btn btn-success btn-mini" style="margin-top: 5px;display:block; float:right;" />
+      <script>
+          require(["dojo/_base/fx", "dojo/fx", "dojo/dom", "dojo/on", "dojo/domReady!"], function(baseFx, fx, dom, on) {
+        	var submitButton = dom.byId("login");
+        	var form = dom.byId("loginForm");
+        	var title = dom.byId("title");
+        	on(submitButton, "click", function(evt) {
+        	  console.log("clicked");
+        	  fx.combine([baseFx.animateProperty({
+        		duration: 200,
+        		node: form,
+        		properties: {opacity: 0, padding: 0}, 
+        	  }),
+        	  baseFx.animateProperty({
+                node: form,
+                properties: {width: 0},
+                delay: 900,
+                duration:100,
+                onEnd: function(evt) {
+                	document.getElementById("loginForm").submit();
+                }
+        	  }),
+        	  baseFx.animateProperty({
+        		node: title,
+        		duration: 500,
+        		properties: {width: 700},
+        		onEnd: function(evt) {
+        			dom.byId("loading").style.display = "block";
+        		}
+        	  })]).play();
+        	});
+          })
+      </script>
     </form>
   </div>
+  
   <c:if test="${not empty param.login_error}">
     <div class="loginErrorMessage">
       <spring:message code="security_login_unsuccessful" />
