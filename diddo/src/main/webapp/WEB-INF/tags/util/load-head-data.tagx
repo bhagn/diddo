@@ -1,0 +1,25 @@
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+
+  <jsp:output omit-xml-declaration="yes" />
+
+  <spring:url value="http://ajax.googleapis.com/ajax/libs/dojo/1.8.0/dojo/dojo.js" var="dojo_url" />
+  <spring:url value="http://ajax.googleapis.com/ajax/libs/dojo/1.8.0/dijit/themes/claro/claro.css" var="claro_url" />
+  <spring:url value="/resources/css/bootstrap.css" var="bootstrap_css_url" />
+  <spring:url value="/resources/css/custom.css" var="custom_css_url" />
+  <spring:url value="/resources/images/favicon.ico" var="favicon" />
+  
+  <link rel="stylesheet" type="text/css" href="${claro_url}" />
+  <link rel="stylesheet" type="text/css" media="screen" href="${bootstrap_css_url}" />
+  <link rel="stylesheet" type="text/css" media="screen" href="${custom_css_url}" />
+  <link rel="SHORTCUT ICON" href="${favicon}" />
+
+  <script>
+    var dojoConfig = {
+      packages: [{name: 'custom', location: '/resources/custom-dojo'}],
+      isDebug: false,
+      async: true
+    };
+  </script>
+  <script src="${dojo_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
+
+</jsp:root>

@@ -15,5 +15,13 @@
     <put-attribute name="header" value="/WEB-INF/views/header.jspx" />
     <put-attribute name="footer" value="/WEB-INF/views/footer.jspx" />
   </definition>
+  
+  <definition name="default-base" template="/WEB-INF/layouts/base.jspx">
+    <put-attribute name="header-new" value="/WEB-INF/views/header-new.jsp" />
+  </definition>
+  
+  <definition name="public-base" template="/WEB-INF/layouts/base.jspx">
+    
+  </definition>
 
 </tiles-definitions>
