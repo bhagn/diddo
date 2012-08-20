@@ -23,11 +23,11 @@
         	var submitButton = dom.byId("login");
         	var form = dom.byId("loginForm");
         	var title = dom.byId("title");
-        	if(dom.byId("loginError")) dom.byId("loginError").style.display = "none";
+        	
         	on(submitButton, "click", function(evt) {
-        	  console.log("clicked");
+        	  if(dom.byId("loginError")) dom.byId("loginError").style.display = "none";
         	  fx.combine([baseFx.animateProperty({
-        		duration: 200,
+        		duration: 100,
         		node: form,
         		properties: {opacity: 0, padding: 0}, 
         	  }),

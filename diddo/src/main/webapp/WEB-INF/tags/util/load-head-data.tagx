@@ -15,7 +15,7 @@
 
   <script>
     var dojoConfig = {
-      packages: [{name: 'custom', location: '/resources/custom-dojo'}],
+      packages: [{name: 'custom', location: '/diddo/resources/custom-dojo'}],
       isDebug: false,
       async: true
     };
