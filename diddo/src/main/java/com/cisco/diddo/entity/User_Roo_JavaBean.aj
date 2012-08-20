@@ -40,4 +40,12 @@ privileged aspect User_Roo_JavaBean {
         this.scrumMaster = scrumMaster;
     }
     
+    public String User.getPassword() {
+        return this.password;
+    }
+    
+    public void User.setPassword(String password) {
+        this.password = password;
+    }
+    
 }

@@ -7,5 +7,6 @@
         <field:display field="email" id="s_com_cisco_diddo_entity_User_email" object="${user}" z="pdfXSZlGrTGSpqPrlRB7PnmdvX8="/>
         <field:display field="team" id="s_com_cisco_diddo_entity_User_team" object="${user}" z="rSViDDSCOKezSMQafWBtME2wnxc="/>
         <field:display field="scrumMaster" id="s_com_cisco_diddo_entity_User_scrumMaster" object="${user}" z="qU40LQ/r06sRR8sYrXL89eY60M8="/>
+        <field:display field="password" id="s_com_cisco_diddo_entity_User_password" object="${user}" z="np3ySrylAN+ipyekr7LCD74xt/w="/>
     </page:show>
 </div>

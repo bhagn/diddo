@@ -201,7 +201,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<User, String> ApplicationConversionServiceFactoryBean.getUserToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.cisco.diddo.entity.User, java.lang.String>() {
             public String convert(User user) {
-                return new StringBuilder().append(user.getUsername()).append(' ').append(user.getEmail()).toString();
+                return new StringBuilder().append(user.getUsername()).append(' ').append(user.getEmail()).append(' ').append(user.getPassword()).toString();
             }
         };
     }

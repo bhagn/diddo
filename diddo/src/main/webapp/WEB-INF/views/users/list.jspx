@@ -8,6 +8,7 @@
             <table:column id="c_com_cisco_diddo_entity_User_email" property="email" z="F2rAMldZEz0l+Z2rvuXJfdfYqsY="/>
             <table:column id="c_com_cisco_diddo_entity_User_team" property="team" z="imZnQYMacYuBvxua0GVLaq1k+BE="/>
             <table:column id="c_com_cisco_diddo_entity_User_scrumMaster" property="scrumMaster" z="W9nW6rr26W9GlUsZREdnkZIIVF8="/>
+            <table:column id="c_com_cisco_diddo_entity_User_password" property="password" z="Iv54O7u2R274qonK3FpzQTAd5R8="/>
         </table:table>
     </page:list>
 </div>

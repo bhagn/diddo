@@ -7,6 +7,7 @@
         <field:input field="email" id="c_com_cisco_diddo_entity_User_email" required="true" validationMessageCode="field_invalid_email" z="bbSajrLpQTw5IiArNM/gZxYktUk="/>
         <field:select field="team" id="c_com_cisco_diddo_entity_User_team" itemValue="id" items="${teams}" path="/teams" z="1mzYu5AlkRBiz9y6Gf8kdwRBLwk="/>
         <field:checkbox field="scrumMaster" id="c_com_cisco_diddo_entity_User_scrumMaster" z="B5zAVhwwLJqQUNzI/fJ41piiKoY="/>
+        <field:input field="password" id="c_com_cisco_diddo_entity_User_password" max="20" min="6" required="true" z="adzq4kzeKPoqKpWzCcf+YAGu1TY="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_cisco_diddo_entity_User" render="${not empty dependencies}" z="6plGDAHurudHqvQH1E6U3byAsJ8="/>
 </div>

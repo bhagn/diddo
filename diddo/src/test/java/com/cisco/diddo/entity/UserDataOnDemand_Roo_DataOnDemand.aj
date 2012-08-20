@@ -35,6 +35,7 @@ privileged aspect UserDataOnDemand_Roo_DataOnDemand {
     public User UserDataOnDemand.getNewTransientUser(int index) {
         User obj = new User();
         setEmail(obj, index);
+        setPassword(obj, index);
         setScrumMaster(obj, index);
         setUsername(obj, index);
         return obj;
@@ -43,6 +44,14 @@ privileged aspect UserDataOnDemand_Roo_DataOnDemand {
     public void UserDataOnDemand.setEmail(User obj, int index) {
         String email = "foo" + index + "@bar.com";
         obj.setEmail(email);
+    }
+    
+    public void UserDataOnDemand.setPassword(User obj, int index) {
+        String password = "password_" + index;
+        if (password.length() > 20) {
+            password = password.substring(0, 20);
+        }
+        obj.setPassword(password);
     }
     
     public void UserDataOnDemand.setScrumMaster(User obj, int index) {

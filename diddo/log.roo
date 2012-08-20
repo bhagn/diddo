@@ -76,3 +76,27 @@ quit
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-08-18 14:56:57
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-08-18 15:18:32
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-08-18 15:47:00
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-08-20 13:20:28
+hint finder
+hint
+help
+help finder
+hint
+hint finders
+help
+hint finders
+field string --fieldName password --class ~.entity.User --notNull --sizeMin 6 --sizeMax 20 
+hint finder
+help finder
+hint
+hint fields
+hint finders
+download status
+download accept terms of use
+hint
+hint finders
+help
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-08-20 13:34:24
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-08-20 13:34:43
+focus --class ~.entity.User 
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-08-20 13:41:40
