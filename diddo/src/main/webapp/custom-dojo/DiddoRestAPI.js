@@ -3,81 +3,47 @@ define(["dojo/_base/declare","dijit/_WidgetBase", "dojox/rpc/Rest"],
 	return(declare("DiddoRestAPI", [], {
 		serviceURL: null,
 		service: null,
-		templateString: null,
 		
-		constructor: function(url) {
-			if(arguments.length == 0 || !url || url.length <= 0) {
-				console.error("Invalid service URL");
+		constructor: function(serviceName) {
+			this.inherited(arguments);
+			if(arguments.length == 0 || !serviceName || serviceName.length <= 0) {
+				console.error("Invalid service Name");
 				this.help();
 				return;
 			}
-			if(url[url.length-1] != '/')
-				url += "/";
-			this.serviceURL = url;
+			if(serviceName[serviceName.length-1] != '/')
+				serviceName += "/";
+			this.serviceURL = serviceName;
 			this.service = Rest(this.serviceURL, true);
-			this.inherited(arguments);
 		},
 		
 		help: function() {
-			if(arguments.length == 0)
-				var items = ["all", "getItem", "getItems", "putItem"];
-			else
-				var items = [arguments[0]];
 			console.log("Usage: ");
-			if("all" in items)
-				console.log("var service = new custom.DiddoRestAPI(\"users\")");
-			if("getItem" in items)
-				console.log("Get a resource: service.getItem(userId, callbackFunc [, errback])");
-			if("getItems" in items)
-				console.log("Get a resource: service.getItems(callbackFunc [, errback])");
-			if("updateItem" in items)
-				console.log("Edit a resource: service.updateItem([name|id], {properties}, callbackFunc [, errback])");
-			if("addItem" in items)
-				console.log("Edit a resource: service.putItem([name|id], {properties}, callbackFunc [, errback])");
+			console.log("var service = new custom.DiddoRestAPI(\"users\")");
+			console.log("Get a resource: service.getItem(userId, callbackFunc [, errback])");
+			console.log("Get a resource: service.getItems(callbackFunc [, errback])");
+			console.log("Edit a resource: service.updateItem([name|id], {properties}, callbackFunc [, errback])");
+			console.log("Edit a resource: service.addItem([name|id], {properties}, callbackFunc [, errback])");
 		},
 		
 		getItem: function(id, callback, errback) {
-			if(!callback) {
-				console.error("Callback not registered");
-				this.help("getItem");
-				return;
-			}
-			var deferred = this.service(id);
-			deferred.load = callback;
-			deferred.error = errback || this.showError;
+			this.service(id).then(callback || this.defaultCallback, errback || this.showError);
 		},
 		
 		getItems: function(callback, errback) {
-			if(!callback) {
-				console.error("Callback not registered");
-				this.help("getItems");
-				return;
-			}
-			var deferred = this.service();
-			deferred.load = callback;
-			deferred.error = errback || this.showError;
+			this.service().then(callback || this.defaultCallback, errback || this.showError);
 		},
 		
 		updateItem: function(name, params, callback, errback) {
-			if(!callback) {
-				console.error("Callback not registered");
-				this.help("updateItem");
-				return;
-			}
-			var deferred = this.service.put(name, params);
-			deferred.load = callback;
-			deferred.error = errback || this.showError;
+			this.service.put(name, params).then(callback || this.defaultCallback, errback || this.showError);
 		},
 		
 		addItem: function(name, params, callback, errback) {
-			if(!callback) {
-				console.error("Callback not registered");
-				this.help("addItem");
-				return;
-			}
-			var deferred = this.service.post(name, params);
-			deferred.load = callback;
-			deferred.error = errback || this.showError;
+			this.service.post(name, params).then(callback || this.defaultCallback, errback || this.showError);
+		},
+		
+		defaultCallback: function(response) {
+			console.log(response);
 		},
 		
 		showError: function(error) {

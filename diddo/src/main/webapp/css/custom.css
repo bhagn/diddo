@@ -83,20 +83,21 @@ input {
   min-width: 200px;
   border-radius: 5px;
   border: none !important;
-  color: #ffffff;
 }
 
 .myDialog > .dijitDialogTitleBar {
-border: none;
-background: none;
-color: #ffffff !important;
-border-radius: 5px 5px 0px 0px;
+  border: none;
+  background: none;
+  color: #ffffff !important;
+  border-radius: 5px 5px 0px 0px;
 }
 .myDialog > .dijitDialogPaneContent {
-margin: 20px 20px 30px 20px;
-min-height: 75px;
+  margin: 20px 20px 20px 20px;
 }
 
+.myDialog .dijitDialogTitle {
+  color: #ffffff !important;
+}
 
 .dark-blue {
   background-color: #0074cc;
