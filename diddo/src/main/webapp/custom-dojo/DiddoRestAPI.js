@@ -5,7 +5,7 @@ define(["dojo/_base/declare","dijit/_WidgetBase", "dojox/rpc/Rest"],
 		service: null,
 		
 		constructor: function(serviceName) {
-			this.inherited(arguments);
+			//this.inherited(arguments);
 			if(arguments.length == 0 || !serviceName || serviceName.length <= 0) {
 				console.error("Invalid service Name");
 				this.help();
@@ -20,10 +20,11 @@ define(["dojo/_base/declare","dijit/_WidgetBase", "dojox/rpc/Rest"],
 		help: function() {
 			console.log("Usage: ");
 			console.log("var service = new custom.DiddoRestAPI(\"users\")");
-			console.log("Get a resource: service.getItem(userId, callbackFunc [, errback])");
-			console.log("Get a resource: service.getItems(callbackFunc [, errback])");
-			console.log("Edit a resource: service.updateItem([name|id], {properties}, callbackFunc [, errback])");
-			console.log("Edit a resource: service.addItem([name|id], {properties}, callbackFunc [, errback])");
+			console.log("Get a resource: service.getItem(id[, callbackFunc [, errback])");
+			console.log("Get a resource: service.getItems([callbackFunc [, errback])");
+			console.log("Edit a resource: service.updateItem({properties}[, callbackFunc [, errback])");
+			console.log("Edit a resource: service.addItem({properties}[, callbackFunc [, errback])");
+			console.log("Delete a resource: service.removeItem(id[, callbackFunc [, errback])");
 		},
 		
 		getItem: function(id, callback, errback) {
@@ -34,12 +35,16 @@ define(["dojo/_base/declare","dijit/_WidgetBase", "dojox/rpc/Rest"],
 			this.service().then(callback || this.defaultCallback, errback || this.showError);
 		},
 		
-		updateItem: function(name, params, callback, errback) {
-			this.service.put(name, params).then(callback || this.defaultCallback, errback || this.showError);
+		updateItem: function(params, callback, errback) {
+			this.service.put('', dojo.toJson(params)).then(callback || this.defaultCallback, errback || this.showError);
 		},
 		
-		addItem: function(name, params, callback, errback) {
-			this.service.post(name, params).then(callback || this.defaultCallback, errback || this.showError);
+		addItem: function(params, callback, errback) {
+			this.service.post('', dojo.toJson(params)).then(callback || this.defaultCallback, errback || this.showError);
+		},
+		
+		removeItem: function(name, callback, errback) {
+			this.service["delete"](name).then(callback || this.defaultCallback, errback || this.showError);
 		},
 		
 		defaultCallback: function(response) {
