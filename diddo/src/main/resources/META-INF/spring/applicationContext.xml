@@ -50,5 +50,9 @@
         <context:exclude-filter expression=".*_Roo_.*" type="regex"/>
         <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
     </context:component-scan>
-
+    <bean id="diddoAuthenticationProvider"
+        class="com.cisco.diddo.security.DiddoAuthenticationProvider">
+	</bean>
+    <bean id="schedule"
+        class="com.cisco.diddo.businesslogic.ImpedimentScheduler" init-method="init"/>  
 </beans>

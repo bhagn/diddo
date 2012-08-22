@@ -11,24 +11,13 @@
       <div class="nav-collapse collapse">
         <ul class="nav">
           <li class="">
-            <a href="users">Users</a>
+            <a href="/diddo/">Scrum</a>
           </li>
           <li class="">
-            <a href="teams">Teams</a>
-          </li>
-          <li class="">
-            <a href="sprints">Sprints</a>
-          </li>
-          <li class="">
-            <a href="userstorys">User Stories</a>
-          </li>
-          <li class="">
-            <a href="Tasks">Tasks</a>
-          </li>
-          <li class="">
-            <a href="Impediments">Impediments</a>
+            <a href="impediments">Impediments</a>
           </li>
         </ul>
+		<div align="right" ><a class="brand" href="resources/j_spring_security_logout"><span class="green-text">Logout</span></a></div>
       </div>
     </div>
   </div>

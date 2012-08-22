@@ -8,4 +8,5 @@ import org.springframework.roo.addon.layers.repository.mongo.RooMongoRepository;
 public interface SprintDao {
 
     List<com.cisco.diddo.entity.Sprint> findAll();
+    long count();
 }

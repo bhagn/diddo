@@ -8,4 +8,7 @@ import org.springframework.roo.addon.layers.repository.mongo.RooMongoRepository;
 public interface UserDao {
 
     List<com.cisco.diddo.entity.User> findAll();
+    User save(User user);
+
+	long count();
 }

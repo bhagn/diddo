@@ -18,18 +18,18 @@ public class User {
 
     @NotNull
     @Column(unique = true)
-    private String username;
+    public String username;
 
     @NotNull
-    private String email;
+    public String email;
 
     @ManyToOne
-    private Team team;
+    public Team team;
 
-    @Value("false")
-    private Boolean scrumMaster;
+    @NotNull
+    public boolean scrumMaster;
 
     @NotNull
     @Size(min = 6, max = 20)
-    private String password;
+    public String password;
 }

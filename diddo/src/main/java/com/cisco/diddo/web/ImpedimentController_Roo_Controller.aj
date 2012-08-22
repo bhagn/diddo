@@ -28,14 +28,14 @@ import org.springframework.web.util.WebUtils;
 
 privileged aspect ImpedimentController_Roo_Controller {
     
-    @Autowired
+    /*@Autowired
     ImpedimentDao ImpedimentController.impedimentDao;
     
     @Autowired
     SprintDao ImpedimentController.sprintDao;
     
     @Autowired
-    UserDao ImpedimentController.userDao;
+    UserDao ImpedimentController.userDao;*/
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String ImpedimentController.create(@Valid Impediment impediment, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -48,7 +48,7 @@ privileged aspect ImpedimentController_Roo_Controller {
         return "redirect:/impediments/" + encodeUrlPathSegment(impediment.getId().toString(), httpServletRequest);
     }
     
-    @RequestMapping(params = "form", produces = "text/html")
+   /* @RequestMapping(params = "form", produces = "text/html")
     public String ImpedimentController.createForm(Model uiModel) {
         populateEditForm(uiModel, new Impediment());
         List<String[]> dependencies = new ArrayList<String[]>();
@@ -60,7 +60,7 @@ privileged aspect ImpedimentController_Roo_Controller {
         }
         uiModel.addAttribute("dependencies", dependencies);
         return "impediments/create";
-    }
+    } */
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String ImpedimentController.show(@PathVariable("id") BigInteger id, Model uiModel) {
@@ -69,7 +69,7 @@ privileged aspect ImpedimentController_Roo_Controller {
         uiModel.addAttribute("itemId", id);
         return "impediments/show";
     }
-    
+    /*
     @RequestMapping(produces = "text/html")
     public String ImpedimentController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         if (page != null || size != null) {
@@ -83,7 +83,7 @@ privileged aspect ImpedimentController_Roo_Controller {
         }
         addDateTimeFormatPatterns(uiModel);
         return "impediments/list";
-    }
+    }*/
     
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String ImpedimentController.update(@Valid Impediment impediment, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -112,7 +112,7 @@ privileged aspect ImpedimentController_Roo_Controller {
         return "redirect:/impediments";
     }
     
-    void ImpedimentController.addDateTimeFormatPatterns(Model uiModel) {
+    /*void ImpedimentController.addDateTimeFormatPatterns(Model uiModel) {
         uiModel.addAttribute("impediment_submitteddate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
     }
     
@@ -121,7 +121,7 @@ privileged aspect ImpedimentController_Roo_Controller {
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("sprints", sprintDao.findAll());
         uiModel.addAttribute("users", userDao.findAll());
-    }
+    }*/
     
     String ImpedimentController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
         String enc = httpServletRequest.getCharacterEncoding();
