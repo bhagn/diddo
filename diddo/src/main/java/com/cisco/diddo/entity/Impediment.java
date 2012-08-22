@@ -36,5 +36,5 @@ public class Impediment {
     private Calendar submittedDate;
 
     @Value("false")
-    private Boolean closed;
+    private boolean closed;
 }
