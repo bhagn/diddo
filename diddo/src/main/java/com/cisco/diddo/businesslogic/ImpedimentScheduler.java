@@ -36,7 +36,7 @@ public class ImpedimentScheduler {
     @Autowired
     public TeamDao teamDao;
     
-    private long dateIntervalInSecs = 1000*60l;
+    private long dateIntervalInSecs = 1000*60*60*24l;
     
     private DateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
 
