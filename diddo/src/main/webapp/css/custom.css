@@ -79,6 +79,10 @@ input {
   #margin-bottom: 0px !important;
 }
 
+.dijitBorderContainer-dijitContentPane {
+	background: none !important;
+}
+
 .myDialog {
   min-width: 200px;
   border-radius: 5px;

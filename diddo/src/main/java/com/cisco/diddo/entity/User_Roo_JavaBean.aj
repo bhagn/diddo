@@ -32,11 +32,11 @@ privileged aspect User_Roo_JavaBean {
         this.team = team;
     }
     
-    public Boolean User.getScrumMaster() {
+    public boolean User.isScrumMaster() {
         return this.scrumMaster;
     }
     
-    public void User.setScrumMaster(Boolean scrumMaster) {
+    public void User.setScrumMaster(boolean scrumMaster) {
         this.scrumMaster = scrumMaster;
     }
     

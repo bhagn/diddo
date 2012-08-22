@@ -1,0 +1,35 @@
+.diddoWidgetHeader {
+	font-size: 25px;
+}
+
+.diddoTitle {
+	font-size: 18px;
+	display: block;
+}
+
+.diddoSubTitle, .diddoMailer {
+	font-size: 10px;
+	display: block;
+	color: gray;
+}
+
+.diddoMailer:hover {
+	color: #fff;
+}
+
+.diddoControls {
+	float: right;
+}
+
+.team {
+	border: solid;
+	border-color: gray;
+	border-width: 1px;
+	margin: 10px;
+	padding: 10px;
+}
+
+.team:hover {
+	background: #000;
+	cursor: pointer;
+}
