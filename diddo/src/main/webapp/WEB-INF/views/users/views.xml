@@ -7,8 +7,8 @@
 <definition extends="default" name="users/show">
         <put-attribute name="body" value="/WEB-INF/views/users/show.jspx"/>
     </definition>
-<definition extends="default" name="users/create">
-        <put-attribute name="body" value="/WEB-INF/views/users/create.jspx"/>
+<definition extends="form-base" name="users/create">
+        <put-attribute name="form" value="/WEB-INF/views/users/create.jspx"/>
     </definition>
 <definition extends="default" name="users/update">
         <put-attribute name="body" value="/WEB-INF/views/users/update.jspx"/>

@@ -24,5 +24,9 @@
   <definition name="public-base" template="/WEB-INF/layouts/base.jspx">
     
   </definition>
+  
+  <definition name="form-base" template="/WEB-INF/layouts/form.jspx">
+    
+  </definition>
 
 </tiles-definitions>
