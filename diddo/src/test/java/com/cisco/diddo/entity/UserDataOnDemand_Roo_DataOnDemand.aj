@@ -55,7 +55,7 @@ privileged aspect UserDataOnDemand_Roo_DataOnDemand {
     }
     
     public void UserDataOnDemand.setScrumMaster(User obj, int index) {
-        Boolean scrumMaster = Boolean.TRUE;
+        Boolean scrumMaster = true;
         obj.setScrumMaster(scrumMaster);
     }
     

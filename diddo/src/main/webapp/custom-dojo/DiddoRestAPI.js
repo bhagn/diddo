@@ -13,7 +13,7 @@ define(["dojo/_base/declare","dijit/_WidgetBase", "dojox/rpc/Rest"],
 			}
 			if(serviceName[serviceName.length-1] != '/')
 				serviceName += "/";
-			this.serviceURL = serviceName;
+			this.serviceURL = "/diddo/" + serviceName;
 			this.service = Rest(this.serviceURL, true);
 		},
 		

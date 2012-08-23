@@ -1,12 +1,27 @@
 define(["dojo/_base/declare","dijit/_WidgetBase", "custom/DiddoRestAPI", "dijit/Dialog", "dijit/form/Button"], 
 		function(declare,_WidgetBase, RestAPI, Dialog, Button) {
-	return(declare("DiddoRestUI", [RestAPI], {
+	return(declare("DiddoRestUI", null, {
+		restAPI: null,
+		
+		constructor: function(serviceName) {
+			this.restAPI = new RestAPI(serviceName);
+		},
+		
+		get: function(name, callback, errback) {
+			this.restAPI.getItem(name, callback, errback || this.showError);
+		},
+		
+		getAll: function(callback, errback) {
+			this.restAPI.getItems(callback, errback || this.showError);
+		}, 
 		
 		add: function(callback, errback) {
-			var service = this.service;
+			var callback = callback;
+			var errback = errback || this.showError;
+			var service = this.restAPI;
 			var dialog = new Dialog({
 				title: "Add",
-				href: this.serviceURL +"?form",
+				href: this.restAPI.serviceURL +"?form",
 				parseOnLoad: true,
 				baseClass: 'myDialog blue'
 			});
@@ -17,7 +32,7 @@ define(["dojo/_base/declare","dijit/_WidgetBase", "custom/DiddoRestAPI", "dijit/
 				onClick: function(evt) {
 					form.validate();
 					if(form.isValid) {
-						service.addItem(form.getValues(), callback, errback || this.showError);
+						service.addItem(form.getValues(), callback, errback);
 						dialog.destroyRecursive();
 					}
 				}
@@ -38,11 +53,13 @@ define(["dojo/_base/declare","dijit/_WidgetBase", "custom/DiddoRestAPI", "dijit/
 		
 		update: function(name, callback, errback) {
 			if(!name || name.length == 0)
-				this.showError({message: 'Provide the name of the Entity to update as a Parameter'});
-			var service = this.service;
+				return this.showError({message: 'Provide the name of the Entity to update as a Parameter'});
+			var callback = callback;
+			var errback = errback || this.showError;
+			var service = this.restAPI;
 			var dialog = new Dialog({
 				title: "Update",
-				href: this.serviceURL + name + "?form",
+				href: this.restAPI.serviceURL + name + "?form",
 				parseOnLoad: true,
 				baseClass: 'myDialog blue'
 			});
@@ -53,7 +70,7 @@ define(["dojo/_base/declare","dijit/_WidgetBase", "custom/DiddoRestAPI", "dijit/
 				onClick: function(evt) {
 					form.validate();
 					if(form.isValid) {
-						service.updateItem(form.getValues(), callback, errback || this.showError);
+						service.updateItem(form.getValues(), callback, errback);
 						dialog.destroyRecursive();
 					}
 				}
@@ -73,9 +90,11 @@ define(["dojo/_base/declare","dijit/_WidgetBase", "custom/DiddoRestAPI", "dijit/
 		},
 		
 		remove: function(name, callback, errback) {
+			var callback = callback;
+			var errback = errback || this.showError;
 			if(!name || name.length == 0)
-				this.showError({message: 'Provide the name of the Entity to update as a Parameter'});
-			var service = this.service;
+				return this.showError({message: 'Entity to be deleted is missing'});
+			var service = this.restAPI;
 			var dialog = new Dialog({
 				title: "Delete",
 				content: "Are you sure you want to delete '" + name + "'?",
@@ -87,7 +106,7 @@ define(["dojo/_base/declare","dijit/_WidgetBase", "custom/DiddoRestAPI", "dijit/
 				baseClass: 'btn btn-danger',
 				style: "margin: 10px; float: right;",
 				onClick: function(evt) {
-					service.removeItem(name, callback, errback || this.showError);
+					service.removeItem(name, callback, errback);
 					dialog.destroyRecursive();
 				}
 			});

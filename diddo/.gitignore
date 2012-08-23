@@ -1,1 +1,5 @@
 /workspace
+.classpath
+.settings
+.project
+*.class
