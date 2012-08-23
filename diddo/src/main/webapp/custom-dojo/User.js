@@ -26,19 +26,18 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 		
 		setupEventHandlers: function() {
 			var widget = this;
-			
+			var service = this.userService;
 			//when editButton (defined in 'Team.html') is clicked
 			on(this.editButton, "click", function(evt) {
 				widget.userService.update(widget.name, function(response) {
 					service.getItem(widget.name, function(user) {
 						mailer.innerHTML = user.email;
-						sm.innerHTML = user.scrumMaster;
 					});
 				});
 			});
 			//when deleteButton (defined in 'Team.html') is clicked
 			on(this.deleteButton, "click", function(evt) {
-				service.remove(teamName, function(response) {
+				service.remove(widget.name, function(response) {
 					console.log("deleted");
 					baseFX.animateProperty({
 						node: widget,
