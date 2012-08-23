@@ -1,6 +1,6 @@
 define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo/dom-construct", "dojo/ready", "dojo/on", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin", "dijit/layout/_LayoutWidget", "dijit/_Container", "dojo/text!./templates/User.html", "custom/DiddoRestUI", "dojo/_base/fx", "dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dijit/form/Button"],
 		function(declare, xhr, parser, dom, domConstruct, ready, on, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _LayoutWidget, _Container, template, RestUI, baseFX) {
-	return declare("Team", [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _Container], {
+	return declare("User", [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _Container], {
 		templateString: template,
 		teamService: null,
 		userService: null,
@@ -8,7 +8,7 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 		name: null,
 		email: null,
 		scrumMaster: null,
-		baseClass: "user .white",
+		baseClass: "user white",
 		
 		constructor: function(userObject, uService) {
 			this.userService = uService || new RestUI("users");

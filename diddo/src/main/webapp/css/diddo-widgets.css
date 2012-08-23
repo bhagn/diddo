@@ -13,8 +13,12 @@
 	color: gray;
 }
 
-.diddoMailer:hover {
+.team > .diddoMailer:hover {
 	color: #fff;
+}
+
+.user > .diddoMailer:hover {
+	color: #000;
 }
 
 .diddoControls {
@@ -25,7 +29,7 @@
 	background: #22252A;
 }
 
-.team, .user {
+.team {
 	background: #22252A;
 	border: solid;
 	border-color: gray;
@@ -35,9 +39,15 @@
 }
 
 .user {
+	border: solid;
+	border-color: gray;
+	border-width: 1px;
+	margin: 10px;
+	padding: 10px;
 	min-width: 200px;
 	max-width: 400px;
 	display: inline-block;
+	color: #000000;
 }
 
 .team:hover {
