@@ -21,7 +21,7 @@ define(["dojo/_base/declare","dijit/_WidgetBase", "custom/DiddoRestAPI", "dijit/
 			var service = this.restAPI;
 			var dialog = new Dialog({
 				title: "Add",
-				href: this.serviceURL +"?form",
+				href: this.restAPI.serviceURL +"?form",
 				parseOnLoad: true,
 				baseClass: 'myDialog blue'
 			});
@@ -59,7 +59,7 @@ define(["dojo/_base/declare","dijit/_WidgetBase", "custom/DiddoRestAPI", "dijit/
 			var service = this.restAPI;
 			var dialog = new Dialog({
 				title: "Update",
-				href: this.serviceURL + name + "?form",
+				href: this.restAPI.serviceURL + name + "?form",
 				parseOnLoad: true,
 				baseClass: 'myDialog blue'
 			});

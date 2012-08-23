@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="/diddo/resources/css/bootstrap.css"/>
   <link rel="stylesheet" href="/diddo/resources/css/custom.css"/>
   <link rel="stylesheet" href="/diddo/resources/css/diddo-widgets.css"/>
+  <link rel="stylesheet" href="/diddo/resources/css/bootstrap-responsive.css"/>
 <style>
 html, body {
     width: 100%;
@@ -27,15 +28,16 @@ html, body {
   </script>
   </head>
   <body class="claro">
-  
-	<!-- <div data-dojo-type="Team"></div> -->
+  <div class="container-fluid">
+	 <div data-dojo-type="TeamManager"></div>
+  </div>
 	<script>
-	require(["custom/Team", "dojo/domReady!"], function(Team) {
+	/* require(["custom/Team", "dojo/domReady!"], function(Team) {
 		var d = new TeamManager();	//{name: '24823102108057933355270016093'}
 		document.body.appendChild(d.domNode);
 		d.startup();
 		//d.show();
-	});  
+	}); */  
 	</script>
   
   </body>

@@ -16,22 +16,32 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 		},
 		
 		_loadTeams: function(){
-			var node = this.teamNode;
-			var tService = this.teamService;
-			var uService = this.userService;
+			console.log("Loading Teams");
+			//var node = this.teamNode;
+			//var tService = this.teamService;
+			//var uService = this.userService;
+			var widget = this;
 			this.teamService.getAll(function(teams) {
-				console.log("Retrieved Teams: ", teams);
 				for(var i=0, len=teams.length; i<len; i++) {
-					var team = new Team(teams[i], tService, uService);
-					node.appendChild(team.domNode);
+					var team = new Team(teams[i], widget.teamService, widget.userService);
+					on(team.domNode, "click", function(evt) {
+						
+					});
+					widget.teamNode.appendChild(team.domNode);
 				}
 			});
 		},
 		
 		_setupEventHandlers: function() {
 			console.log("Setting up Event Handlers");
-			on(this.addTeamButton, "click", this.teamService.add);
-			on(this.addUserButton, "click", this.userService.add);
+			var tService = this.teamService;
+			var uService = this.userService;
+			on(this.addTeamButton, "click", function(evt) {
+				tService.add();
+			});
+			on(this.addUserButton, "click", function(evt) {
+				uService.add();
+			});
 		},
 		
 	});
