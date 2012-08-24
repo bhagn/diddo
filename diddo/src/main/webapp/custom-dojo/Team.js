@@ -1,5 +1,5 @@
-define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo/dom-construct", "dojo/ready", "dojo/on", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin", "dijit/layout/_LayoutWidget", "dijit/_Container", "dojo/text!./templates/Team.html", "custom/DiddoRestUI", "dojo/_base/fx", "dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dijit/form/Button"],
-		function(declare, xhr, parser, dom, domConstruct, ready, on, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _LayoutWidget, _Container, template, RestUI, baseFX) {
+define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo/dom-construct", "dojo/ready", "dojo/on", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin", "dijit/layout/_LayoutWidget", "dijit/_Container", "dojo/text!./templates/Team.html", "custom/DiddoRestUI", "dojo/_base/fx", "custom/User", "dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dijit/form/Button"],
+		function(declare, xhr, parser, dom, domConstruct, ready, on, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _LayoutWidget, _Container, template, RestUI, baseFX, User) {
 	return declare("Team", [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _Container], {
 		templateString: template,
 		teamService: null,
@@ -9,6 +9,7 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 		email: null,
 		scrumMaster: null,
 		baseClass: "team",
+		contentNode: 'usersNode',
 		
 		constructor: function(teamObject, tService, uService) {
 			this.teamService = tService || new RestUI("teams");
@@ -26,24 +27,54 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 			this.setupEventHandlers();
 		},
 		
+		_loadUsers: function() {
+			var container = dom.byId("usersNode");
+			
+			for(var i=container.childNodes.length; i>0; i--) {
+				console.log("deleting: ", container.childNodes[i-1].id);
+				var userWidget = dijit.byId(container.childNodes[i-1].id);
+				if(userWidget)
+					userWidget.destroyRecursive();
+			}
+			container.innerHTML = "";
+			if(this.users.length == 0) {
+				container.innerHTML = "There are no Users in this Team, Add new Users";
+			}
+			for(var i=0; i< this.users.length; i++) {
+				var user = new User(this.users[i], this.userService);
+				container.appendChild(user.domNode);
+			}
+		},
+		
 		setupEventHandlers: function() {
 			var service = this.teamService;
 			var teamName = this.name;
 			
-			var mailer = this.mailer;
-			var SM = this.SM;
+			var widget = this;
+			
+			on(this.domNode, "click", function(evt) {
+				if(widget.users) {
+					widget._loadUsers();
+					return;
+				}
+				
+				service.get(teamName, "users", function(users) {
+					console.log(users);
+					widget.users = users;
+					widget._loadUsers();
+				});
+			});
 			
 			//when editButton (defined in 'Team.html') is clicked
 			on(this.editButton, "click", function(evt) {
 				service.update(teamName, function(response) {
-					service.getItem(teamName, function(team) {
-						mailer.innerHTML = team.email;
-						sm.innerHTML = team.scrumMaster;
+					service.get(teamName, null, function(team) {
+						widget.mailer.innerHTML = team.email;
+						widget.SM.innerHTML = team.scrumMaster.name;
 					});
 				});
 			});
 			//when deleteButton (defined in 'Team.html') is clicked
-			var widget = this;
 			on(this.deleteButton, "click", function(evt) {
 				service.remove(teamName, function(response) {
 					console.log("deleted");

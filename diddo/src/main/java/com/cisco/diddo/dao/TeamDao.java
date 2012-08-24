@@ -8,4 +8,5 @@ import org.springframework.roo.addon.layers.repository.mongo.RooMongoRepository;
 public interface TeamDao {
 
     List<com.cisco.diddo.entity.Team> findAll();
+    Team findByName(String name);
 }

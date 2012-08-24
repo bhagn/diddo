@@ -29,10 +29,10 @@ public class TeamController {
 		@Autowired
 	    public UserDao userDao;
 		
-		@RequestMapping(value = "/{id}",params="users", headers = "Accept=application/json")
+		@RequestMapping(value = "/{name}",params="users", headers = "Accept=application/json")
 	    @ResponseBody
-	    public ResponseEntity<String> getUserJson(@PathVariable("id") BigInteger id) {
-	        Team team = teamDao.findOne(id);
+	    public ResponseEntity<String> getUserJson(@PathVariable("name") String name) {
+	        Team team = teamDao.findByName(name);
 	        HttpHeaders headers = new HttpHeaders();
 	        headers.add("Content-Type", "application/json; charset=utf-8");
 	        if (team == null) {

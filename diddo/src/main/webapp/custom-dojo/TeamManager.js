@@ -17,16 +17,10 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 		
 		_loadTeams: function(){
 			console.log("Loading Teams");
-			//var node = this.teamNode;
-			//var tService = this.teamService;
-			//var uService = this.userService;
 			var widget = this;
-			this.teamService.getAll(function(teams) {
+			this.teamService.getAll(null, function(teams) {
 				for(var i=0, len=teams.length; i<len; i++) {
 					var team = new Team(teams[i], widget.teamService, widget.userService);
-					on(team.domNode, "click", function(evt) {
-						
-					});
 					widget.teamNode.appendChild(team.domNode);
 				}
 			});

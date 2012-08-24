@@ -7,12 +7,12 @@ define(["dojo/_base/declare","dijit/_WidgetBase", "custom/DiddoRestAPI", "dijit/
 			this.restAPI = new RestAPI(serviceName);
 		},
 		
-		get: function(name, callback, errback) {
-			this.restAPI.getItem(name, callback, errback || this.showError);
+		get: function(name, params, callback, errback) {
+			this.restAPI.getItem(name, params, callback, errback || this.showError);
 		},
 		
-		getAll: function(callback, errback) {
-			this.restAPI.getItems(callback, errback || this.showError);
+		getAll: function(params, callback, errback) {
+			this.restAPI.getItems(params, callback, errback || this.showError);
 		}, 
 		
 		add: function(callback, errback) {

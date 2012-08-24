@@ -27,12 +27,19 @@ define(["dojo/_base/declare","dijit/_WidgetBase", "dojox/rpc/Rest"],
 			console.log("Delete a resource: service.removeItem(id[, callbackFunc [, errback])");
 		},
 		
-		getItem: function(id, callback, errback) {
-			this.service(id).then(callback || this.defaultCallback, errback || this.showError);
+		getItem: function(id, params, callback, errback) {
+			var query = '';
+			if(params)
+				query="?" + params;
+			id = encodeURI(id);
+			this.service(id + query).then(callback || this.defaultCallback, errback || this.showError);
 		},
 		
-		getItems: function(callback, errback) {
-			this.service().then(callback || this.defaultCallback, errback || this.showError);
+		getItems: function(params, callback, errback) {
+			if(!params)
+			    this.service().then(callback || this.defaultCallback, errback || this.showError);
+			else
+				this.service('?' + params).then(callback || this.defaultCallback, errback || this.showError);
 		},
 		
 		updateItem: function(params, callback, errback) {
