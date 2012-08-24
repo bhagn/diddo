@@ -4,6 +4,7 @@
 package com.cisco.diddo.web;
 
 import com.cisco.diddo.dao.TeamDao;
+import com.cisco.diddo.dao.UserDao;
 import com.cisco.diddo.entity.Team;
 import com.cisco.diddo.web.TeamController;
 import java.io.UnsupportedEncodingException;
@@ -92,6 +93,7 @@ privileged aspect TeamController_Roo_Controller {
     
     void TeamController.populateEditForm(Model uiModel, Team team) {
         uiModel.addAttribute("team", team);
+        uiModel.addAttribute("users", userDao.findAll());
     }
     
     String TeamController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

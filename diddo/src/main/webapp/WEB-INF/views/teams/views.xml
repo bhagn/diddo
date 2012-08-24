@@ -7,8 +7,8 @@
 <definition extends="default" name="teams/show">
         <put-attribute name="body" value="/WEB-INF/views/teams/show.jspx"/>
     </definition>
-<definition extends="default" name="teams/create">
-        <put-attribute name="body" value="/WEB-INF/views/teams/create.jspx"/>
+<definition extends="form-base" name="teams/create">
+        <put-attribute name="form" value="/WEB-INF/views/teams/create.jspx"/>
     </definition>
 <definition extends="default" name="teams/update">
         <put-attribute name="body" value="/WEB-INF/views/teams/update.jspx"/>
