@@ -42,11 +42,11 @@ privileged aspect Impediment_Roo_JavaBean {
         this.submittedDate = submittedDate;
     }
     
-    public Boolean Impediment.getClosed() {
+    public boolean Impediment.isClosed() {
         return this.closed;
     }
     
-    public void Impediment.setClosed(Boolean closed) {
+    public void Impediment.setClosed(boolean closed) {
         this.closed = closed;
     }
     

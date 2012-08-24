@@ -110,7 +110,7 @@ public class ImpedimentScheduler {
 		private String getBodyText(List<Impediment> impedimentList) {
 			StringBuffer buffer = new StringBuffer();
 			for(Impediment imp : impedimentList){
-				if(!imp.getClosed()){
+				if(!imp.isClosed()){
 					buffer.append("<br>");
 					buffer.append("     Description : " + imp.getDescription()+ "<br/>");
 					Calendar cal = imp.getSubmittedDate();

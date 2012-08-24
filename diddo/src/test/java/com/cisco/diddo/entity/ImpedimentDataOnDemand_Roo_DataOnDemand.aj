@@ -51,7 +51,7 @@ privileged aspect ImpedimentDataOnDemand_Roo_DataOnDemand {
     }
     
     public void ImpedimentDataOnDemand.setClosed(Impediment obj, int index) {
-        Boolean closed = Boolean.TRUE;
+        Boolean closed = true;
         obj.setClosed(closed);
     }
     
