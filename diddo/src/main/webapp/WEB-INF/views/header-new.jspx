@@ -1,0 +1,20 @@
+<div xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="/diddo/"><span class="green-text">Did</span><span class="red-text">DO</span></a>
+      <div class="nav-collapse collapse">
+        <ul class="nav">
+          <li class="">
+            <a href="/diddo/">Scrum</a>
+          </li>
+          <li class="">
+            <a href="impediments">Impediments</a>
+          </li>
+        </ul>
+		<div class="pull-right white"><i class="icon-user"></i> ${username} </div>
+      </div>
+    </div>
+   </div>
+  </div>
+</div>
