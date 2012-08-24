@@ -13,7 +13,7 @@
           </li>
         </ul>
 		<div class="btn pull-right"><i class="icon-user"><span style="display:none;">dummy text</span> </i> 
-		  <span>${username}</span> 
+		  <a title="logout" href="resources/j_spring_security_logout"><span>${username}</span></a> 
 		</div>
       </div>
     </div>
