@@ -13,9 +13,9 @@
     <spring:url value="/resources/j_spring_security_check" var="form_url" />
     <form id="loginForm" name="f" action="${fn:escapeXml(form_url)}" method="POST" class="loginFormContainer pull-right">
       <span class="loginFormLabel">Username</span>
-      <input type="text" placeholder="Username" name="j_username" />
+      <input type="text" placeholder="Username" name="j_username"/>
       <span class="loginFormLabel">Password</span>
-      <input type="password" placeholder="Password" name="j_password" />
+      <input type="password" placeholder="Password" name="j_password"/>
       <br/>
       <input id="login" type="button" value="Login" class="btn btn-success btn-mini" style="margin-top: 5px;display:block; float:right;" />
       <script>

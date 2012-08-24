@@ -19,7 +19,8 @@
     var dojoConfig = {
       packages: [{name: 'custom', location: '/diddo/resources/custom-dojo'}],
       isDebug: false,
-      async: true
+      async: true,
+      parseOnLoad: true
     };
   </script>
   <script src="${dojo_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>

@@ -48,6 +48,11 @@ body {
   color: gray;
 }
 
+.loginFormContainer > input[type="text"],
+.loginFormContainer > input[type="password"] {
+	height: 24px;
+}
+
 .loginErrorMessage {
   width: 500px;
   text-align: center;

@@ -12,15 +12,15 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 		
 		constructor: function(userObject, uService) {
 			this.userService = uService || new RestUI("users");
-			this.name = userObject.username;
-			this.email = userObject.email;
+			//this.name = userObject.username;
+			//this.email = userObject.email;
 			this.isScrumMaster = userObject.scrumMaster;
-			this.id = userObject.id;
+			//this.id = userObject.id;
 		},
 		
 		postCreate: function() {
-			this.username.innerHTML = this.name;
-			this.mailer.innerHTML = this.email;
+			this.usernameNode.innerHTML = this.username;
+			this.mailerNode.innerHTML = this.email;
 			this.setupEventHandlers();
 		},
 		
@@ -29,15 +29,15 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 			var service = this.userService;
 			//when editButton (defined in 'Team.html') is clicked
 			on(this.editButton, "click", function(evt) {
-				widget.userService.update(widget.name, function(response) {
-					service.getItem(widget.name, function(user) {
-						mailer.innerHTML = user.email;
+				widget.userService.update(widget.username, function(response) {
+					service.getItem(widget.username, function(user) {
+						mailerNode.innerHTML = user.email;
 					});
 				});
 			});
 			//when deleteButton (defined in 'Team.html') is clicked
 			on(this.deleteButton, "click", function(evt) {
-				service.remove(widget.name, function(response) {
+				service.remove(widget.username, function(response) {
 					console.log("deleted");
 					baseFX.animateProperty({
 						node: widget,

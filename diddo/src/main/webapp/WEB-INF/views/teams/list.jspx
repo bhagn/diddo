@@ -2,10 +2,9 @@
 <div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:list id="pl_com_cisco_diddo_entity_Team" items="${teams}" z="UsUDESHOjh0+foMEKNQzM/ORTCM=">
-        <table:table data="${teams}" id="l_com_cisco_diddo_entity_Team" path="/teams" z="SzEP070mQ5afaW3bRDwsZXoL1y0=">
-            <table:column id="c_com_cisco_diddo_entity_Team_name" property="name" z="oP2oaXxETFvrOvSqVFB3YDqIr8w="/>
-            <table:column id="c_com_cisco_diddo_entity_Team_email" property="email" z="ATk9LX4SI1kssFJsD0k0H9sCt4g="/>
-        </table:table>
-    </page:list>
+    <script>
+      require(["custom/TeamManager"]);
+    </script>
+    <div data-dojo-type="TeamManager"></div>
+    
 </div>

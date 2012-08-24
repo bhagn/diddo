@@ -11,6 +11,9 @@
       <div class="nav-collapse collapse">
         <ul class="nav">
           <li class="">
+            <a href="teams">Teams</a>
+          </li>
+          <li class="">
             <a href="/diddo/">Scrum</a>
           </li>
           <li class="">
