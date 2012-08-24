@@ -17,7 +17,7 @@
   </definition>
   
   <definition name="default-base" template="/WEB-INF/layouts/base.jspx">
-    <put-attribute name="header-new" value="/WEB-INF/views/header-new.jsp" />
+    <put-attribute name="header-new" value="/WEB-INF/views/header-new.jspx" />
     
   </definition>
   

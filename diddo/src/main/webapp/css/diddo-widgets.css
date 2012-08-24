@@ -5,6 +5,8 @@
 .diddoTitle {
 	font-size: 18px;
 	display: block;
+	float: left;
+	margin-right: 10px;
 }
 
 .diddoSubTitle, .diddoMailer {
@@ -45,11 +47,20 @@
 	margin: 10px;
 	padding: 10px;
 	min-width: 200px;
-	max-width: 400px;
+	max-width: 500px;
 	display: inline-block;
 	color: #000000;
 }
 
+.impediment {
+	color: #fff;
+}
+
+.diddoDescription {
+	margin: 20px;
+	font-size: 10px;
+	text-align: justify;
+}
 .team:hover {
 	background: #000;
 	cursor: pointer;

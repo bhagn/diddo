@@ -14,7 +14,7 @@
 	</head>
 	
   	<body class="claro">
-  	  <div class="container">
+  	  <div class="container-fluid container">
 		    <tiles:insertAttribute name="header-new" ignore="true" />
 		    <div style="margin-top:50px">
 		      <tiles:insertAttribute name="menu" ignore="true" />
