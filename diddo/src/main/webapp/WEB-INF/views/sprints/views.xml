@@ -7,8 +7,8 @@
 <definition extends="default" name="sprints/show">
         <put-attribute name="body" value="/WEB-INF/views/sprints/show.jspx"/>
     </definition>
-<definition extends="default" name="sprints/create">
-        <put-attribute name="body" value="/WEB-INF/views/sprints/create.jspx"/>
+<definition extends="form-base" name="sprints/create">
+        <put-attribute name="form" value="/WEB-INF/views/sprints/create.jspx"/>
     </definition>
 <definition extends="default" name="sprints/update">
         <put-attribute name="body" value="/WEB-INF/views/sprints/update.jspx"/>

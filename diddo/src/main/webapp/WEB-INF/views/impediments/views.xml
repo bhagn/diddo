@@ -7,8 +7,8 @@
 	<definition extends="tab" name="impediments/list">
         <put-attribute name="body" value="/WEB-INF/views/impediments/impediment-list.jspx"/>
     </definition>
-<definition extends="default" name="impediments/create">
-        <put-attribute name="body" value="/WEB-INF/views/impediments/create.jspx"/>
+<definition extends="form-base" name="impediments/create">
+        <put-attribute name="form" value="/WEB-INF/views/impediments/create.jspx"/>
     </definition>
 <definition extends="default" name="impediments/update">
         <put-attribute name="body" value="/WEB-INF/views/impediments/update.jspx"/>
