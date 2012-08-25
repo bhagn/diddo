@@ -10,7 +10,7 @@
 <definition extends="form-base" name="sprints/create">
         <put-attribute name="form" value="/WEB-INF/views/sprints/create.jspx"/>
     </definition>
-<definition extends="default" name="sprints/update">
-        <put-attribute name="body" value="/WEB-INF/views/sprints/update.jspx"/>
+<definition extends="form-base" name="sprints/update">
+        <put-attribute name="form" value="/WEB-INF/views/sprints/update.jspx"/>
     </definition>
 </tiles-definitions>
