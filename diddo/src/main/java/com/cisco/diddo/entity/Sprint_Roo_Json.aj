@@ -13,7 +13,7 @@ import java.util.List;
 privileged aspect Sprint_Roo_Json {
     
     public String Sprint.toJson() {
-        return new JSONSerializer().exclude("*.class").serialize(this);
+        return new JSONSerializer().exclude("*.class", "*.locale").serialize(this);
     }
     
     public static Sprint Sprint.fromJsonToSprint(String json) {
@@ -21,7 +21,7 @@ privileged aspect Sprint_Roo_Json {
     }
     
     public static String Sprint.toJsonArray(Collection<Sprint> collection) {
-        return new JSONSerializer().exclude("*.class").serialize(collection);
+        return new JSONSerializer().exclude("*.class", "*.locale").serialize(collection);
     }
     
     public static Collection<Sprint> Sprint.fromJsonArrayToSprints(String json) {
