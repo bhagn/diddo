@@ -2,13 +2,9 @@
 <div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:list id="pl_com_cisco_diddo_entity_Impediment" items="${impediments}" z="LAwAGkWibuUJ0AhEBhgEn8vJMh8=">
-        <table:table data="${impediments}" id="l_com_cisco_diddo_entity_Impediment" path="/impediments" z="V914PPKrBxgfvYjRcn3TZkBM/ks=">
-            <table:column id="c_com_cisco_diddo_entity_Impediment_description" property="description" z="NULpGqh/dWFLoxjSRDSQSy1lA3g="/>
-            <table:column id="c_com_cisco_diddo_entity_Impediment_sprint" property="sprint" z="i49Ds85HDWuOtRKcSY+QhWgS/qk="/>
-            <table:column id="c_com_cisco_diddo_entity_Impediment_submitter" property="submitter" z="6kwA/w+Dv46JuhrYd5Kkz4K6K8w="/>
-            <table:column calendar="true" dateTimePattern="${impediment_submitteddate_date_format}" id="c_com_cisco_diddo_entity_Impediment_submittedDate" property="submittedDate" z="o930PEWmc9n/Sy7llKlC+T38uxw="/>
-            <table:column id="c_com_cisco_diddo_entity_Impediment_closed" property="closed" z="PSPl2cb94FIp8l6MhNoJ4uisAIM="/>
-        </table:table>
-    </page:list>
+    <script>
+      require(["custom/ImpedimentManager"]);
+    </script>
+    <div data-dojo-type="ImpedimentManager"></div>
+    
 </div>

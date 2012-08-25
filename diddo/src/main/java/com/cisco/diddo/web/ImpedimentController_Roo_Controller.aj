@@ -69,7 +69,7 @@ privileged aspect ImpedimentController_Roo_Controller {
         uiModel.addAttribute("itemId", id);
         return "impediments/show";
     }
-    /*
+    
     @RequestMapping(produces = "text/html")
     public String ImpedimentController.list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         if (page != null || size != null) {
@@ -83,7 +83,7 @@ privileged aspect ImpedimentController_Roo_Controller {
         }
         addDateTimeFormatPatterns(uiModel);
         return "impediments/list";
-    }*/
+    }
     
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String ImpedimentController.update(@Valid Impediment impediment, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -112,10 +112,10 @@ privileged aspect ImpedimentController_Roo_Controller {
         return "redirect:/impediments";
     }
     
-    /*void ImpedimentController.addDateTimeFormatPatterns(Model uiModel) {
+    void ImpedimentController.addDateTimeFormatPatterns(Model uiModel) {
         uiModel.addAttribute("impediment_submitteddate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
     }
-    
+    /*
     void ImpedimentController.populateEditForm(Model uiModel, Impediment impediment) {
         uiModel.addAttribute("impediment", impediment);
         addDateTimeFormatPatterns(uiModel);

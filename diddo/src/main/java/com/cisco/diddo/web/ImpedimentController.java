@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cisco.diddo.dao.ImpedimentDao;
@@ -86,8 +87,8 @@ public class ImpedimentController extends BaseController{
        uiModel.addAttribute("impediments", impedimentDao.findAll());
        addDateTimeFormatPatterns(uiModel);
        return "impediments/list";
-   }
-   */
+   }*/
+   
    @RequestMapping(headers = "Accept=application/json")
    @ResponseBody
    public ResponseEntity<String> listJson() {
@@ -97,9 +98,9 @@ public class ImpedimentController extends BaseController{
        String str = new JSONSerializer().exclude("*.class").transform(new BigDecimalTransformer(),BigInteger.class).serialize(result);
        return new ResponseEntity<String>(str, headers, HttpStatus.OK);
    }
-   public void addDateTimeFormatPatterns(Model uiModel) {
+   /*public void addDateTimeFormatPatterns(Model uiModel) {
        uiModel.addAttribute("impediment_submitteddate_date_format", org.joda.time.format.DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
-   }
+   }*/
    public class BigDecimalTransformer extends AbstractTransformer{ 
 	   public void transform(Object object)
 	   { 
