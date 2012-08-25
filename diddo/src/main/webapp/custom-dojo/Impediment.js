@@ -7,14 +7,11 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 		sprint: null,
 		submitter: null,
 		submitteddate: null,
+		closed: false,
 		baseClass: "impediment orange",
 		
 		constructor: function(impObject, iService) {
 			this.iService = iService || new RestUI("impediments");
-			/*this.id = impObject.id;
-			this.description = impObject.description;
-			this.sprint = impObject.sprint.sprintNo;
-			this.submitter = impObject.submitter.username;*/
 			this.submitteddate = impObject.submittedDate;
 		},
 		
@@ -23,6 +20,10 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 			this.sprintNode.innerHTML = this.sprint.sprintNo;
 			this.submitterNode.innerHTML = this.submitter.username;
 			this.submitteddateNode.innerHTML = this.submitteddate;
+			if(this.closed) {
+				this.set("class", "impediment green");
+				this.resolveButton.set("style", "display: none;");
+			}
 			this.setupEventHandlers();
 		},
 		
@@ -33,13 +34,13 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 			on(this.resolveButton, "click", function(evt) {
 				widget.iService.get(widget.id, "close" ,function(response) {
 					widget.resolveButton.destroy();
-					widget.baseClass = "impediment green";
+					widget.set("class", "impediment green");
 				});
 			});
 			//when deleteButton (defined in 'Team.html') is clicked
 			on(this.deleteButton, "click", function(evt) {
 				service.remove("" + widget.id, function(response) {
-					console.log("deleted");
+					console.log("deleted: ", widget.id);
 					baseFX.animateProperty({
 						node: widget,
 						duration: 500,
