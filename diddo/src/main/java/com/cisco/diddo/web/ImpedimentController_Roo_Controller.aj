@@ -48,7 +48,7 @@ privileged aspect ImpedimentController_Roo_Controller {
         return "redirect:/impediments/" + encodeUrlPathSegment(impediment.getId().toString(), httpServletRequest);
     }
     
-   /* @RequestMapping(params = "form", produces = "text/html")
+    @RequestMapping(params = "form", produces = "text/html")
     public String ImpedimentController.createForm(Model uiModel) {
         populateEditForm(uiModel, new Impediment());
         List<String[]> dependencies = new ArrayList<String[]>();
@@ -60,7 +60,7 @@ privileged aspect ImpedimentController_Roo_Controller {
         }
         uiModel.addAttribute("dependencies", dependencies);
         return "impediments/create";
-    } */
+    } 
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String ImpedimentController.show(@PathVariable("id") BigInteger id, Model uiModel) {

@@ -1,11 +1,15 @@
 package com.cisco.diddo.web;
 
 import java.math.BigInteger;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +18,9 @@ import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cisco.diddo.dao.ImpedimentDao;
@@ -23,6 +28,7 @@ import com.cisco.diddo.dao.SprintDao;
 import com.cisco.diddo.dao.UserDao;
 import com.cisco.diddo.entity.Impediment;
 
+import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
 import flexjson.transformer.AbstractTransformer;
 
@@ -41,7 +47,7 @@ public class ImpedimentController extends BaseController{
     @Autowired
     public UserDao userDao;
 	
-    @RequestMapping(params = "form", produces = "text/html")
+    /*@RequestMapping(params = "form", produces = "text/html")
     public String createForm(Model uiModel) {
         populateEditForm(uiModel, new Impediment());
         List<String[]> dependencies = new ArrayList<String[]>();
@@ -53,7 +59,7 @@ public class ImpedimentController extends BaseController{
         }
         uiModel.addAttribute("dependencies", dependencies);
         return "impediments/create";
-    }
+    }*/
       
     @RequestMapping(value = "/{id}", params="close", headers = "Accept=application/json")
     @ResponseBody
@@ -95,7 +101,7 @@ public class ImpedimentController extends BaseController{
        HttpHeaders headers = new HttpHeaders();
        headers.add("Content-Type", "application/json; charset=utf-8");
        List<Impediment> result = impedimentDao.findAll();
-       String str = new JSONSerializer().exclude("*.class").transform(new BigDecimalTransformer(),BigInteger.class).serialize(result);
+       String str = new JSONSerializer().exclude("*.class").transform(new BigDecimalTransformer(),BigInteger.class).transform(new CalendarTransformer(), Calendar.class).serialize(result);
        return new ResponseEntity<String>(str, headers, HttpStatus.OK);
    }
    /*public void addDateTimeFormatPatterns(Model uiModel) {
@@ -106,5 +112,31 @@ public class ImpedimentController extends BaseController{
 	   { 
 		   getContext().writeQuoted(((BigInteger)object).toString());
 	   }
-	}
+   }
+   public class CalendarTransformer extends AbstractTransformer{ 
+	   public void transform(Object object)
+	   { 
+		   DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+		   Date date = ((Calendar)object).getTime();
+		   getContext().writeQuoted(format.format(date));
+	   }
+   }
+   @RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
+   @ResponseBody
+   public ResponseEntity<String> createFromJson(@RequestBody String json) {
+       Impediment impediment = new Impediment();
+       
+       impediment.setSubmittedDate(Calendar.getInstance());
+       Map<String, String> deserialized = new JSONDeserializer<Map<String, String>>().deserialize(json);
+       impediment.setDescription(deserialized.get("description"));
+       impediment.setSprint(sprintDao.findOne(new BigInteger(deserialized.get("sprint"))));
+       impediment.setSubmitter(getCurrentUser());
+       //.use("*.sprint", String.class)
+       impedimentDao.save(impediment);
+       HttpHeaders headers = new HttpHeaders();
+       headers.add("Content-Type", "application/json; charset=utf-8");
+       return new ResponseEntity<String>(impediment.toJson(),headers, HttpStatus.CREATED);
+   }
+    
+   
 }
