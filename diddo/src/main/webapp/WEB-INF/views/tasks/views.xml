@@ -7,8 +7,8 @@
 <definition extends="default" name="tasks/show">
         <put-attribute name="body" value="/WEB-INF/views/tasks/show.jspx"/>
     </definition>
-<definition extends="default" name="tasks/create">
-        <put-attribute name="body" value="/WEB-INF/views/tasks/create.jspx"/>
+<definition extends="form-base" name="tasks/create">
+        <put-attribute name="form" value="/WEB-INF/views/tasks/create.jspx"/>
     </definition>
 <definition extends="default" name="tasks/update">
         <put-attribute name="body" value="/WEB-INF/views/tasks/update.jspx"/>
