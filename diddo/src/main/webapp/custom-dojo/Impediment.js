@@ -11,6 +11,10 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 		
 		constructor: function(impObject, iService) {
 			this.iService = iService || new RestUI("impediments");
+			/*this.id = impObject.id;
+			this.description = impObject.description;
+			this.sprint = impObject.sprint.sprintNo;
+			this.submitter = impObject.submitter.username;*/
 			this.submitteddate = impObject.submittedDate;
 		},
 		
@@ -34,7 +38,7 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 			});
 			//when deleteButton (defined in 'Team.html') is clicked
 			on(this.deleteButton, "click", function(evt) {
-				service.remove(widget.id, function(response) {
+				service.remove("" + widget.id, function(response) {
 					console.log("deleted");
 					baseFX.animateProperty({
 						node: widget,

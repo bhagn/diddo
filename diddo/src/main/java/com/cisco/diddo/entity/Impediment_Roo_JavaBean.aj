@@ -49,5 +49,5 @@ privileged aspect Impediment_Roo_JavaBean {
     public void Impediment.setClosed(boolean closed) {
         this.closed = closed;
     }
-    
+     
 }

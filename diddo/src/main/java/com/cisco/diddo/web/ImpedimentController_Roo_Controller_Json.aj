@@ -30,14 +30,14 @@ privileged aspect ImpedimentController_Roo_Controller_Json {
         return new ResponseEntity<String>(impediment.toJson(), headers, HttpStatus.OK);
     }
     
-    @RequestMapping(headers = "Accept=application/json")
+    /*@RequestMapping(headers = "Accept=application/json")
     @ResponseBody
     public ResponseEntity<String> ImpedimentController.listJson() {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");
         List<Impediment> result = impedimentDao.findAll();
         return new ResponseEntity<String>(Impediment.toJsonArray(result), headers, HttpStatus.OK);
-    }
+    }*/
     
     @RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> ImpedimentController.createFromJson(@RequestBody String json) {

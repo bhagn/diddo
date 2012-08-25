@@ -1,6 +1,8 @@
 package com.cisco.diddo.entity;
 
 import java.util.Calendar;
+
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,7 +20,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooMongoEntity
 @RooJson
 public class Impediment {
-
+	
     @NotNull
     @Size(max = 1024)
     private String description;
