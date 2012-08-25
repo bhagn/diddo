@@ -54,7 +54,7 @@ public class UserStory {
     private Boolean unplanned;
 
     @NotNull
-    @OneToOne
+    @ManyToOne
     private Sprint sprint;
 
     @ManyToOne

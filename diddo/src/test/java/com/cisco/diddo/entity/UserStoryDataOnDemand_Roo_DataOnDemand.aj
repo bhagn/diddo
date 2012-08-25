@@ -100,7 +100,7 @@ privileged aspect UserStoryDataOnDemand_Roo_DataOnDemand {
     }
     
     public void UserStoryDataOnDemand.setSprint(UserStory obj, int index) {
-        Sprint sprint = sprintDataOnDemand.getSpecificSprint(index);
+        Sprint sprint = sprintDataOnDemand.getRandomSprint();
         obj.setSprint(sprint);
     }
     

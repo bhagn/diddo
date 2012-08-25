@@ -159,6 +159,10 @@ input {
   filter: progid:dximagetransform.microsoft.gradient(enabled=false);
 }
 
+.dijitSelectLabel {
+	color: #000 !important;
+}
+
 .red {
   background-color: #da4f49;
   *background-color: #bd362f;

@@ -9,4 +9,5 @@ public interface SprintDao {
 
     List<com.cisco.diddo.entity.Sprint> findAll();
     long count();
+	Sprint findBySprintNo(String sprintNo);
 }

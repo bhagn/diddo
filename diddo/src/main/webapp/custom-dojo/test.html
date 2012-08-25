@@ -24,12 +24,15 @@ html, body {
   </script>
   <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.7.1/dojo/dojo.js"></script>
   <script>
-      require(["dojo/parser", "custom/TeamManager", "dijit/form/Form", "dijit/form/TextBox", "dijit/form/ValidationTextBox", "dijit/form/Select" ,"dojo/domReady!"]);
+      //require(["dojo/parser", "custom/TeamManager", "dijit/form/Form", "dijit/form/TextBox", "dijit/form/ValidationTextBox", "dijit/form/Select" ,"dojo/domReady!"]);
   </script>
   </head>
   <body class="claro">
   <div class="container-fluid">
-	 <div data-dojo-type="TeamManager"></div>
+  <script>require(["custom/SprintManager"]);</script>
+	 <div>
+	 <div data-dojo-type="SprintManager"></div>
+	 
   </div>
 	<script>
 	/* require(["custom/Team", "dojo/domReady!"], function(Team) {
