@@ -6,26 +6,49 @@ package com.cisco.diddo.entity;
 import com.cisco.diddo.entity.Sprint;
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
+import flexjson.transformer.AbstractTransformer;
+
+import java.math.BigInteger;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 privileged aspect Sprint_Roo_Json {
-    
-    public String Sprint.toJson() {
-        return new JSONSerializer().exclude("*.class").serialize(this);
-    }
-    
-    public static Sprint Sprint.fromJsonToSprint(String json) {
-        return new JSONDeserializer<Sprint>().use(null, Sprint.class).deserialize(json);
-    }
-    
-    public static String Sprint.toJsonArray(Collection<Sprint> collection) {
-        return new JSONSerializer().exclude("*.class").serialize(collection);
-    }
-    
-    public static Collection<Sprint> Sprint.fromJsonArrayToSprints(String json) {
-        return new JSONDeserializer<List<Sprint>>().use(null, ArrayList.class).use("values", Sprint.class).deserialize(json);
-    }
-    
+
+	public String Sprint.toJson() {
+		return new JSONSerializer().exclude("*.class","*.locale").transform(new BigDecimalTransformer(),BigInteger.class).transform(new CalendarTransformer(), Calendar.class).serialize(this);
+	}
+
+	public static Sprint Sprint.fromJsonToSprint(String json) {
+		return new JSONDeserializer<Sprint>().use(null, Sprint.class)
+				.deserialize(json);
+	}
+
+	public static String Sprint.toJsonArray(Collection<Sprint> collection) {
+		return new JSONSerializer().exclude("*.class","*.locale").transform(new BigDecimalTransformer(),BigInteger.class).transform(new CalendarTransformer(), Calendar.class).serialize(collection);
+	}
+
+	public static Collection<Sprint> Sprint.fromJsonArrayToSprints(String json) {
+		return new JSONDeserializer<List<Sprint>>().use(null, ArrayList.class)
+				.use("values", Sprint.class).deserialize(json);
+	}
+
+	public static class BigDecimalTransformer extends AbstractTransformer {
+		public void transform(Object object) {
+			getContext().writeQuoted(((BigInteger) object).toString());
+		}
+	}
+
+	public static class CalendarTransformer extends AbstractTransformer {
+		public void transform(Object object) {
+			DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+			Date date = ((Calendar) object).getTime();
+			getContext().writeQuoted(format.format(date));
+		}
+	}
+
 }

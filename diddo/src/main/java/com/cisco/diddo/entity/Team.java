@@ -1,3 +1,4 @@
+
 package com.cisco.diddo.entity;
 
 import javax.persistence.Column;
