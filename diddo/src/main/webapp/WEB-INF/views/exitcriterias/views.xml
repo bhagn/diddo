@@ -10,7 +10,7 @@
 <definition extends="form-base" name="exitcriterias/create">
         <put-attribute name="form" value="/WEB-INF/views/exitcriterias/create.jspx"/>
     </definition>
-<definition extends="default" name="exitcriterias/update">
-        <put-attribute name="body" value="/WEB-INF/views/exitcriterias/update.jspx"/>
+<definition extends="form-base" name="exitcriterias/update">
+        <put-attribute name="form" value="/WEB-INF/views/exitcriterias/update.jspx"/>
     </definition>
 </tiles-definitions>
