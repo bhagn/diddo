@@ -28,36 +28,7 @@
 					</c:forEach> 
 	            </td>
 	        </tr>
-	        
-	         <tr>
-	            <td>
-	                <label for="_submitter_id">Submitter:</label>
-	            </td>
-	            <td>
-					 <select id="_submitter_id" name="submitter" data-dojo-type="dijit.form.Select" required="true"/>
-	                <c:forEach items="${users}" var="user">
-					<option value="${user.id}">${user.username}</option> 
-					</c:forEach> 
-	            </td>
-	        </tr>
-	        
-	         <tr>
-	            <td>
-	                <label for="_submittedDate_id">Submitted Date:</label>
-	            </td>
-	            <td>
-	                <input type="text" id="_submittedDate_id" name="submittedDate" data-dojo-type="dijit.form.DateTextBox"/>
-	            </td>
-	        </tr>
-	        
-	        <tr>
-	        	<td>
-	        		<label for="_closed_id">Closed:</label>
-	        	</td>
-	        	<td>	
-	        		<input type="checkbox"  id="_closed_id" name="closed" data-dojo-type="dijit.form.CheckBox"/>
-	        	</td>
-	        </tr>
+	       
 	    
 	    
     	</table>
