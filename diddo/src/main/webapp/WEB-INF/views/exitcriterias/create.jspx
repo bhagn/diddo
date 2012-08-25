@@ -28,10 +28,4 @@
             </tr>
         </table>
     </form>
-    <form:create id="fc_com_cisco_diddo_entity_ExitCriteria" modelAttribute="exitCriteria" path="/exitcriterias" render="${empty dependencies}" z="tEvvVBpHVc6eIJUPAlBEVum7Okc=">
-        <field:select field="userStory" id="c_com_cisco_diddo_entity_ExitCriteria_userStory" itemValue="id" items="${userstorys}" path="/userstorys" z="EW6enbF4dXU4jbUtksZ1+os+8cI="/>
-        <field:textarea field="description" id="c_com_cisco_diddo_entity_ExitCriteria_description" required="true" z="ieq6Lob1MhoS13It9kMSYtGiNT4="/>
-        <field:checkbox field="done" id="c_com_cisco_diddo_entity_ExitCriteria_done" z="niXFKMehrvAItsSEgSPXOtZvtSE="/>
-    </form:create>
-    <form:dependency dependencies="${dependencies}" id="d_com_cisco_diddo_entity_ExitCriteria" render="${not empty dependencies}" z="4M290y1DC/UmUlTfYOea5elzvnU="/>
 </div>

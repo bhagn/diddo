@@ -28,12 +28,4 @@
             </tr>
         </table>
     </form>
-    <form:create id="fc_com_cisco_diddo_entity_Impediment" modelAttribute="impediment" path="/impediments" render="${empty dependencies}" z="7QhdXxfTCStwyRc6OpX5+FOKA5w=">
-        <field:textarea field="description" id="c_com_cisco_diddo_entity_Impediment_description" required="true" z="Iyr4xJhI9+AhWSgTrq1EIBSL/hg="/>
-        <field:select field="sprint" id="c_com_cisco_diddo_entity_Impediment_sprint" itemValue="id" items="${sprints}" path="/sprints" required="true" z="4vLgB78Lt7MMMoTtlIQyLkWlsr0="/>
-        <field:select field="submitter" id="c_com_cisco_diddo_entity_Impediment_submitter" itemValue="id" items="${users}" path="/users" required="true" z="/x1g9WXuq9IWZzaUqn88Kn0cYD0="/>
-        <field:datetime dateTimePattern="${impediment_submitteddate_date_format}" field="submittedDate" id="c_com_cisco_diddo_entity_Impediment_submittedDate" z="MI+wBADX55nEGojtGNka9IKnzAc="/>
-        <field:checkbox field="closed" id="c_com_cisco_diddo_entity_Impediment_closed" z="1NeYXP+JxXwRwwjzO8dC17D36bk="/>
-    </form:create>
-    <form:dependency dependencies="${dependencies}" id="d_com_cisco_diddo_entity_Impediment" render="${not empty dependencies}" z="rBQNSKJzr90d27pCAs6yzGgExm4="/>
 </div>

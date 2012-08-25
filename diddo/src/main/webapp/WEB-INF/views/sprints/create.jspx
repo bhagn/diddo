@@ -41,11 +41,4 @@
             </tr>
         </table>
     </form>
-    <form:create id="fc_com_cisco_diddo_entity_Sprint" modelAttribute="sprint" path="/sprints" render="${empty dependencies}" z="f3/q2v6IF17O+himhPrtYE+7DAw=">
-        <field:input field="sprintNo" id="c_com_cisco_diddo_entity_Sprint_sprintNo" required="true" z="FHU5ZK4wfUi92ZigYtIyuUvPTas="/>
-        <field:datetime dateTimePattern="${sprint_startdate_date_format}" field="startDate" id="c_com_cisco_diddo_entity_Sprint_startDate" required="true" z="cnv891ZeMMWPhV+qfKx6o86VcXM="/>
-        <field:datetime dateTimePattern="${sprint_enddate_date_format}" field="endDate" id="c_com_cisco_diddo_entity_Sprint_endDate" z="mvUqECnR35WJf1kQpAMnGhJuk4c="/>
-        <field:input field="releaseVersion" id="c_com_cisco_diddo_entity_Sprint_releaseVersion" required="true" z="qCeHQivulfhYtdtavhzSL/y6atM="/>
-    </form:create>
-    <form:dependency dependencies="${dependencies}" id="d_com_cisco_diddo_entity_Sprint" render="${not empty dependencies}" z="PkpIC4UtdpfZcxKCe6nGokiiZVw="/>
 </div>
