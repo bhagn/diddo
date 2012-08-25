@@ -4,7 +4,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     
      <script>
-      require(["dojo/parser", "dijit/form/Form", "dijit/form/TextBox", "dijit/form/ValidationTextBox", "dijit/form/Textarea", "dijit/form/DateTextBox", "dijit/form/CheckBox", "dojox/widget/ColorPicker", "dijit/form/DropDownButton", "dijit/form/Select", "dojo/domReady!"]);
+      require(["dojo/parser", "dijit/form/Form", "dijit/form/TextBox", "dijit/form/ValidationTextBox", "dijit/form/Textarea", "dijit/form/DateTextBox", "dijit/form/CheckBox", "dijit/form/Select", "dojo/domReady!"]);
     </script>
 
     <form class="diddoForm" name="form" data-dojo-type="dijit.form.Form" data-dojo-id="form" modelAttribute="user" path="/teams">

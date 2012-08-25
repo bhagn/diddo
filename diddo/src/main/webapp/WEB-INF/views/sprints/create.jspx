@@ -22,7 +22,7 @@
 	                <label for="_startDate_id">Start Date:</label>
 	            </td>
 	            <td>
-	                <input type="text" id="_startDate_id" name="startDate" data-dojo-type="dijit.form.DateTextBox" required="true"/>
+	                <input type="date" id="_startDate_id" name="startDate" data-dojo-type="dijit.form.DateTextBox" required="true"/>
 	            </td>
 	        </tr>
 	        
