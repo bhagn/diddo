@@ -6,7 +6,6 @@ package com.cisco.diddo.web;
 import com.cisco.diddo.entity.Impediment;
 import com.cisco.diddo.web.ImpedimentController;
 import java.math.BigInteger;
-import java.util.List;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,24 +28,6 @@ privileged aspect ImpedimentController_Roo_Controller_Json {
         }
         return new ResponseEntity<String>(impediment.toJson(), headers, HttpStatus.OK);
     }
-    
-    /*@RequestMapping(headers = "Accept=application/json")
-    @ResponseBody
-    public ResponseEntity<String> ImpedimentController.listJson() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Type", "application/json; charset=utf-8");
-        List<Impediment> result = impedimentDao.findAll();
-        return new ResponseEntity<String>(Impediment.toJsonArray(result), headers, HttpStatus.OK);
-    }*/
-    
-    /*@RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
-    public ResponseEntity<String> ImpedimentController.createFromJson(@RequestBody String json) {
-        Impediment impediment = Impediment.fromJsonToImpediment(json);
-        impedimentDao.save(impediment);
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Type", "application/json");
-        return new ResponseEntity<String>(headers, HttpStatus.CREATED);
-    }*/
     
     @RequestMapping(value = "/jsonArray", method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> ImpedimentController.createFromJsonArray(@RequestBody String json) {

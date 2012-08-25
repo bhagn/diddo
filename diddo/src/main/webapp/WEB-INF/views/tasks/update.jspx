@@ -1,117 +1,118 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div style="width:400px;margin: auto;" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" style="width:400px;margin: auto;" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    
     <script>
       require(["dojo/parser", "dijit/form/Form", "dijit/form/TextBox", "dijit/form/ValidationTextBox", "dijit/form/Textarea", "dijit/form/DateTextBox", "dijit/form/CheckBox", "dojo/domReady!"]);
     </script>
-    <form class="diddoForm" name="form" data-dojo-type="dijit.form.Form" data-dojo-id="form" modelAttribute="user" path="/teams">
-   		<table style="color: #000;" cellspacing="10">
-   		
-   		    <tr>
-	            <td>
-	                <label for="_taskNumber_id">Task Number:</label>
-	            </td>
-	            <td>
-	                <input type="text" id="_taskNumber_id" name="taskNumber" data-dojo-type="dijit.form.ValidationTextBox" value="${task.taskNumber}" required="true"/>
-	            </td>
-	        </tr>
-	        
-	       <tr>
-	            <td>
-	                <label for="_description_id">Description:</label>
-	            </td>
-	            <td>
-	                <textarea id="_description_id" name="description" data-dojo-type="dijit/form/Textarea">${task.description}</textarea>
-	            </td>
-	        </tr>
-	        
-	        <tr>
-	            <td>
-	                <label for="_dots_id">Dots:</label>
-	            </td>
-	            <td>
-	                <input type="text" id="_dots_id" name="dots" data-dojo-type="dijit.form.TextBox" value="${task.dots}"/>
-	            </td>
-	        </tr>
-	        
-	        <tr>
-	            <td>
-	                <label for="_status_id">Status:</label>
-	            </td>
-	            <td>
-	                <select id="_status_id" name="status" data-dojo-type="dijit.form.Select" required="true"/>
-					<c:forEach items="${tasks}" var="tasks">
-						<c:choose>
-							<c:when test="${tasks == task.status}">
-								<option selected="selected" value="${tasks}">${tasks}</option> 
-							</c:when>
-							<c:otherwise>
-								<option value="${tasks}">${tasks}</option> 
-							</c:otherwise>
-						</c:choose>
-					</c:forEach> 
-	            </td>
-	        </tr>
-	       
-	    	<tr>
-	            <td>
-	                <label for="_complex_id">Complex:</label>
-	            </td>
-	            <td>
-	                <input type="checkbox" id="_complex_id" name="complex" data-dojo-type="dijit.form.CheckBox"/>
-	            </td>
-	        </tr>
-	        
-	        <tr>
-	            <td>
-	                <label for="_unplanned_id">Unplanned:</label>
-	            </td>
-	            <td>
-	                <input type="checkbox" id="_unplanned_id" name="unplanned" data-dojo-type="dijit.form.CheckBox"/>
-	            </td>
-	        </tr>
-	        
-	        <tr>
-	            <td>
-	                <label for="_owner_id">Owner:</label>
-	            </td>
-	            <td>
-					 <select id="_owner_id" name="owner" data-dojo-type="dijit.form.Select" required="true"/>
-	                <c:forEach items="${users}" var="user">
-						<c:choose>
-							<c:when test="${user.username == task.owner.username}">
-								<option selected="selected" value="${user.id}">${user.username}</option> 
-							</c:when>
-							<c:otherwise>
-								<option value="${user.id}">${user.username}</option>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach> 
-	            </td>
-	        </tr>
-	        
-	        <tr>
-	            <td>
-	                <label for="_userStory_id">User Story:</label>
-	            </td>
-	            <td>
-					 <select id="_userStory_id" name="userStory" data-dojo-type="dijit.form.Select" required="true"/>
-	                <c:forEach items="${userstorys}" var="userstory">
-						<c:choose>
-							<c:when test="${userstory.title == task.userStory.title}">
-								<option selected="selected" value="${userstory.id}">${userstory.title}</option> 
-							</c:when>
-							<c:otherwise>
-								<option value="${userstory.id}">${userstory.title}</option> 
-							</c:otherwise>
-						</c:choose>
-					</c:forEach> 
-	            </td>
-	        </tr>
-	    
-    	</table>
-
+    <form class="diddoForm" data-dojo-id="form" data-dojo-type="dijit.form.Form" modelAttribute="user" name="form" path="/teams">
+        <table cellspacing="10" style="color: #000;">
+            <tr>
+                <td>
+                    <label for="_taskNumber_id">Task Number:</label>
+                </td>
+                <td>
+                    <input data-dojo-type="dijit.form.ValidationTextBox" id="_taskNumber_id" name="taskNumber" required="true" type="text" value="${task.taskNumber}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="_description_id">Description:</label>
+                </td>
+                <td>
+                    <textarea data-dojo-type="dijit/form/Textarea" id="_description_id" name="description">${task.description}</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="_dots_id">Dots:</label>
+                </td>
+                <td>
+                    <input data-dojo-type="dijit.form.TextBox" id="_dots_id" name="dots" type="text" value="${task.dots}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="_status_id">Status:</label>
+                </td>
+                <td>
+                    <select data-dojo-type="dijit.form.Select" id="_status_id" name="status" required="true"/>
+                    <c:forEach items="${tasks}" var="tasks">
+                        <c:choose>
+                            <c:when test="${tasks == task.status}">
+                                <option selected="selected" value="${tasks}">${tasks}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${tasks}">${tasks}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="_complex_id">Complex:</label>
+                </td>
+                <td>
+                    <input data-dojo-type="dijit.form.CheckBox" id="_complex_id" name="complex" type="checkbox"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="_unplanned_id">Unplanned:</label>
+                </td>
+                <td>
+                    <input data-dojo-type="dijit.form.CheckBox" id="_unplanned_id" name="unplanned" type="checkbox"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="_owner_id">Owner:</label>
+                </td>
+                <td>
+                    <select data-dojo-type="dijit.form.Select" id="_owner_id" name="owner" required="true"/>
+                    <c:forEach items="${users}" var="user">
+                        <c:choose>
+                            <c:when test="${user.username == task.owner.username}">
+                                <option selected="selected" value="${user.id}">${user.username}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${user.id}">${user.username}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="_userStory_id">User Story:</label>
+                </td>
+                <td>
+                    <select data-dojo-type="dijit.form.Select" id="_userStory_id" name="userStory" required="true"/>
+                    <c:forEach items="${userstorys}" var="userstory">
+                        <c:choose>
+                            <c:when test="${userstory.title == task.userStory.title}">
+                                <option selected="selected" value="${userstory.id}">${userstory.title}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${userstory.id}">${userstory.title}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </td>
+            </tr>
+        </table>
     </form>
+    <form:update id="fu_com_cisco_diddo_entity_Task" modelAttribute="task" path="/tasks" versionField="none" z="jhWSfiNHOp3KFcf2fue9xIERiMM=">
+        <field:input field="taskNumber" id="c_com_cisco_diddo_entity_Task_taskNumber" required="true" z="tZZRTcgepWKynkhS01iho9qE81o="/>
+        <field:textarea field="description" id="c_com_cisco_diddo_entity_Task_description" z="XDy/MqXt1KZXIrSGSzpjA3StB6E="/>
+        <field:input field="dots" id="c_com_cisco_diddo_entity_Task_dots" min="0" required="true" z="1nLgODngXKxV/R9y5+T8f5+nrNA="/>
+        <field:select field="status" id="c_com_cisco_diddo_entity_Task_status" items="${tasks}" path="tasks" required="true" z="FCowjTqt4+m+HynoRUba5Ip0PWE="/>
+        <field:datetime dateTimePattern="${task_startdate_date_format}" field="startDate" id="c_com_cisco_diddo_entity_Task_startDate" z="YpDsAe96yvw4PtRO3bEF327Hr8A="/>
+        <field:datetime dateTimePattern="${task_enddate_date_format}" field="endDate" id="c_com_cisco_diddo_entity_Task_endDate" z="f3wbeEgMBHmAotF6fe89uKyUdbg="/>
+        <field:checkbox field="complex" id="c_com_cisco_diddo_entity_Task_complex" z="lq/vSnr5ScBv4/pZyCMa+6gmJBM="/>
+        <field:checkbox field="unplanned" id="c_com_cisco_diddo_entity_Task_unplanned" z="bSR+Lj/Suskf9k9A0Gp4CRgusLM="/>
+        <field:select field="owner" id="c_com_cisco_diddo_entity_Task_owner" itemValue="id" items="${users}" path="/users" z="Z1JPtiKbLPlpnf7Mt4ltplTna/A="/>
+        <field:select field="userStory" id="c_com_cisco_diddo_entity_Task_userStory" itemValue="id" items="${userstorys}" path="/userstorys" z="osaxPpZ0m/eHGuF2XCDc1aJCGlg="/>
+    </form:update>
 </div>

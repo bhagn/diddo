@@ -1,38 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div style="width:400px;margin: auto;" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" style="width:400px;margin: auto;" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-
-	<script>
+    <script>
       require(["dojo/parser", "dijit/form/Form", "dijit/form/TextBox", "dijit/form/ValidationTextBox", "dijit/form/Textarea", "dijit/form/DateTextBox", "dijit/form/CheckBox", "dojo/domReady!"]);
     </script>
-    <form class="diddoForm" name="form" data-dojo-type="dijit.form.Form" data-dojo-id="form">
-   		<table style="color: #000;" cellspacing="10">
-	       <tr>
-	            <td>
-	                <label for="_description_id">Description:</label>
-	            </td>
-	            <td>
-	                <textarea id="_description_id" name="description" data-dojo-type="dijit/form/Textarea" style="width:210px;">Your description here...</textarea>
-	            </td>
-	        </tr>
-	        
-	        <tr>
-	            <td>
-	                <label for="_sprint_id">Sprint:</label>
-	            </td>
-	            <td>
-					 <select id="_sprint_id" name="sprint" data-dojo-type="dijit.form.Select" required="true"/>
-	                <c:forEach items="${sprints}" var="sprint">
-					<option value="${sprint.id}">${sprint.sprintNo}</option> 
-					</c:forEach> 
-	            </td>
-	        </tr>
-	       
-	    
-	    
-    	</table>
-
+    <form class="diddoForm" data-dojo-id="form" data-dojo-type="dijit.form.Form" name="form">
+        <table cellspacing="10" style="color: #000;">
+            <tr>
+                <td>
+                    <label for="_description_id">Description:</label>
+                </td>
+                <td>
+                    <textarea data-dojo-type="dijit/form/Textarea" id="_description_id" name="description" style="width:210px;">Your description here...</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="_sprint_id">Sprint:</label>
+                </td>
+                <td>
+                    <select data-dojo-type="dijit.form.Select" id="_sprint_id" name="sprint" required="true"/>
+                    <c:forEach items="${sprints}" var="sprint">
+                        <option value="${sprint.id}">${sprint.sprintNo}</option>
+                    </c:forEach>
+                </td>
+            </tr>
+        </table>
     </form>
-   
+    <form:create id="fc_com_cisco_diddo_entity_Impediment" modelAttribute="impediment" path="/impediments" render="${empty dependencies}" z="7QhdXxfTCStwyRc6OpX5+FOKA5w=">
+        <field:textarea field="description" id="c_com_cisco_diddo_entity_Impediment_description" required="true" z="Iyr4xJhI9+AhWSgTrq1EIBSL/hg="/>
+        <field:select field="sprint" id="c_com_cisco_diddo_entity_Impediment_sprint" itemValue="id" items="${sprints}" path="/sprints" required="true" z="4vLgB78Lt7MMMoTtlIQyLkWlsr0="/>
+        <field:select field="submitter" id="c_com_cisco_diddo_entity_Impediment_submitter" itemValue="id" items="${users}" path="/users" required="true" z="/x1g9WXuq9IWZzaUqn88Kn0cYD0="/>
+        <field:datetime dateTimePattern="${impediment_submitteddate_date_format}" field="submittedDate" id="c_com_cisco_diddo_entity_Impediment_submittedDate" z="MI+wBADX55nEGojtGNka9IKnzAc="/>
+        <field:checkbox field="closed" id="c_com_cisco_diddo_entity_Impediment_closed" z="1NeYXP+JxXwRwwjzO8dC17D36bk="/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_com_cisco_diddo_entity_Impediment" render="${not empty dependencies}" z="rBQNSKJzr90d27pCAs6yzGgExm4="/>
 </div>

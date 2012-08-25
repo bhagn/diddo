@@ -3,9 +3,6 @@
 
 package com.cisco.diddo.web;
 
-import com.cisco.diddo.dao.ImpedimentDao;
-import com.cisco.diddo.dao.SprintDao;
-import com.cisco.diddo.dao.UserDao;
 import com.cisco.diddo.entity.Impediment;
 import com.cisco.diddo.web.ImpedimentController;
 import java.io.UnsupportedEncodingException;
@@ -15,7 +12,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.joda.time.format.DateTimeFormat;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,15 +23,6 @@ import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 privileged aspect ImpedimentController_Roo_Controller {
-    
-    /*@Autowired
-    ImpedimentDao ImpedimentController.impedimentDao;
-    
-    @Autowired
-    SprintDao ImpedimentController.sprintDao;
-    
-    @Autowired
-    UserDao ImpedimentController.userDao;*/
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String ImpedimentController.create(@Valid Impediment impediment, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -60,7 +47,7 @@ privileged aspect ImpedimentController_Roo_Controller {
         }
         uiModel.addAttribute("dependencies", dependencies);
         return "impediments/create";
-    } 
+    }
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String ImpedimentController.show(@PathVariable("id") BigInteger id, Model uiModel) {
@@ -115,13 +102,6 @@ privileged aspect ImpedimentController_Roo_Controller {
     void ImpedimentController.addDateTimeFormatPatterns(Model uiModel) {
         uiModel.addAttribute("impediment_submitteddate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
     }
-    /*
-    void ImpedimentController.populateEditForm(Model uiModel, Impediment impediment) {
-        uiModel.addAttribute("impediment", impediment);
-        addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("sprints", sprintDao.findAll());
-        uiModel.addAttribute("users", userDao.findAll());
-    }*/
     
     String ImpedimentController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
         String enc = httpServletRequest.getCharacterEncoding();
