@@ -44,10 +44,41 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 		},
 		
 		_loadUSOfSprint: function() {
+			var widget = this;
 			var sprint = this.sprintDropdownNode.options[this.sprintDropdownNode.selectedIndex].value;
 			this.sprintService.get(sprint, "userstories", function(userStories) {
+				widget.sprintDropdownNode.options[this.sprintDropdownNode.selectedIndex].userStories = userStories;
+				//widget._showUserStories();
 				console.log(userStories);
 			});
+		},
+		
+		_showUserStories: function() {
+			var us = this.sprintDropdownNode.options[this.sprintDropdownNode.selectedIndex].userStories;
+			this._cleanup(this.userStoriesNode.domNode);
+			for(var i=0; i<us.length; i++) {
+				var userStory = us[i];
+				this._addUserStoryToUI(userStory);
+			}
+		},
+		
+		_loadTasks: function(userStory) {
+			var widget = this;
+			this._cleanup(this.taskNode.domNode);
+			this.userStoryService.get(userStory.id, "tasks", function(tasks) {
+				for(var i=0; i<tasks.length; i++) {
+					widget.taskNode.domNode.appendChild(new Task(tasks[i], taskService).domNode);
+				}
+			});
+		},
+		
+		_addUserStoryToUI: function(us) {
+			var widget = this;
+			var userStory = new UserStory(us, this.userStoryService);
+			on(userStory.domNode, "click", function(evt) {		
+				widget._loadTasks(userStory);
+			});
+			this.userStoriesNode.domNode.apendChild(userStory.domNode);
 		},
 		
 		_setupEventHandlers: function() {
@@ -55,7 +86,22 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 			on(this.sprintDropdownNode, "change", function(evt) {
 				widget._loadUSOfSprint();
 			});
+			
+			on(this.addUserStoryButton, "click", function(evt) {
+				widget.userStoryService.add(function(userStory) {
+					widget._addUserStoryToUI(userStory);
+				});
+			});
 		},
+		
+		_cleanup: function(container) {
+			for(var i=container.childNodes.length; i>0; i--) {
+				console.log("deleting: ", container.childNodes[i-1].id);
+				var widget = dijit.byId(container.childNodes[i-1].id);
+				if(widget)
+					userWidget.destroyRecursive();
+			}
+		}
 		
 	});
 }
