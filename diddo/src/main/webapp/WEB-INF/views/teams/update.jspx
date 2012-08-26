@@ -24,6 +24,7 @@
                     <input data-dojo-type="dijit.form.TextBox" id="_email_id" name="email" value="${team.email}" required="true" type="text"/>
                 </td>
             </tr>
+           <!-- scrummaster exception thrown
             <tr>
                 <td>
                     <label for="_scrummaster_id">ScrumMaster:</label>
@@ -42,6 +43,7 @@
                     </c:forEach>
                 </td>
             </tr>
+             -->
         </table>
     </form>
 </div>
