@@ -42,7 +42,7 @@ public class SprintController {
             return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
         }
         List<UserStory> userStoryList = userStoryDao.findAllBySprint_SprintNoAndSprint_ReleaseVersion(sprint.getSprintNo(), sprint.getReleaseVersion());
-        String userStoryJson = new JSONSerializer().exclude("*.class", "*.locale").serialize(userStoryList);
+        String userStoryJson = UserStory.toJsonArray(userStoryList);
         return new ResponseEntity<String>(userStoryJson, headers, HttpStatus.OK);
     }
 }
