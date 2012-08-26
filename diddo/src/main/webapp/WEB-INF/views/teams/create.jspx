@@ -12,7 +12,7 @@
                     <label for="_name_id">Name:</label>
                 </td>
                 <td>
-                    <input data-dojo-type="dijit.form.ValidationTextBox" id="_name_id" name="username" required="true" type="text"/>
+                    <input data-dojo-type="dijit.form.ValidationTextBox" id="_name_id" name="name" required="true" type="text"/>
                 </td>
             </tr>
             <tr>
@@ -28,7 +28,7 @@
                     <label for="_scrummaster_id">ScrumMaster:</label>
                 </td>
                 <td>
-                    <select data-dojo-type="dijit.form.Select" id="_scrummaster_id" name="scrumMaster" path="/users" required="true"/>
+                    <select data-dojo-type="dijit.form.Select" id="_scrummaster_id" name="scrummaster" path="/users" required="true"/>
                     <c:forEach items="${users}" var="user">
                         <option value="${user.id}">${user.username}</option>
                     </c:forEach>
