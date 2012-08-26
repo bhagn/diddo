@@ -37,6 +37,6 @@ public class Impediment {
     @DateTimeFormat(style = "M-")
     private Calendar submittedDate;
 
-    @Value("false")
+    
     private boolean closed;
 }
