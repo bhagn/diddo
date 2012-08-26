@@ -9,6 +9,9 @@
             <a href="teams">Teams</a>
           </li>
           <li class="">
+            <a href="sprints">Sprint</a>
+          </li>
+          <li class="">
             <a href="impediments">Impediments</a>
           </li>
         </ul>
