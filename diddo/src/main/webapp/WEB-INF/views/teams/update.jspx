@@ -6,4 +6,46 @@
         <field:input field="name" id="c_com_cisco_diddo_entity_Team_name" required="true" z="lCp2ceoMTXG2W5hMxXWrPuo2hPg="/>
         <field:input field="email" id="c_com_cisco_diddo_entity_Team_email" required="true" validationMessageCode="field_invalid_email" z="3ZP0enBzR/6D8uk9PIgAeAyKzMA="/>
     </form:update>
+    
+        <script>
+      require(["dojo/parser", "dijit/form/Form", "dijit/form/TextBox", "dijit/form/ValidationTextBox", "dijit/form/Select", "dijit/form/CheckBox", "dojo/domReady!"]);
+    </script>
+    <form class="diddoForm" data-dojo-id="form" data-dojo-type="dijit.form.Form" modelAttribute="user" name="form" path="/teams">
+        <table cellspacing="10" style="color: #000;">
+            <tr>
+                <td>
+                    <label for="_name_id">Name:</label>
+                </td>
+                <td>
+                    <input data-dojo-type="dijit.form.ValidationTextBox" id="_name_id" name="name" value="${team.name}" required="true" type="text"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="_email_id">Email:</label>
+                </td>
+                <td>
+                    <input data-dojo-type="dijit.form.TextBox" id="_email_id" name="email" value="${team.email}" required="true" type="text"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="_scrummaster_id">ScrumMaster:</label>
+                </td>
+                <td>
+                    <select data-dojo-type="dijit.form.Select" id="_scrummaster_id" name="scrummaster" path="/users" required="true"/>
+                    <c:forEach items="${users}" var="user">
+                        <c:choose>
+                            <c:when test="${user.username == scrummaster.scrumMaster.username}">
+                                <option selected="selected" value="${user.id}">${user.username}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${user.id}">${user.username}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </td>
+            </tr>
+        </table>
+    </form>
 </div>
