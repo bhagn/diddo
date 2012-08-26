@@ -52,23 +52,23 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 			
 			var widget = this;
 			
-			on(this.domNode, "click", function(evt) {
+			/*on(this.domNode, "click", function(evt) {
 				if(widget.users) {
 					widget._loadUsers();
 					return;
 				}
 				
-				service.get(teamName, "users", function(users) {
+				service.get("" + widget.id, "users", function(users) {
 					console.log(users);
 					widget.users = users;
 					widget._loadUsers();
 				});
-			});
+			});*/
 			
 			//when editButton (defined in 'Team.html') is clicked
 			on(this.editButton, "click", function(evt) {
-				service.update(teamName, function(response) {
-					service.get(teamName, null, function(team) {
+				service.update("" + widget.id, function(response) {
+					service.get("" + widget.id, null, function(team) {
 						widget.mailer.innerHTML = team.email;
 						widget.SM.innerHTML = team.scrumMaster.name;
 					});
@@ -76,7 +76,7 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 			});
 			//when deleteButton (defined in 'Team.html') is clicked
 			on(this.deleteButton, "click", function(evt) {
-				service.remove(teamName, function(response) {
+				service.remove("" + widget.id, function(response) {
 					console.log("deleted");
 					console.log(widget);
 					baseFX.animateProperty({

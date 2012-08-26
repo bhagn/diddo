@@ -36,8 +36,9 @@ define(["dojo/_base/declare","dijit/_WidgetBase", "dojox/rpc/Rest"],
 		},
 		
 		getItems: function(params, callback, errback) {
-			if(!params)
+			if(!params){
 			    this.service().then(callback || this.defaultCallback, errback || this.showError);
+			}
 			else
 				this.service('?' + params).then(callback || this.defaultCallback, errback || this.showError);
 		},

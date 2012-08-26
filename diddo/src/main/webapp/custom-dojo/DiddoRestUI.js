@@ -15,10 +15,11 @@ define(["dojo/_base/declare","dijit/_WidgetBase", "custom/DiddoRestAPI", "dijit/
 			this.restAPI.getItems(params, callback, errback || this.showError);
 		}, 
 		
-		add: function(callback, errback) {
+		add: function(updateParams, callback, errback) {
 			var callback = callback;
 			var errback = errback || this.showError;
 			var service = this.restAPI;
+			var params = updateParams;
 			var dialog = new Dialog({
 				title: "Add",
 				href: this.restAPI.serviceURL +"?form",
@@ -32,7 +33,13 @@ define(["dojo/_base/declare","dijit/_WidgetBase", "custom/DiddoRestAPI", "dijit/
 				onClick: function(evt) {
 					form.validate();
 					if(form.isValid) {
-						service.addItem(form.getValues(), callback, errback);
+						var formValues = form.getValues();
+						if(params) {
+							for(param in params) {
+								formValues[param] = params[param];
+							}
+						}
+						service.addItem(formValues, callback, errback);
 						dialog.destroyRecursive();
 					}
 				}

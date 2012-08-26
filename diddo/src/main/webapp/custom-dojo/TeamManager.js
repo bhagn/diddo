@@ -21,21 +21,54 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 			var widget = this;
 			this.teamService.getAll(null, function(teams) {
 				for(var i=0, len=teams.length; i<len; i++) {
-					var team = new Team(teams[i], widget.teamService, widget.userService);
-					widget.teamNode.appendChild(team.domNode);
+					var teamWidget = new Team(teams[i], widget.teamService, widget.userService);
+					var team = teams[i];
+					(function(team, teamWidget) {
+						on(teamWidget.domNode, "click", function(evt) {
+							widget.addUserButton.selectedTeam = {"team": team};
+							if(teamWidget.users) {
+								teamWidget._loadUsers();
+								return;
+							}
+							widget.teamService.get("" + team.id, "users", function(users) {
+								console.log(users);
+								teamWidget.users = users;
+								teamWidget._loadUsers();
+							});
+						});
+						
+					})(team, teamWidget);
+					widget.teamNode.appendChild(teamWidget.domNode);
 				}
 			});
 		},
 		
+		_addTeamToUI: function(team) {
+			var teamWidget = new Team(team, this.teamService, this.userService);
+			this.teamNode.appendChild(teamWidget.domNode);
+		},
+		
+		_addUserToUI: function(user) {
+			var userWidget = new User(user, this.userService);
+			this.usersNode.appendChild(userWidget.domNode);
+		},
+		
 		_setupEventHandlers: function() {
 			console.log("Setting up Event Handlers");
+			var widget = this;
 			var tService = this.teamService;
 			var uService = this.userService;
 			on(this.addTeamButton, "click", function(evt) {
-				tService.add();
+				tService.add(null, function(team) {
+					console.log("Added Team: ", team);
+					widget._addTeamToUI(team);
+				});
 			});
 			on(this.addUserButton, "click", function(evt) {
-				uService.add();
+				uService.add(widget.addUserButton.selectedTeam, function(user) {
+					console.log(user);
+					widget._addUserToUI(user);
+				});
 			});
 		},
 		
