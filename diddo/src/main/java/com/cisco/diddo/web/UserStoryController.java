@@ -124,6 +124,18 @@ public class UserStoryController {
 	    	    userStory.setUnplanned(true);
 	    	}
 	    }
+	    if(deserialized.get("spillover") != null ){
+	    	Object obj = deserialized.get("spillOver");
+	    	if(obj instanceof ArrayList && ((ArrayList)obj).size() > 0){
+	    	    userStory.setSpillOver(true);
+	    	}
+	    }
+	    if(deserialized.get("complex") != null ){
+	    	Object obj = deserialized.get("complex");
+	    	if(obj instanceof ArrayList && ((ArrayList)obj).size() > 0){
+	    	    userStory.setComplex(true);
+	    	}
+	    }
 	    String Id = deserialized.get("sprint");
 	    if(Id != null && !Id.equals("")){
 	    	BigInteger iid = new BigInteger(Id);
