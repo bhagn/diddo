@@ -112,6 +112,7 @@ public class UserStoryController {
 		 }
 		userStory.setFriendlyID(deserialized.get("friendlyID"));
 	    userStory.setDescription(deserialized.get("description"));
+	    userStory.setTitle(deserialized.get("title"));
 	    String points = deserialized.get("points");
 	    if(points != null){
 	    	userStory.setPoints(Byte.valueOf(points));

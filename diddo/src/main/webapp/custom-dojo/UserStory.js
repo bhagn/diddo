@@ -2,7 +2,7 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 		function(declare, xhr, parser, dom, domConstruct, ready, on, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _LayoutWidget, _Container, template, RestUI, baseFX) {
 	return declare("UserStory", [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _Container], {
 		templateString: template,
-		friendlyId : null,
+		friendlyID : null,
 		title: null,
 		description: null,
 		points: null,
@@ -21,11 +21,9 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 		},
 		
 		postCreate: function() {
-			this.friendlyIDNode.innerHTML = this.friendlyId;
+			this.friendlyIDNode.innerHTML = this.friendlyID;
 			this.titleNode.innerHTML = this.title;
-			this.pointsNode.innerHTML = this.points;
-			this.burntPointsNode.innerHTML = this.burntPoints;
-
+			
 			this.setupEventHandlers();
 		},
 		
@@ -36,10 +34,9 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 			on(this.editButton, "click", function(evt) {
 				evt.stopPropagation();
 				service.update(widget.id, function(response) {
-					service.get(teamName, null, function(team) {
-						widget.titleNode.innerHTML = team.title;
-						widget.pointsNode.innerHTML = team.points;
-						widget.burntPointsNode.innerHTML = team.burntPoints;
+					service.get(teamName, null, function(userStory) {
+						widget.friendlyIDNode.innerHTML = userStory.friendlyID;
+						widget.titleNode.innerHTML = userStory.title;
 					});
 				});
 			});
