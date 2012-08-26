@@ -12,7 +12,7 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 		constructor: function() {
 			this.sprintService = new RestUI("sprints");
 			this.userStoryService = new RestUI("userstorys");
-			this.userStoryService = new RestUI("tasks");
+			this.taskStoryService = new RestUI("tasks");
 			this.exitCriteriaService = new RestUI("exitcriterias");
 		},
 		
