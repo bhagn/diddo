@@ -6,26 +6,46 @@ package com.cisco.diddo.entity;
 import com.cisco.diddo.entity.Team;
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
+import flexjson.transformer.AbstractTransformer;
+
+import java.math.BigInteger;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 privileged aspect Team_Roo_Json {
     
     public String Team.toJson() {
-        return new JSONSerializer().exclude("*.class").serialize(this);
+        return new JSONSerializer().exclude("*.class","*.locale").transform(new BigDecimalTransformer(),BigInteger.class).transform(new CalendarTransformer(), Calendar.class).serialize(this);
     }
     
     public static Team Team.fromJsonToTeam(String json) {
-        return new JSONDeserializer<Team>().use(null, Team.class).deserialize(json);
+        return new JSONDeserializer<Team>().use(null, Team.class).use("*.id" , BigInteger.class).deserialize(json);
     }
     
     public static String Team.toJsonArray(Collection<Team> collection) {
-        return new JSONSerializer().exclude("*.class").serialize(collection);
+        return new JSONSerializer().exclude("*.class","*.locale").transform(new BigDecimalTransformer(),BigInteger.class).transform(new CalendarTransformer(), Calendar.class).serialize(collection);
     }
     
     public static Collection<Team> Team.fromJsonArrayToTeams(String json) {
-        return new JSONDeserializer<List<Team>>().use(null, ArrayList.class).use("values", Team.class).deserialize(json);
+        return new JSONDeserializer<List<Team>>().use(null, ArrayList.class).use("values", Team.class).use("*.id" , BigInteger.class).deserialize(json);
     }
-    
+    public static class BigDecimalTransformer extends AbstractTransformer{ 
+  	   public void transform(Object object)
+  	   { 
+  		   getContext().writeQuoted(((BigInteger)object).toString());
+  	   }
+     }
+     public static class CalendarTransformer extends AbstractTransformer{ 
+  	   public void transform(Object object)
+  	   { 
+  		   DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+  		   Date date = ((Calendar)object).getTime();
+  		   getContext().writeQuoted(format.format(date));
+  	   }
+     }
 }

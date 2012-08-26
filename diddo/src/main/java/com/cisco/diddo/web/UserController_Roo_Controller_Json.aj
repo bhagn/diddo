@@ -39,14 +39,14 @@ privileged aspect UserController_Roo_Controller_Json {
         return new ResponseEntity<String>(User.toJsonArray(result), headers, HttpStatus.OK);
     }
     
-    @RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
+   /* @RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> UserController.createFromJson(@RequestBody String json) {
         User user = User.fromJsonToUser(json);
         userDao.save(user);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
-    }
+    }*/
     
     @RequestMapping(value = "/jsonArray", method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> UserController.createFromJsonArray(@RequestBody String json) {
@@ -58,7 +58,7 @@ privileged aspect UserController_Roo_Controller_Json {
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
     
-    @RequestMapping(method = RequestMethod.PUT, headers = "Accept=application/json")
+    /*@RequestMapping(method = RequestMethod.PUT, headers = "Accept=application/json")
     public ResponseEntity<String> UserController.updateFromJson(@RequestBody String json) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
@@ -67,7 +67,7 @@ privileged aspect UserController_Roo_Controller_Json {
             return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<String>(headers, HttpStatus.OK);
-    }
+    }*/
     
     @RequestMapping(value = "/jsonArray", method = RequestMethod.PUT, headers = "Accept=application/json")
     public ResponseEntity<String> UserController.updateFromJsonArray(@RequestBody String json) {
@@ -81,7 +81,7 @@ privileged aspect UserController_Roo_Controller_Json {
         return new ResponseEntity<String>(headers, HttpStatus.OK);
     }
     
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
+    /*@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
     public ResponseEntity<String> UserController.deleteFromJson(@PathVariable("id") BigInteger id) {
         User user = userDao.findOne(id);
         HttpHeaders headers = new HttpHeaders();
@@ -91,6 +91,6 @@ privileged aspect UserController_Roo_Controller_Json {
         }
         userDao.delete(user);
         return new ResponseEntity<String>(headers, HttpStatus.OK);
-    }
+    }*/
     
 }

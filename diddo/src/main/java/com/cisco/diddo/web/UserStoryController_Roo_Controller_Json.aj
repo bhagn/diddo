@@ -39,14 +39,14 @@ privileged aspect UserStoryController_Roo_Controller_Json {
         return new ResponseEntity<String>(UserStory.toJsonArray(result), headers, HttpStatus.OK);
     }
     
-    @RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
+   /* @RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> UserStoryController.createFromJson(@RequestBody String json) {
         UserStory userStory = UserStory.fromJsonToUserStory(json);
         userStoryDao.save(userStory);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
-    }
+    }*/
     
     @RequestMapping(value = "/jsonArray", method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> UserStoryController.createFromJsonArray(@RequestBody String json) {
@@ -81,7 +81,7 @@ privileged aspect UserStoryController_Roo_Controller_Json {
         return new ResponseEntity<String>(headers, HttpStatus.OK);
     }
     
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
+    /*@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
     public ResponseEntity<String> UserStoryController.deleteFromJson(@PathVariable("id") BigInteger id) {
         UserStory userStory = userStoryDao.findOne(id);
         HttpHeaders headers = new HttpHeaders();
@@ -91,6 +91,6 @@ privileged aspect UserStoryController_Roo_Controller_Json {
         }
         userStoryDao.delete(userStory);
         return new ResponseEntity<String>(headers, HttpStatus.OK);
-    }
+    }*/
     
 }

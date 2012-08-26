@@ -59,7 +59,7 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 			var tService = this.teamService;
 			var uService = this.userService;
 			on(this.addTeamButton, "click", function(evt) {
-				tService.add(null, function(team) {
+				tService.add(function(team) {
 					console.log("Added Team: ", team);
 					widget._addTeamToUI(team);
 				});

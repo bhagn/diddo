@@ -20,7 +20,8 @@ import java.util.List;
 privileged aspect Sprint_Roo_Json {
 
 	public String Sprint.toJson() {
-		return new JSONSerializer().exclude("*.class","*.locale").transform(new BigDecimalTransformer(),BigInteger.class).transform(new CalendarTransformer(), Calendar.class).serialize(this);
+		return new JSONSerializer().exclude("*.class", "*.locale").transform(new BigDecimalTransformer(),BigInteger.class).transform(new CalendarTransformer(), Calendar.class).serialize(
+				this);
 	}
 
 	public static Sprint Sprint.fromJsonToSprint(String json) {
@@ -33,8 +34,8 @@ privileged aspect Sprint_Roo_Json {
 	}
 
 	public static Collection<Sprint> Sprint.fromJsonArrayToSprints(String json) {
-		return new JSONDeserializer<List<Sprint>>().use(null, ArrayList.class)
-				.use("values", Sprint.class).deserialize(json);
+		return new JSONDeserializer<List<Sprint>>().use(null, ArrayList.class).use("values", Sprint.class).use("*.id" , BigInteger.class).deserialize(json);
+
 	}
 
 	public static class BigDecimalTransformer extends AbstractTransformer {
@@ -50,5 +51,4 @@ privileged aspect Sprint_Roo_Json {
 			getContext().writeQuoted(format.format(date));
 		}
 	}
-
 }

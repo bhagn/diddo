@@ -29,15 +29,15 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 			var service = this.userService;
 			//when editButton (defined in 'Team.html') is clicked
 			on(this.editButton, "click", function(evt) {
-				widget.userService.update(widget.username, function(response) {
-					service.getItem(widget.username, function(user) {
+				widget.userService.update("" +  widget.id, function(response) {
+					service.getItem("" +  widget.id, function(user) {
 						mailerNode.innerHTML = user.email;
 					});
 				});
 			});
 			//when deleteButton (defined in 'Team.html') is clicked
 			on(this.deleteButton, "click", function(evt) {
-				service.remove(widget.username, function(response) {
+				service.remove("" +  widget.id, function(response) {
 					console.log("deleted");
 					baseFX.animateProperty({
 						node: widget,

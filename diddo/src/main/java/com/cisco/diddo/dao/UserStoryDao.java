@@ -12,4 +12,7 @@ public interface UserStoryDao {
     List<com.cisco.diddo.entity.UserStory> findAll();
 
 	List<UserStory> findAllBySprint(Sprint sprint);
+
+	List<UserStory> findAllBySprint_SprintNoAndSprint_ReleaseVersion(String sprintNo,
+			String releaseVersion);
 }

@@ -28,8 +28,8 @@ import org.springframework.web.util.WebUtils;
 
 privileged aspect UserStoryController_Roo_Controller {
     
-    @Autowired
-    UserStoryDao UserStoryController.userStoryDao;
+    /*@Autowired
+    UserStoryDao UserStoryController.userStoryDao;*/
     
     @Autowired
     SprintDao UserStoryController.sprintDao;
