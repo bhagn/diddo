@@ -1,11 +1,7 @@
 package com.cisco.diddo.web;
 
 import java.math.BigInteger;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +17,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.cisco.diddo.dao.SprintDao;
+import com.cisco.diddo.dao.TeamDao;
 import com.cisco.diddo.dao.UserStoryDao;
+import com.cisco.diddo.entity.Sprint;
+import com.cisco.diddo.entity.Team;
 import com.cisco.diddo.entity.UserStory;
 
 import flexjson.JSONDeserializer;
@@ -33,6 +33,12 @@ import flexjson.JSONDeserializer;
 public class UserStoryController {
 	    @Autowired
 	    public UserStoryDao userStoryDao;
+	    
+	    @Autowired
+	    public SprintDao sprintDao;
+	    
+	    @Autowired
+	    public TeamDao teamDao;
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
     public ResponseEntity<String> deleteFromJson(@PathVariable("id") String idStr) {
@@ -76,6 +82,24 @@ public class UserStoryController {
 		}
 		return null;
 	}
+	private Sprint findSprintById(BigInteger id){
+		List<Sprint> sprints = sprintDao.findAll();
+		for(Sprint sprint : sprints){
+			if(sprint.getId().equals(id)){
+				return sprint;
+			}
+		}
+		return null;
+	}
+	private Team findTeamById(BigInteger id){
+		List<Team> teams = teamDao.findAll();
+		for(Team team : teams){
+			if(team.getId().equals(id)){
+				return team;
+			}
+		}
+		return null;
+	}
 	private UserStory fromJsonToUserStory(String jsonStr){
 		UserStory userStory = null;
 		Map<String, String> deserialized = new JSONDeserializer<Map<String, String>>().deserialize(jsonStr);
@@ -86,22 +110,30 @@ public class UserStoryController {
 		if(userStory == null){
 			userStory = new UserStory();
 		 }
-		/*userStory.setName(deserialized.get("name"));
-	    userStory.setEmail(deserialized.get("email"));*/
-		/*String scrumMasterId = deserialized.get("scrumMaster");
-		if(scrumMasterId != null && !scrumMasterId.equals("")){
-		     //set scrummaster here;
-		}*/
-		
-		DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
-		try{
-		     Date date = format.parse("dateString");
-		     Calendar cal  = Calendar.getInstance(); 
-		     cal.setTime(date);
-		}catch(ParseException ex){
-			
-		}
-		
+		userStory.setFriendlyID(deserialized.get("friendlyID"));
+	    userStory.setDescription(deserialized.get("description"));
+	    String points = deserialized.get("points");
+	    if(points != null){
+	    	userStory.setPoints(Byte.valueOf(points));
+	    }
+	    userStory.setColor(deserialized.get("color"));
+	    if(deserialized.get("unplanned") != null ){
+	    	Object obj = deserialized.get("unplanned");
+	    	if(obj instanceof ArrayList && ((ArrayList)obj).size() > 0){
+	    	    userStory.setUnplanned(true);
+	    	}
+	    }
+	    String Id = deserialized.get("sprint");
+	    if(Id != null && !Id.equals("")){
+	    	BigInteger iid = new BigInteger(Id);
+	    	userStory.setSprint(findSprintById(iid));
+	    }
+	    Id = deserialized.get("team");
+	    if(Id != null && !Id.equals("")){
+	    	BigInteger iid = new BigInteger(Id);
+	    	userStory.setTeam(findTeamById(iid));
+	    }
+	    
 		return userStory;
 	}
 

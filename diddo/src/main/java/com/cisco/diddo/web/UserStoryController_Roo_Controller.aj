@@ -31,11 +31,11 @@ privileged aspect UserStoryController_Roo_Controller {
     /*@Autowired
     UserStoryDao UserStoryController.userStoryDao;*/
     
-    @Autowired
+    /*@Autowired
     SprintDao UserStoryController.sprintDao;
     
     @Autowired
-    TeamDao UserStoryController.teamDao;
+    TeamDao UserStoryController.teamDao;*/
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String UserStoryController.create(@Valid UserStory userStory, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
