@@ -28,14 +28,14 @@ import org.springframework.web.util.WebUtils;
 
 privileged aspect TaskController_Roo_Controller {
     
-    @Autowired
+    /*@Autowired
     TaskDao TaskController.taskDao;
     
     @Autowired
     UserDao TaskController.userDao;
     
     @Autowired
-    UserStoryDao TaskController.userStoryDao;
+    UserStoryDao TaskController.userStoryDao;*/
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String TaskController.create(@Valid Task task, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
