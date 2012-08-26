@@ -2,9 +2,13 @@ package com.cisco.diddo.web;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Map;
 
 import com.cisco.diddo.dao.UserDao;
+import com.cisco.diddo.entity.Team;
 import com.cisco.diddo.entity.User;
+
+import flexjson.JSONDeserializer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -28,7 +32,7 @@ public class UserController {
 	
 	   @RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
 	    public ResponseEntity<String> createFromJson(@RequestBody String json) {
-	        User user = User.fromJsonToUser(json);
+	        User user = fromJsonToUser(json);
 	        userDao.save(user);
 	        HttpHeaders headers = new HttpHeaders();
 	        headers.add("Content-Type", "application/json");
@@ -39,7 +43,7 @@ public class UserController {
 	    public ResponseEntity<String> updateFromJson(@RequestBody String json) {
 	        HttpHeaders headers = new HttpHeaders();
 	        headers.add("Content-Type", "application/json");
-	        User user = User.fromJsonToUser(json);
+	        User user = fromJsonToUser(json);
 	        if (userDao.save(user) == null) {
 	            return new ResponseEntity<String>(user.toJson() , headers, HttpStatus.NOT_FOUND);
 	        }
@@ -66,4 +70,32 @@ public class UserController {
 			}
 			return null;
 		}
+	   private Team findTeamById(BigInteger id){
+		   List<Team> teams = teamDao.findAll();
+			for(Team team : teams){
+				if(team.getId().equals(id)){
+					return team;
+				}
+			}
+			return null;
+	   }
+	  private User fromJsonToUser(String jsonStr){
+		  User user = null;
+		  Map<String, String> deserialized = new JSONDeserializer<Map<String, String>>().deserialize(jsonStr);
+		  String id = deserialized.get("id");
+		  if(id != null && !id.equals("")){
+			 user = findById(new BigInteger(id));
+		  }
+		  if(user == null){
+			  user = new User();
+		  }
+		  user.setUsername(deserialized.get("username"));
+		  user.setPassword(deserialized.get("password"));
+		  user.setEmail(deserialized.get("email"));
+		  String teamId = deserialized.get("team");
+		  if(teamId != null && !teamId.equals("")){
+		     user.setTeam(findTeamById(new BigInteger(teamId)));
+		  }
+		  return user;
+	  }
 }
