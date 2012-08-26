@@ -13,7 +13,7 @@ import java.util.List;
 privileged aspect UserStory_Roo_Json {
     
     public String UserStory.toJson() {
-        return new JSONSerializer().exclude("*.class", "*.locale").serialize(this);
+        return new JSONSerializer().exclude("*.class").serialize(this);
     }
     
     public static UserStory UserStory.fromJsonToUserStory(String json) {
@@ -21,7 +21,7 @@ privileged aspect UserStory_Roo_Json {
     }
     
     public static String UserStory.toJsonArray(Collection<UserStory> collection) {
-        return new JSONSerializer().exclude("*.class", "*.locale").serialize(collection);
+        return new JSONSerializer().exclude("*.class").serialize(collection);
     }
     
     public static Collection<UserStory> UserStory.fromJsonArrayToUserStorys(String json) {

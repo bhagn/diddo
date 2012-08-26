@@ -25,8 +25,6 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 			this.titleNode.innerHTML = this.title;
 			this.pointsNode.innerHTML = this.points;
 			this.burntPointsNode.innerHTML = this.burntPoints;
-			this.unplannedNode.innerHTML = this.unplanned;
-			this.spillOverNode.innerHTML = this.spillOver;
 
 			this.setupEventHandlers();
 		},
@@ -41,8 +39,6 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 						widget.titleNode.innerHTML = team.title;
 						widget.pointsNode.innerHTML = team.points;
 						widget.burntPointsNode.innerHTML = team.burntPoints;
-						widget.unplannedNode.innerHTML = team.unplanned;
-						widget.spillOverNode.innerHTML = team.spillOver;
 					});
 				});
 			});

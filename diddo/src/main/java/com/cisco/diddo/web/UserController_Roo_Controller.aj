@@ -81,7 +81,6 @@ privileged aspect UserController_Roo_Controller {
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String UserController.updateForm(@PathVariable("id") BigInteger id, Model uiModel) {
         populateEditForm(uiModel, userDao.findOne(id));
-        uiModel.addAttribute("teams", teamDao.findAll());
         return "users/update";
     }
     

@@ -31,7 +31,7 @@
 	background: #22252A;
 }
 
-.team {
+.team, .userstory {
 	background: #22252A;
 	border: solid;
 	border-color: gray;
@@ -76,4 +76,8 @@
 .team:hover {
 	background: #000;
 	cursor: pointer;
+}
+
+.userstory:hover {
+	color: #fff;
 }

@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo/dom-construct", "dojo/ready", "dojo/on", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin", "dijit/layout/_LayoutWidget", "dijit/_Container", "dojo/text!./templates/SprintManager.html", "custom/DiddoRestUI", "custom/Team", 
+define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo/dom-construct", "dojo/ready", "dojo/on", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin", "dijit/layout/_LayoutWidget", "dijit/_Container", "dojo/text!./templates/SprintManager.html", "custom/DiddoRestUI", "custom/Team", "custom/UserStory", 
         "dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dijit/form/Button", "dijit/form/Form", "dijit/form/TextBox", "dijit/form/ValidationTextBox", "dijit/form/Select", "dijit/form/CheckBox"],
 		function(declare, xhr, parser, dom, domConstruct, ready, on, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _LayoutWidget, _Container, template, RestUI, Team) {
 	return declare("SprintManager", [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _Container], {
@@ -25,37 +25,52 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 			var widget = this;
 			//load all Sprints
 			this.sprintService.getAll(null, function(sprints) {
+				console.log(sprints);
 				for(var i=0; i<sprints.length; i++) {
 					var sprint = sprints[i];
 					(function(sprint) {
 						var option = domConstruct.create("option");
+						option.sprint = sprint;
 						option.value = sprint.sprintNo; 
 						option.innerHTML = sprint.sprintNo;
 						
 						if(!sprints[i].endDate) {
 							option.innerHTML =  sprint.sprintNo + " (Latest)";
 						}
-						option["sprintObject"] = sprint;
 						widget.sprintDropdownNode.appendChild(option);
 					})(sprint);
 				}
+				widget._showSelectedSprint();
 				widget._loadUSOfSprint();
 			});
+		},
+		
+		_showSelectedSprint: function() {
+			var sprint = this.sprintDropdownNode.options[this.sprintDropdownNode.selectedIndex].sprint;
+			this.sprintNoNode.innerHTML = sprint.sprintNo;
+			this.startedOnNode.innerHTML = sprint.startDate;
+			this.endedOnNode.innerHTML = sprint.endDate;
+		},
+		
+		_updateUSCount: function() {
+			var us = this.sprintDropdownNode.options[this.sprintDropdownNode.selectedIndex].userStories;
+			this.noOfUSNode.innerHTML = us.length;
 		},
 		
 		_loadUSOfSprint: function() {
 			var widget = this;
 			var sprint = this.sprintDropdownNode.options[this.sprintDropdownNode.selectedIndex].value;
 			this.sprintService.get(sprint, "userstories", function(userStories) {
-				widget.sprintDropdownNode.options[this.sprintDropdownNode.selectedIndex].userStories = userStories;
-				//widget._showUserStories();
+				widget.sprintDropdownNode.options[widget.sprintDropdownNode.selectedIndex].userStories = userStories;
+				widget._showUserStories();
 				console.log(userStories);
+				widget._updateUSCount();
 			});
 		},
 		
 		_showUserStories: function() {
 			var us = this.sprintDropdownNode.options[this.sprintDropdownNode.selectedIndex].userStories;
-			this._cleanup(this.userStoriesNode.domNode);
+			this._cleanup(this.userStoriesNode);
 			for(var i=0; i<us.length; i++) {
 				var userStory = us[i];
 				this._addUserStoryToUI(userStory);
@@ -64,10 +79,10 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 		
 		_loadTasks: function(userStory) {
 			var widget = this;
-			this._cleanup(this.taskNode.domNode);
+			this._cleanup(this.taskNode);
 			this.userStoryService.get(userStory.id, "tasks", function(tasks) {
 				for(var i=0; i<tasks.length; i++) {
-					widget.taskNode.domNode.appendChild(new Task(tasks[i], taskService).domNode);
+					widget.taskNode.appendChild(new Task(tasks[i], taskService).domNode);
 				}
 			});
 		},
@@ -78,12 +93,13 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 			on(userStory.domNode, "click", function(evt) {		
 				widget._loadTasks(userStory);
 			});
-			this.userStoriesNode.domNode.apendChild(userStory.domNode);
+			this.userStoriesNode.appendChild(userStory.domNode);
 		},
 		
 		_setupEventHandlers: function() {
 			var widget = this;
 			on(this.sprintDropdownNode, "change", function(evt) {
+				widget._showSelectedSprint();
 				widget._loadUSOfSprint();
 			});
 			

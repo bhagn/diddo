@@ -90,6 +90,14 @@ privileged aspect UserStory_Roo_JavaBean {
         this.unplanned = unplanned;
     }
     
+    public Boolean UserStory.getComplex() {
+        return this.complex;
+    }
+    
+    public void UserStory.setComplex(Boolean complex) {
+        this.complex = complex;
+    }
+    
     public Sprint UserStory.getSprint() {
         return this.sprint;
     }

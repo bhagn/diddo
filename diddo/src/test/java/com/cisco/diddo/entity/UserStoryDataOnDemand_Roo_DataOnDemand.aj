@@ -43,6 +43,7 @@ privileged aspect UserStoryDataOnDemand_Roo_DataOnDemand {
         UserStory obj = new UserStory();
         setBurntPoints(obj, index);
         setColor(obj, index);
+        setComplex(obj, index);
         setDescription(obj, index);
         setEndDate(obj, index);
         setFriendlyID(obj, index);
@@ -66,6 +67,11 @@ privileged aspect UserStoryDataOnDemand_Roo_DataOnDemand {
     public void UserStoryDataOnDemand.setColor(UserStory obj, int index) {
         String color = "color_" + index;
         obj.setColor(color);
+    }
+    
+    public void UserStoryDataOnDemand.setComplex(UserStory obj, int index) {
+        Boolean complex = Boolean.TRUE;
+        obj.setComplex(complex);
     }
     
     public void UserStoryDataOnDemand.setDescription(UserStory obj, int index) {
