@@ -39,14 +39,14 @@ privileged aspect TaskController_Roo_Controller_Json {
         return new ResponseEntity<String>(Task.toJsonArray(result), headers, HttpStatus.OK);
     }
     
-    @RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
+    /*@RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> TaskController.createFromJson(@RequestBody String json) {
         Task task = Task.fromJsonToTask(json);
         taskDao.save(task);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
-    }
+    }*/
     
     @RequestMapping(value = "/jsonArray", method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> TaskController.createFromJsonArray(@RequestBody String json) {
@@ -58,7 +58,7 @@ privileged aspect TaskController_Roo_Controller_Json {
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
     
-    @RequestMapping(method = RequestMethod.PUT, headers = "Accept=application/json")
+    /*@RequestMapping(method = RequestMethod.PUT, headers = "Accept=application/json")
     public ResponseEntity<String> TaskController.updateFromJson(@RequestBody String json) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
@@ -67,7 +67,7 @@ privileged aspect TaskController_Roo_Controller_Json {
             return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<String>(headers, HttpStatus.OK);
-    }
+    }*/
     
     @RequestMapping(value = "/jsonArray", method = RequestMethod.PUT, headers = "Accept=application/json")
     public ResponseEntity<String> TaskController.updateFromJsonArray(@RequestBody String json) {
@@ -81,7 +81,7 @@ privileged aspect TaskController_Roo_Controller_Json {
         return new ResponseEntity<String>(headers, HttpStatus.OK);
     }
     
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
+    /*@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
     public ResponseEntity<String> TaskController.deleteFromJson(@PathVariable("id") BigInteger id) {
         Task task = taskDao.findOne(id);
         HttpHeaders headers = new HttpHeaders();
@@ -91,6 +91,6 @@ privileged aspect TaskController_Roo_Controller_Json {
         }
         taskDao.delete(task);
         return new ResponseEntity<String>(headers, HttpStatus.OK);
-    }
+    }*/
     
 }

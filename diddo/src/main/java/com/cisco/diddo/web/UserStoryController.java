@@ -70,7 +70,7 @@ public class UserStoryController {
         if (userStoryDao.save(userStory) == null) {
             return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<String>(headers, HttpStatus.OK);
+        return new ResponseEntity<String>(userStory.toJson() , headers, HttpStatus.OK);
     } 
 	 
 	private UserStory findById(BigInteger id){
