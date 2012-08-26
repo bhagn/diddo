@@ -90,8 +90,9 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 		_addUserStoryToUI: function(us) {
 			var widget = this;
 			var userStory = new UserStory(us, this.userStoryService);
-			on(userStory.domNode, "click", function(evt) {		
-				widget._loadTasks(userStory);
+			on(userStory.domNode, "click", function(evt) {
+				if(evt.target === evt.currentTarget)
+					widget._loadTasks(userStory);
 			});
 			this.userStoriesNode.appendChild(userStory.domNode);
 		},

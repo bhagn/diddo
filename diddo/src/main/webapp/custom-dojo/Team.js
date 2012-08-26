@@ -48,22 +48,7 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 		
 		setupEventHandlers: function() {
 			var service = this.teamService;
-			var teamName = this.name;
-			
 			var widget = this;
-			
-			/*on(this.domNode, "click", function(evt) {
-				if(widget.users) {
-					widget._loadUsers();
-					return;
-				}
-				
-				service.get("" + widget.id, "users", function(users) {
-					console.log(users);
-					widget.users = users;
-					widget._loadUsers();
-				});
-			});*/
 			
 			//when editButton (defined in 'Team.html') is clicked
 			on(this.editButton, "click", function(evt) {
@@ -73,6 +58,7 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 						widget.SM.innerHTML = team.scrumMaster.name;
 					});
 				});
+				evt.stopPropagation();
 			});
 			//when deleteButton (defined in 'Team.html') is clicked
 			on(this.deleteButton, "click", function(evt) {
@@ -89,6 +75,7 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 						}
 					}).play();
 				});
+				evt.stopPropagation();
 			});
 		},
 	});

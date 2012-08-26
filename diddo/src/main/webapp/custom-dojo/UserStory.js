@@ -31,10 +31,11 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 		
 		setupEventHandlers: function() {
 			var widget = this;
-			var service = this.iService;
+			var service = this.service;
 			//when editButton (defined in 'Team.html') is clicked
 			on(this.editButton, "click", function(evt) {
-				service.update(teamName, function(response) {
+				evt.stopPropagation();
+				service.update(widget.id, function(response) {
 					service.get(teamName, null, function(team) {
 						widget.titleNode.innerHTML = team.title;
 						widget.pointsNode.innerHTML = team.points;
@@ -44,7 +45,8 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 			});
 			//when deleteButton (defined in 'Team.html') is clicked
 			on(this.deleteButton, "click", function(evt) {
-				service.remove("" + widget.id, function(response) {
+				evt.stopPropagation();
+				service.remove(widget.id, function(response) {
 					console.log("deleted: ", widget.id);
 					baseFX.animateProperty({
 						node: widget,

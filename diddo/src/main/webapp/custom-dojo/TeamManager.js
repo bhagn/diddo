@@ -35,6 +35,7 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 								teamWidget.users = users;
 								teamWidget._loadUsers();
 							});
+							evt.stopPropagation();
 						});
 						
 					})(team, teamWidget);
