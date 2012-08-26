@@ -82,6 +82,11 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 		_showUserStories: function() {
 			var us = this.sprintDropdownNode.options[this.sprintDropdownNode.selectedIndex].userStories;
 			this._cleanup(this.userStoriesNode);
+			if(us.length == 0) {
+				this.userStoriesNode.innerHTML = "There are no User Stories defined in this Sprint";
+			} else {
+				this.userStoriesNode.innerHTML = "";
+			}
 			for(var i=0; i<us.length; i++) {
 				var userStory = us[i];
 				this._addUserStoryToUI(userStory);
