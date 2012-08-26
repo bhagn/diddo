@@ -103,16 +103,4 @@
             </tr>
         </table>
     </form>
-    <form:update id="fu_com_cisco_diddo_entity_Task" modelAttribute="task" path="/tasks" versionField="none" z="jhWSfiNHOp3KFcf2fue9xIERiMM=">
-        <field:input field="taskNumber" id="c_com_cisco_diddo_entity_Task_taskNumber" required="true" z="tZZRTcgepWKynkhS01iho9qE81o="/>
-        <field:textarea field="description" id="c_com_cisco_diddo_entity_Task_description" z="XDy/MqXt1KZXIrSGSzpjA3StB6E="/>
-        <field:input field="dots" id="c_com_cisco_diddo_entity_Task_dots" min="0" required="true" z="1nLgODngXKxV/R9y5+T8f5+nrNA="/>
-        <field:select field="status" id="c_com_cisco_diddo_entity_Task_status" items="${tasks}" path="tasks" required="true" z="FCowjTqt4+m+HynoRUba5Ip0PWE="/>
-        <field:datetime dateTimePattern="${task_startdate_date_format}" field="startDate" id="c_com_cisco_diddo_entity_Task_startDate" z="YpDsAe96yvw4PtRO3bEF327Hr8A="/>
-        <field:datetime dateTimePattern="${task_enddate_date_format}" field="endDate" id="c_com_cisco_diddo_entity_Task_endDate" z="f3wbeEgMBHmAotF6fe89uKyUdbg="/>
-        <field:checkbox field="complex" id="c_com_cisco_diddo_entity_Task_complex" z="lq/vSnr5ScBv4/pZyCMa+6gmJBM="/>
-        <field:checkbox field="unplanned" id="c_com_cisco_diddo_entity_Task_unplanned" z="bSR+Lj/Suskf9k9A0Gp4CRgusLM="/>
-        <field:select field="owner" id="c_com_cisco_diddo_entity_Task_owner" itemValue="id" items="${users}" path="/users" z="Z1JPtiKbLPlpnf7Mt4ltplTna/A="/>
-        <field:select field="userStory" id="c_com_cisco_diddo_entity_Task_userStory" itemValue="id" items="${userstorys}" path="/userstorys" z="osaxPpZ0m/eHGuF2XCDc1aJCGlg="/>
-    </form:update>
 </div>
