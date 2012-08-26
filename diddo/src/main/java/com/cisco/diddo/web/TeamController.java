@@ -3,6 +3,7 @@ package com.cisco.diddo.web;
 import java.math.BigInteger;
 import java.util.List;
 
+import com.cisco.diddo.dao.ScrumMasterDao;
 import com.cisco.diddo.dao.UserDao;
 import com.cisco.diddo.entity.Team;
 import com.cisco.diddo.entity.User;
@@ -28,6 +29,8 @@ public class TeamController {
 	 
 		@Autowired
 	    public UserDao userDao;
+		
+		public ScrumMasterDao scrumMasterDao;
 		
 		@RequestMapping(value = "/{name}",params="users", headers = "Accept=application/json")
 	    @ResponseBody
