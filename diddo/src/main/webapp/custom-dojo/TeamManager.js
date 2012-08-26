@@ -65,9 +65,10 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 				});
 			});
 			on(this.addUserButton, "click", function(evt) {
-				uService.add(widget.addUserButton.selectedTeam, function(user) {
+				uService.add(function(user) {
 					console.log(user);
-					widget._addUserToUI(user);
+					if(widget.addUserButton.selectedTeam.name == user.team.name)
+						widget._addUserToUI(user);
 				});
 			});
 		},
