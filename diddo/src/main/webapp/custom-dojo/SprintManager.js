@@ -47,6 +47,17 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 		
 		_showSelectedSprint: function() {
 			var sprint = this.sprintDropdownNode.options[this.sprintDropdownNode.selectedIndex].sprint;
+			if(sprint.endDate) {
+				this.endSprintButton.set("class", "btn btn-small disabled");
+				this.endSprintButton.disabled = true;
+				this.newSprintButton.set("class", "btn btn-small btn-success");
+				this.newSprintButton.disabled = false;
+			} else {
+				this.endSprintButton.set("class", "btn btn-small btn-danger");
+				this.endSprintButton.disabled = false;
+				this.newSprintButton.set("class", "btn btn-small disabled");
+				this.newSprintButton.disabled = true;
+			}
 			this.sprintNoNode.innerHTML = sprint.sprintNo;
 			this.startedOnNode.innerHTML = sprint.startDate;
 			this.endedOnNode.innerHTML = sprint.endDate;
@@ -107,6 +118,23 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 			on(this.addUserStoryButton, "click", function(evt) {
 				widget.userStoryService.add(function(userStory) {
 					widget._addUserStoryToUI(userStory);
+				});
+			});
+			
+			on(this.newSprintButton, "click", function(evt) {
+				evt.stopPropagation();
+				widget.sprintService.add(function(sprint) {
+					var option = domConstruct.create("option");
+					option.sprint = sprint;
+					option.value = sprint.sprintNo; 
+					option.innerHTML = sprint.sprintNo;
+					
+					if(!sprints[i].endDate) {
+						option.innerHTML =  sprint.sprintNo + " (Latest)";
+					}
+					widget.sprintDropdownNode.appendChild(option);
+					widget.sprintDropdownNode.selectedIndex = widget.sprintDropdownNode.options.length - 1;
+					widget._loadUSOfSprint();
 				});
 			});
 		},
