@@ -64,7 +64,7 @@ define(["dojo/_base/declare","dijit/_WidgetBase", "custom/DiddoRestAPI", "dijit/
 				baseClass: 'myDialog blue'
 			});
 			var submitButton = new Button({
-				label: 'Add',
+				label: 'Update',
 				baseClass: 'btn btn-primary',
 				style: "margin: 10px; float: right;",
 				onClick: function(evt) {
