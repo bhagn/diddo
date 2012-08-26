@@ -70,7 +70,7 @@ public class UserStoryController {
         if (userStoryDao.save(userStory) == null) {
             return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<String>(headers, HttpStatus.OK);
+        return new ResponseEntity<String>(userStory.toJson() , headers, HttpStatus.OK);
     } 
 	 
 	private UserStory findById(BigInteger id){
@@ -112,6 +112,7 @@ public class UserStoryController {
 		 }
 		userStory.setFriendlyID(deserialized.get("friendlyID"));
 	    userStory.setDescription(deserialized.get("description"));
+	    userStory.setTitle(deserialized.get("title"));
 	    String points = deserialized.get("points");
 	    if(points != null){
 	    	userStory.setPoints(Byte.valueOf(points));
