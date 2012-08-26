@@ -1,7 +1,13 @@
 package com.cisco.diddo.web;
 
 import java.math.BigInteger;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -43,13 +49,24 @@ public class UserStoryController {
 	
 	 @RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
 	    public ResponseEntity<String> createFromJson(@RequestBody String json) {
-	        UserStory userStory = new JSONDeserializer<UserStory>().use(null, UserStory.class).deserialize(json);
+	        UserStory userStory = fromJsonToUserStory(json);
 	        userStoryDao.save(userStory);
 	        HttpHeaders headers = new HttpHeaders();
 	        headers.add("Content-Type", "application/json");
 	        return new ResponseEntity<String>(userStory.toJson(),headers, HttpStatus.CREATED);
 	    }
 	
+    @RequestMapping(method = RequestMethod.PUT, headers = "Accept=application/json")
+    public ResponseEntity<String> updateFromJson(@RequestBody String json) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json");
+        UserStory userStory = fromJsonToUserStory(json);
+        if (userStoryDao.save(userStory) == null) {
+            return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<String>(headers, HttpStatus.OK);
+    } 
+	 
 	private UserStory findById(BigInteger id){
 		List<UserStory> userStorys = userStoryDao.findAll();
 		for(UserStory userStory : userStorys){
@@ -58,6 +75,34 @@ public class UserStoryController {
 			}
 		}
 		return null;
+	}
+	private UserStory fromJsonToUserStory(String jsonStr){
+		UserStory userStory = null;
+		Map<String, String> deserialized = new JSONDeserializer<Map<String, String>>().deserialize(jsonStr);
+		String id = deserialized.get("id");
+		if(id != null && !id.equals("")){
+			 userStory = findById(new BigInteger(id));
+		}
+		if(userStory == null){
+			userStory = new UserStory();
+		 }
+		/*userStory.setName(deserialized.get("name"));
+	    userStory.setEmail(deserialized.get("email"));*/
+		/*String scrumMasterId = deserialized.get("scrumMaster");
+		if(scrumMasterId != null && !scrumMasterId.equals("")){
+		     //set scrummaster here;
+		}*/
+		
+		DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+		try{
+		     Date date = format.parse("dateString");
+		     Calendar cal  = Calendar.getInstance(); 
+		     cal.setTime(date);
+		}catch(ParseException ex){
+			
+		}
+		
+		return userStory;
 	}
 
 }
