@@ -4,16 +4,26 @@
 package com.cisco.diddo.entity;
 
 import com.cisco.diddo.entity.UserStory;
+import com.cisco.diddo.web.ImpedimentController.BigDecimalTransformer;
+import com.cisco.diddo.web.ImpedimentController.CalendarTransformer;
+
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
+import flexjson.transformer.AbstractTransformer;
+
+import java.math.BigInteger;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 privileged aspect UserStory_Roo_Json {
     
     public String UserStory.toJson() {
-        return new JSONSerializer().exclude("*.class", "*.locale").serialize(this);
+        return new JSONSerializer().exclude("*.class", "*.locale").transform(new BigDecimalTransformer(),BigInteger.class).transform(new CalendarTransformer(), Calendar.class).serialize(this);
     }
     
     public static UserStory UserStory.fromJsonToUserStory(String json) {
@@ -21,11 +31,26 @@ privileged aspect UserStory_Roo_Json {
     }
     
     public static String UserStory.toJsonArray(Collection<UserStory> collection) {
-        return new JSONSerializer().exclude("*.class", "*.locale").serialize(collection);
+        return new JSONSerializer().exclude("*.class", "*.locale").transform(new BigDecimalTransformer(),BigInteger.class).transform(new CalendarTransformer(), Calendar.class).serialize(collection);
     }
     
     public static Collection<UserStory> UserStory.fromJsonArrayToUserStorys(String json) {
         return new JSONDeserializer<List<UserStory>>().use(null, ArrayList.class).use("values", UserStory.class).deserialize(json);
+    }
+    
+    public static class BigDecimalTransformer extends AbstractTransformer{ 
+ 	   public void transform(Object object)
+ 	   { 
+ 		   getContext().writeQuoted(((BigInteger)object).toString());
+ 	   }
+    }
+    public static class CalendarTransformer extends AbstractTransformer{ 
+ 	   public void transform(Object object)
+ 	   { 
+ 		   DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+ 		   Date date = ((Calendar)object).getTime();
+ 		   getContext().writeQuoted(format.format(date));
+ 	   }
     }
     
 }

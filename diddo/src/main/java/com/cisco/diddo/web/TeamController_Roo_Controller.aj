@@ -24,8 +24,8 @@ import org.springframework.web.util.WebUtils;
 
 privileged aspect TeamController_Roo_Controller {
     
-    @Autowired
-    TeamDao TeamController.teamDao;
+    //@Autowired
+    //TeamDao TeamController.teamDao;
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String TeamController.create(@Valid Team team, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {

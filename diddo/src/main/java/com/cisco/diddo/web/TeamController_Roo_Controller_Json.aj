@@ -39,14 +39,14 @@ privileged aspect TeamController_Roo_Controller_Json {
         return new ResponseEntity<String>(Team.toJsonArray(result), headers, HttpStatus.OK);
     }
     
-    @RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
+    /*@RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> TeamController.createFromJson(@RequestBody String json) {
         Team team = Team.fromJsonToTeam(json);
         teamDao.save(team);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
-    }
+    }*/
     
     @RequestMapping(value = "/jsonArray", method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> TeamController.createFromJsonArray(@RequestBody String json) {
@@ -58,7 +58,7 @@ privileged aspect TeamController_Roo_Controller_Json {
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
     
-    @RequestMapping(method = RequestMethod.PUT, headers = "Accept=application/json")
+    /*@RequestMapping(method = RequestMethod.PUT, headers = "Accept=application/json")
     public ResponseEntity<String> TeamController.updateFromJson(@RequestBody String json) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
@@ -67,7 +67,7 @@ privileged aspect TeamController_Roo_Controller_Json {
             return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<String>(headers, HttpStatus.OK);
-    }
+    }*/
     
     @RequestMapping(value = "/jsonArray", method = RequestMethod.PUT, headers = "Accept=application/json")
     public ResponseEntity<String> TeamController.updateFromJsonArray(@RequestBody String json) {
@@ -81,7 +81,7 @@ privileged aspect TeamController_Roo_Controller_Json {
         return new ResponseEntity<String>(headers, HttpStatus.OK);
     }
     
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
+    /*@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
     public ResponseEntity<String> TeamController.deleteFromJson(@PathVariable("id") BigInteger id) {
         Team team = teamDao.findOne(id);
         HttpHeaders headers = new HttpHeaders();
@@ -91,6 +91,6 @@ privileged aspect TeamController_Roo_Controller_Json {
         }
         teamDao.delete(team);
         return new ResponseEntity<String>(headers, HttpStatus.OK);
-    }
+    }*/
     
 }

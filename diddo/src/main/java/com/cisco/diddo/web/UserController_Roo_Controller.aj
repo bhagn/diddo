@@ -23,8 +23,8 @@ import org.springframework.web.util.WebUtils;
 
 privileged aspect UserController_Roo_Controller {
     
-    @Autowired
-    UserDao UserController.userDao;
+    /*@Autowired
+    UserDao UserController.userDao;*/
     
     @Autowired
     TeamDao UserController.teamDao;
