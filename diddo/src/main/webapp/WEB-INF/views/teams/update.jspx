@@ -7,6 +7,7 @@
       require(["dojo/parser", "dijit/form/Form", "dijit/form/TextBox", "dijit/form/ValidationTextBox", "dijit/form/Select", "dijit/form/CheckBox", "dojo/domReady!"]);
     </script>
     <form class="diddoForm" data-dojo-id="form" data-dojo-type="dijit.form.Form" modelAttribute="user" name="form" path="/teams">
+          <input id="_id_id" dojoType="dijit.form.TextBox" name="id" value="${team.id}" type="hidden"/>
         <table cellspacing="10" style="color: #000;">
             <tr>
                 <td>
