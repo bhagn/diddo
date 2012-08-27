@@ -2,7 +2,6 @@ package com.cisco.diddo.security;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,28 +29,28 @@ public class DiddoAuthenticationProvider implements AuthenticationProvider{
             throws AuthenticationException {
     	//initialData.save();
     	try{
-	    	Properties props = PropertiesLoaderUtils.loadAllProperties(propertyFile);
-	        String userName = authentication.getPrincipal().toString();
+    		String userName = authentication.getPrincipal().toString();
 	        String passWord = authentication.getCredentials().toString();
+    		Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+        	//check for ROLE.
+        	User user = userDao.findByUsernameAndPassword(userName , passWord);
+        	if(user != null){
+   	        	if(user.scrumMaster){
+		    	        authorities.add(new GrantedAuthorityImpl("ROLE_ADMIN"));
+	    	     }
+	    	     else{
+	    		        authorities.add(new GrantedAuthorityImpl("ROLE_USER"));
+	    	     }
+	    	        	return new UsernamePasswordAuthenticationToken(userName, passWord, authorities);	
+	        }
+	    	Properties props = PropertiesLoaderUtils.loadAllProperties(propertyFile);
 	        String val = props.getProperty(userName);
 	        if(passWord.equals(val)){
-	        	//Authentication succeeded 
-	        	Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-	        	authorities.add(new GrantedAuthorityImpl("ROLE_USER"));
-	        	//check for ROLE.
-	        	List<User> userList = userDao.findAll();
-	        	if(userList != null){
-		        	for(User user : userList){
-		        		if(user.username.equalsIgnoreCase(userName)){
-		    	        	if(user.scrumMaster){
-			    	        	authorities.add(new GrantedAuthorityImpl("ROLE_ADMIN"));
-		    	        	}
-		    	        	return new UsernamePasswordAuthenticationToken(userName, passWord, authorities);	
-		        		}
-		        	}
-	        	}
-	        	//return new UsernamePasswordAuthenticationToken(userName, passWord, authorities);
-    		    throw new BadCredentialsException("Username/password is not correct.");
+	        	//@TODO Uncomment and comment previous  lines
+          	    //authorities.add(new GrantedAuthorityImpl("ROLE_VIEW"));
+          	    authorities.add(new GrantedAuthorityImpl("ROLE_ADMIN"));
+	        	return new UsernamePasswordAuthenticationToken(userName, passWord, authorities);
+    		    //throw new BadCredentialsException("Username/password is not correct.");
 	        }
 	        else
     		{

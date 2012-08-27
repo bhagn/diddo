@@ -8,7 +8,7 @@
           <li class="">
             <a href="">Scrum Board</a>
           </li>
-         <c:if test="${ROLE != 'ROLE_ADMIN'}">
+         <c:if test="${ROLE == 'ROLE_ADMIN'}">
 	          <li class="">
 	            <a href="teams">Teams</a>
 	          </li>

@@ -12,5 +12,6 @@ public interface UserDao {
     User save(User user);
     List<com.cisco.diddo.entity.User> findAllByTeam(Team team);
     User findByUsername(String username);
+    User findByUsernameAndPassword(String username , String password );
 	long count();
 }

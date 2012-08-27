@@ -3,17 +3,23 @@
 
 package com.cisco.diddo.entity;
 
-import com.cisco.diddo.entity.Impediment;
+import java.math.BigInteger;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import flexjson.transformer.AbstractTransformer;
 
 privileged aspect Impediment_Roo_Json {
     
     public String Impediment.toJson() {
-        return new JSONSerializer().exclude("*.class").serialize(this);
+    	return new JSONSerializer().exclude("*.class","*.locale").transform(new BigDecimalTransformer(),BigInteger.class).transform(new CalendarTransformer(), Calendar.class).serialize(this);
     }
     
     public static Impediment Impediment.fromJsonToImpediment(String json) {
@@ -21,11 +27,25 @@ privileged aspect Impediment_Roo_Json {
     }
     
     public static String Impediment.toJsonArray(Collection<Impediment> collection) {
-        return new JSONSerializer().exclude("*.class").serialize(collection);
+    	  return new JSONSerializer().exclude("*.class","*.locale").transform(new BigDecimalTransformer(),BigInteger.class).transform(new CalendarTransformer(), Calendar.class).serialize(collection);
     }
     
     public static Collection<Impediment> Impediment.fromJsonArrayToImpediments(String json) {
         return new JSONDeserializer<List<Impediment>>().use(null, ArrayList.class).use("values", Impediment.class).deserialize(json);
     }
+    public static class BigDecimalTransformer extends AbstractTransformer{ 
+   	   public void transform(Object object)
+   	   { 
+   		   getContext().writeQuoted(((BigInteger)object).toString());
+   	   }
+      }
+      public static class CalendarTransformer extends AbstractTransformer{ 
+   	   public void transform(Object object)
+   	   { 
+   		   DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+   		   Date date = ((Calendar)object).getTime();
+   		   getContext().writeQuoted(format.format(date));
+   	   }
+      }
     
 }

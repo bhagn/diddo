@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cisco.diddo.dao.ImpedimentDao;
 import com.cisco.diddo.dao.SprintDao;
+import com.cisco.diddo.dao.TeamDao;
 import com.cisco.diddo.dao.UserDao;
 import com.cisco.diddo.entity.Impediment;
 
@@ -46,6 +47,9 @@ public class ImpedimentController extends BaseController{
     
     @Autowired
     public UserDao userDao;
+    
+    @Autowired
+    public TeamDao teamDao;
 	
     /*@RequestMapping(params = "form", produces = "text/html")
     public String createForm(Model uiModel) {
@@ -101,6 +105,13 @@ public class ImpedimentController extends BaseController{
        HttpHeaders headers = new HttpHeaders();
        headers.add("Content-Type", "application/json; charset=utf-8");
        List<Impediment> result = impedimentDao.findAll();
+       if(hasRole("ROLE_USER")){
+    	   result = impedimentDao.findAllBySubmitterId_Team(getCurrectTeam());
+       }
+       else if(hasRole("ROLE_ADMIN")){
+    	   //@TODO Need to implement this.
+    	   //result = impedimentDao.
+       }
        String str = new JSONSerializer().exclude("*.class").transform(new BigDecimalTransformer(),BigInteger.class).transform(new CalendarTransformer(), Calendar.class).serialize(result);
        return new ResponseEntity<String>(str, headers, HttpStatus.OK);
    }
