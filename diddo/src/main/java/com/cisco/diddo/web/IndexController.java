@@ -1,6 +1,5 @@
 package com.cisco.diddo.web;
 
-import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -34,18 +33,16 @@ public class IndexController extends BaseController{
 	    	session.setAttribute("username" , auth.getPrincipal().toString());
 	    }
 	    if(hasRole("ROLE_ADMIN")){
-    		model.addAttribute("ROLE_USER" , true);
-    		model.addAttribute("ROLE_ADMIN" , true);
-    		session.setAttribute("ROLE_USER" , true);
-    		session.setAttribute("ROLE_ADMIN" , true);
+    		model.addAttribute("ROLE" , "ROLE_ADMIN");
+    		session.setAttribute("ROLE" , "ROLE_ADMIN");
     	}
     	else if(hasRole("ROLE_USER")){
-    		model.addAttribute("ROLE_USER" , true);
-    		session.setAttribute("ROLE_USER" , true);
+    		model.addAttribute("ROLE" , "ROLE_USER");
+    		session.setAttribute("ROLE" , "ROLE_USER");
     	}
     	else{
-    		model.addAttribute("ROLE_VIEW" , true);
-    		session.setAttribute("ROLE_VIEW" , true);
+    		model.addAttribute("ROLE" , "ROLE_VIEW");
+    		session.setAttribute("ROLE" , "ROLE_VIEW");
     	}
 	    return "index";
 	}

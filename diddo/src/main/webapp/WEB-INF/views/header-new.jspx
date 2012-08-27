@@ -1,4 +1,4 @@
-<div xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
@@ -6,11 +6,16 @@
       <div class="nav-collapse collapse">
         <ul class="nav">
           <li class="">
-            <a href="teams">Teams</a>
+            <a href="">Scrum Board</a>
           </li>
-          <li class="">
-            <a href="sprints">Sprint</a>
-          </li>
+         <c:if test="${ROLE != 'ROLE_ADMIN'}">
+	          <li class="">
+	            <a href="teams">Teams</a>
+	          </li>
+	          <li class="">
+	            <a href="sprints">Sprint</a>
+	          </li>
+	      </c:if>
           <li class="">
             <a href="impediments">Impediments</a>
           </li>
