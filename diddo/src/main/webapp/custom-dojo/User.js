@@ -12,10 +12,6 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 		
 		constructor: function(userObject, uService) {
 			this.userService = uService || new RestUI("users");
-			//this.name = userObject.username;
-			//this.email = userObject.email;
-			this.isScrumMaster = userObject.scrumMaster;
-			//this.id = userObject.id;
 		},
 		
 		postCreate: function() {

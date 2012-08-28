@@ -149,7 +149,7 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 				console.log("deleting: ", container.childNodes[i-1].id);
 				var widget = dijit.byId(container.childNodes[i-1].id);
 				if(widget)
-					userWidget.destroyRecursive();
+					widget.destroyRecursive();
 			}
 		}
 		

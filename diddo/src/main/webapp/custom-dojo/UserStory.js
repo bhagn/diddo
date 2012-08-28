@@ -33,11 +33,9 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 			//when editButton (defined in 'Team.html') is clicked
 			on(this.editButton, "click", function(evt) {
 				evt.stopPropagation();
-				service.update(widget.id, function(response) {
-					service.get(teamName, null, function(userStory) {
-						widget.friendlyIDNode.innerHTML = userStory.friendlyID;
-						widget.titleNode.innerHTML = userStory.title;
-					});
+				service.update(widget.id, function(userStory) {
+					widget.friendlyIDNode.innerHTML = userStory.friendlyID;
+					widget.titleNode.innerHTML = userStory.title;
 				});
 			});
 			//when deleteButton (defined in 'Team.html') is clicked
