@@ -16,13 +16,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cisco.diddo.dao.ExitCriteraDao;
 import com.cisco.diddo.dao.SprintDao;
 import com.cisco.diddo.dao.TeamDao;
 import com.cisco.diddo.dao.UserStoryDao;
+import com.cisco.diddo.entity.ExitCriteria;
 import com.cisco.diddo.entity.Sprint;
 import com.cisco.diddo.entity.Team;
+import com.cisco.diddo.entity.User;
 import com.cisco.diddo.entity.UserStory;
+import com.cisco.diddo.entity.UserStoryDetail;
 
 import flexjson.JSONDeserializer;
 
@@ -39,6 +44,9 @@ public class UserStoryController {
 	    
 	    @Autowired
 	    public TeamDao teamDao;
+	    
+	    @Autowired
+	    public ExitCriteraDao exitCriteriaDao;
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
     public ResponseEntity<String> deleteFromJson(@PathVariable("id") String idStr) {
@@ -73,6 +81,26 @@ public class UserStoryController {
         return new ResponseEntity<String>(userStory.toJson() , headers, HttpStatus.OK);
     } 
 	 
+    @RequestMapping(value = "/{id}",params="userstorydetails", headers = "Accept=application/json")
+    @ResponseBody
+    public ResponseEntity<String> getUserJson(@PathVariable("id") String id) {
+    	UserStory userStory = findById(new BigInteger(id));
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json; charset=utf-8");
+        if (userStory == null) {
+            return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
+        }
+        UserStoryDetail userStoryDetail = new UserStoryDetail();
+        userStoryDetail.title = userStory.getTitle();
+        userStoryDetail.description = userStory.getDescription();
+        userStoryDetail.startDate = userStory.getStartDate();
+        userStoryDetail.endDate = userStory.getEndDate();
+        List<ExitCriteria> exitCriteriaList = exitCriteriaDao.findAllByUserStory(userStory);
+        for(ExitCriteria exitCriteria : exitCriteriaList){
+        	userStoryDetail.exitcriterias.put(exitCriteria.getDescription() , exitCriteria.getDone());
+        }
+        return new ResponseEntity<String>(userStoryDetail.toJson() , headers, HttpStatus.OK);
+    }
 	private UserStory findById(BigInteger id){
 		List<UserStory> userStorys = userStoryDao.findAll();
 		for(UserStory userStory : userStorys){
