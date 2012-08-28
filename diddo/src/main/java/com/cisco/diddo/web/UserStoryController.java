@@ -18,12 +18,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cisco.diddo.constants.TASK;
 import com.cisco.diddo.dao.ExitCriteraDao;
 import com.cisco.diddo.dao.SprintDao;
+import com.cisco.diddo.dao.TaskDao;
 import com.cisco.diddo.dao.TeamDao;
 import com.cisco.diddo.dao.UserStoryDao;
 import com.cisco.diddo.entity.ExitCriteria;
 import com.cisco.diddo.entity.Sprint;
+import com.cisco.diddo.entity.Task;
 import com.cisco.diddo.entity.Team;
 import com.cisco.diddo.entity.User;
 import com.cisco.diddo.entity.UserStory;
@@ -47,6 +50,9 @@ public class UserStoryController {
 	    
 	    @Autowired
 	    public ExitCriteraDao exitCriteriaDao;
+	    
+	    @Autowired
+	    public TaskDao taskDao;
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
     public ResponseEntity<String> deleteFromJson(@PathVariable("id") String idStr) {
@@ -99,6 +105,20 @@ public class UserStoryController {
         for(ExitCriteria exitCriteria : exitCriteriaList){
         	userStoryDetail.exitcriterias.put(exitCriteria.getDescription() , exitCriteria.getDone());
         }
+        List<Task> taskList = taskDao.findAllByUserStory(userStory);
+        int countInprogress = 0;
+        int countCompleted = 0;
+        for(Task task :taskList){
+        	if(task.getStatus() == TASK.IN_PROGRESS){
+        		countInprogress ++;
+        	}
+        	else if(task.getStatus() == TASK.COMPLETED){
+        		countCompleted ++ ;
+        	}
+        }
+        userStoryDetail.totalTask = taskList.size();
+        userStoryDetail.inprogressTask=countInprogress;
+        userStoryDetail.completedTask=countCompleted;
         return new ResponseEntity<String>(userStoryDetail.toJson() , headers, HttpStatus.OK);
     }
 	private UserStory findById(BigInteger id){

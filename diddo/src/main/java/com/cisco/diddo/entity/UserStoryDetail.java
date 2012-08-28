@@ -16,7 +16,9 @@ public class UserStoryDetail {
 	public Calendar startDate ;
 	public Calendar endDate ;
 	public Map<String,Boolean> exitcriterias = new HashMap<String , Boolean>();
-	
+	public int totalTask;
+	public int inprogressTask;
+	public int completedTask;
 	public String toJson() {
 		return new JSONSerializer().exclude("*.class", "*.locale").transform(new CalendarTransformer(), Calendar.class).serialize(
 				this);

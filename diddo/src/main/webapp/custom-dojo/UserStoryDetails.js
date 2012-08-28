@@ -11,6 +11,8 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 			this.userStoryService.get("" + this.id , "userstorydetails" , function(userstorydetails){
 				this.title.innerHTML = userstorydetails.title;
 				this.description.innerHTML = userstorydetails.description;
+				this.startDate.innerHTML = userstorydetails.startDate;
+				this.endDate.innerHTML = userstorydetails.endDate;
 				var exitcriterias = userstorydetails.exitcriterias;
 				exitcriterias.forEach(function(value, key)
 				  {
@@ -24,7 +26,7 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 			        	cell1.innerHTML =  '<span ><i class="icon-sign-black"></span>';
 			        }
 		            var cell2 = row.insertCell(1);
-			        cell2.innerHTML = "<span>" + key + "</span>";
+			        cell2.innerHTML = "<span calss='diddoData'>" + key + "</span>";
 				  });
 			});
 			this.setupEventHandlers();
