@@ -24,11 +24,11 @@ privileged aspect ExitCriteria_Roo_JavaBean {
         this.description = description;
     }
     
-    public Boolean ExitCriteria.getDone() {
+    public boolean ExitCriteria.getDone() {
         return this.done;
     }
     
-    public void ExitCriteria.setDone(Boolean done) {
+    public void ExitCriteria.setDone(boolean done) {
         this.done = done;
     }
     

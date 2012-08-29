@@ -22,6 +22,6 @@ public class ExitCriteria {
     @Size(max = 256)
     private String description;
 
-    @Value("false")
-    private Boolean done;
+    @NotNull
+    private boolean done;
 }
