@@ -31,7 +31,7 @@
 	background: #22252A;
 }
 
-.team, .userstory {
+.team, .userstory, .exitcriteria {
 	background: #22252A;
 	border: solid;
 	border-color: gray;
@@ -63,6 +63,11 @@
 	display: inline-block;
 }
 
+.exitcriteria {
+	padding: 5px;
+	font-size: 10px;
+}
+
 .diddoData {
 	color: #000;
 	font-size: 11px; 
@@ -80,4 +85,8 @@
 
 .userstory:hover {
 	color: #fff;
+}
+
+.diddo-button {
+	cursor: pointer;
 }
