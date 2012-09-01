@@ -26,10 +26,6 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 					(function(team, teamWidget) {
 						on(teamWidget.domNode, "click", function(evt) {
 							widget.addUserButton.selectedTeam = team;
-							/*if(teamWidget.users) {
-								teamWidget._loadUsers();
-								return;
-							}*/
 							widget.teamService.get("" + team.id, "users", function(users) {
 								console.log(users);
 								teamWidget.users = users;

@@ -1,6 +1,6 @@
-define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo/dom-construct", "dojo/ready", "dojo/on", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin", "dijit/layout/_LayoutWidget", "dijit/_Container", "dojo/text!./templates/SprintManager.html", "custom/DiddoRestUI", "custom/Team", "custom/UserStory", "custom/UserStoryDetails",
+define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo/dom-construct", "dojo/ready", "dojo/on", "dojo/_base/event", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin", "dijit/layout/_LayoutWidget", "dijit/_Container", "dojo/text!./templates/SprintManager.html", "custom/DiddoRestUI", "custom/Team", "custom/UserStory", "custom/UserStoryDetails",
         "dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dijit/form/Button", "dijit/form/Form", "dijit/form/TextBox", "dijit/form/ValidationTextBox", "dijit/form/Select", "dijit/form/CheckBox"],
-		function(declare, xhr, parser, dom, domConstruct, ready, on, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _LayoutWidget, _Container, template, RestUI, Team) {
+		function(declare, xhr, parser, dom, domConstruct, ready, on, event, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _LayoutWidget, _Container, template, RestUI, Team) {
 	return declare("SprintManager", [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _Container], {
 		templateString: template,
 		sprintService: null,
@@ -107,14 +107,14 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 			var widget = this;
 			var userStory = new UserStory(us, this.userStoryService);
 			on(userStory.domNode, "click", function(evt) {
-				if(evt.target === evt.currentTarget) {
-					widget._cleanup(widget.userStoryNode);
-					widget._cleanup(widget.taskNode);
-					
-					widget._loadTasks(us);
-					var details = new UserStoryDetails(us);
-					widget.userStoryNode.appendChild(details.domNode);
-				}
+				evt.cancelBubble = true;
+				evt.stopPropagation();
+				widget._cleanup(widget.userStoryNode);
+				widget._cleanup(widget.taskNode);
+				
+				widget._loadTasks(us);
+				var details = new UserStoryDetails(us);
+				widget.userStoryNode.appendChild(details.domNode);
 			});
 			this.userStoriesNode.appendChild(userStory.domNode);
 		},
@@ -127,13 +127,14 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 			});
 			
 			on(this.addUserStoryButton, "click", function(evt) {
+				event.stop(evt);
 				widget.userStoryService.add(function(userStory) {
 					widget._addUserStoryToUI(userStory);
 				});
 			});
 			
 			on(this.newSprintButton, "click", function(evt) {
-				evt.stopPropagation();
+				event.stop(evt);
 				widget.sprintService.add(function(sprint) {
 					var option = domConstruct.create("option");
 					option.sprint = sprint;
