@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo/dom-construct", "dojo/ready", "dojo/on", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin", "dijit/layout/_LayoutWidget", "dijit/_Container", "dojo/text!./templates/SprintManager.html", "custom/DiddoRestUI", "custom/Team", "custom/UserStory", 
+define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo/dom-construct", "dojo/ready", "dojo/on", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin", "dijit/layout/_LayoutWidget", "dijit/_Container", "dojo/text!./templates/SprintManager.html", "custom/DiddoRestUI", "custom/Team", "custom/UserStory", "custom/UserStoryDetails",
         "dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dijit/form/Button", "dijit/form/Form", "dijit/form/TextBox", "dijit/form/ValidationTextBox", "dijit/form/Select", "dijit/form/CheckBox"],
 		function(declare, xhr, parser, dom, domConstruct, ready, on, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _LayoutWidget, _Container, template, RestUI, Team) {
 	return declare("SprintManager", [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _Container], {
@@ -107,8 +107,14 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 			var widget = this;
 			var userStory = new UserStory(us, this.userStoryService);
 			on(userStory.domNode, "click", function(evt) {
-				if(evt.target === evt.currentTarget)
-					widget._loadTasks(userStory);
+				if(evt.target === evt.currentTarget) {
+					widget._cleanup(widget.userStoryNode);
+					widget._cleanup(widget.taskNode);
+					
+					widget._loadTasks(us);
+					var details = new UserStoryDetails(us);
+					widget.userStoryNode.appendChild(details.domNode);
+				}
 			});
 			this.userStoriesNode.appendChild(userStory.domNode);
 		},

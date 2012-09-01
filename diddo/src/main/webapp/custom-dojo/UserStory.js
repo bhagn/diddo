@@ -14,10 +14,12 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 		spillOver: false,
 		sprint: null,
 		team: null,
+		obj: null,
 		baseClass: "team",
 		
 		constructor: function(USObject, service) {
 			this.service = service || new RestUI("userstorys");
+			this.obj = USObject;
 		},
 		
 		postCreate: function() {

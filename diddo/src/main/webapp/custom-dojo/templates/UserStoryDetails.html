@@ -1,17 +1,12 @@
 <div>
-  <div class="diddoControls">
-    <div>
-       <span class="diddoTitle" data-dojo-attach-point="title"></span><br/>
-       <span class="diddoSubTitle" data-dojo-attach-point="description"></span>
-       <span class="diddoData">Start Date: <span data-dojo-attach-point="startDate"></span></span>
-       <span class="diddoData">End Date: <span data-dojo-attach-point="endDate"></span></span>
-       <span class="diddoSubTitle">Exit Criteria</span>
-       <table>
-       <tbody data-dojo-attach-point="table">
-       </tbody>
-       </table>
-    </div>
-    <div data-dojo-attach-point="chart" ></div>
-    <!--  <i class="icon-ok"></i>  -->
+  <div class="diddoTitle">
+    <span data-dojo-attach-point="friendlyIDNode"></span> -
+    <span data-dojo-attach-point="titleNode" style="font-size: 13px;"></span>
+  </div><br/>
+  <div class="diddoDescription" data-dojo-attach-point="descriptionNode" style="padding: 10px;"></div>
+  <div class="diddoTitle">Exit Criteria</div><br/>
+  <div style="margin-top: 10px;">
+    <span data-dojo-attach-point="exitCriteriaNode"></span>
+    <div data-dojo-attach-point="addExitCriteriaNode" class="exitcriteria" style="text-align: center;border-style:dotted;border-width:3px;cursor: pointer;">Add Exit Criteria</div>
   </div>
 </div>

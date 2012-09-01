@@ -1,38 +1,56 @@
-define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo/dom-construct", "dojo/ready", "dojo/on", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin", "dijit/layout/_LayoutWidget", "dijit/_Container", "dojo/text!./templates/UserStoryDetails.html", "custom/DiddoRestUI", "dojo/_base/fx", "dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dijit/form/Button"],
+define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo/dom-construct", "dojo/ready", "dojo/on", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin", "dijit/layout/_LayoutWidget", "dijit/_Container", "dojo/text!./templates/UserStoryDetails.html", "custom/DiddoRestUI", "custom/ExitCriteria", "dojo/_base/fx", "dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dijit/form/Button"],
 		function(declare, xhr, parser, dom, domConstruct, ready, on, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _LayoutWidget, _Container, template, RestUI, baseFX) {
 	return declare("UserStoryDetails", [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _Container], {
 		templateString: template,
-		id : null,
+		friendlyID : null,
+		title: null,
+		description: null,
+		points: null,
+		burntPoints: null,
+		startDate: null,
+		endDate: null,
+		color: "white",
+		unplanned: false,
+		spillOver: false,
+		sprint: null,
+		team: null,
+		id: null,
+		
 		constructor: function(userstoryObject) {
+			userstoryObject.id = "us-" + userstoryObject.id;
 			this.userStoryService = new RestUI("userstorys");
-			this.id = userstoryObject.id;
-		},
-		postCreate: function() {
-			this.userStoryService.get("" + this.id , "userstorydetails" , function(userstorydetails){
-				this.title.innerHTML = userstorydetails.title;
-				this.description.innerHTML = userstorydetails.description;
-				this.startDate.innerHTML = userstorydetails.startDate;
-				this.endDate.innerHTML = userstorydetails.endDate;
-				var exitcriterias = userstorydetails.exitcriterias;
-				exitcriterias.forEach(function(value, key)
-				  {
-					var rowCount = this.table.rows.length;
-			        var row = table.insertRow(rowCount);
-			        var cell1 = row.insertCell(0);
-			        if(value = "true"){
-			            cell1.innerHTML = '<span ><i class="icon-ok-sign"></span>';
-			        }
-			        else{
-			        	cell1.innerHTML =  '<span ><i class="icon-sign-black"></span>';
-			        }
-		            var cell2 = row.insertCell(1);
-			        cell2.innerHTML = "<span calss='diddoData'>" + key + "</span>";
-				  });
-			});
-			this.setupEventHandlers();
+			this.exitCriteriaService = new RestUI("exitcriterias");
 		},
 		
-		setupEventHandlers: function() {},
+		postCreate: function() {
+			this.friendlyIDNode.innerHTML = this.friendlyID;
+			this.titleNode.innerHTML = this.title;
+			this.descriptionNode.innerHTML = this.description;
+			this._loadExitCriterias();
+			this._setupEventHandlers();
+		},
+		
+		_loadExitCriterias: function() {
+			var widget = this;
+			var id = this.id.split("us-")[1];
+			this.userStoryService.get(id, "exitcriterias", function(exitCriterias) {
+				for(var i=0 ;i<exitCriterias.length; i++) {
+					var ec = new ExitCriteria(exitCriterias[i]);
+					widget.exitCriteriaNode.appendChild(ec.domNode);
+				}
+			});
+		},
+		
+		_setupEventHandlers: function() {
+			var widget = this;
+			on(this.addExitCriteriaNode, "click", function(evt) {
+				evt.stopPropagation();
+				widget.exitCriteriaService.add(function(exitCriteria) {
+					var ec = new ExitCriteria(exitCriteria);
+					widget.exitCriteriaNode.appendChild(ec.domNode);
+				});
+			});
+		}
 	});
 }
 );
