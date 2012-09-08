@@ -3,8 +3,10 @@
     <div data-dojo-type="dijit.form.Button" data-dojo-attach-point="resolveButton" baseClass="btn btn-mini" alt="Resolve"> <i class="icon-ok"></i> </div>
     <div data-dojo-type="dijit.form.Button" data-dojo-attach-point="deleteButton" baseClass="btn btn-danger btn-mini" alt="Delete"> <i class="icon-trash icon-white"></i>    </div>
   </div>
-  <span class="diddoData" data-dojo-attach-point="descriptionNode" class="diddoDescription"></span><br/>
-  <span class="diddoData">Sprint: <span data-dojo-attach-point="sprintNode"></span></span><br/>
-  <span class="diddoData">Submitter: <span data-dojo-attach-point="submitterNode"></span></span><br/>
-  <span class="diddoData">Submitted On: <span data-dojo-attach-point="submitteddateNode"></span></span>
+  <div class="diddoTitle pull-left"><span data-dojo-attach-point="submitterNode"></span></div><br/>
+  <span class="diddoData" data-dojo-attach-point="descriptionNode" class="diddoDescription"></span>
+  <br/>
+  <div style="border-top: solid; border-width: 1px; border-color: #000; margin-top: 3px;">
+  <span class="diddoData pull-left"><span data-dojo-attach-point="sprintNode"></span></span>
+  <span class="diddoData pull-right">Submitted On: <span data-dojo-attach-point="submitteddateNode"></span></span>
 </div>

@@ -19,6 +19,9 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 			this.descriptionNode.innerHTML = this.description;
 			this.sprintNode.innerHTML = this.sprint.sprintNo;
 			this.submitterNode.innerHTML = this.submitter.username;
+			if(this.submitter.username.length > 12) {
+				this.submitterNode.innerHTML = this.submitter.username.substr(0, 12) + "..";
+			}
 			this.submitteddateNode.innerHTML = this.submitteddate;
 			if(this.closed) {
 				this.set("class", "impediment green");
