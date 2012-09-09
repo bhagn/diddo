@@ -34,7 +34,7 @@ public class SprintController {
 	
 	@RequestMapping(value = "/{id}",params="userstories", headers = "Accept=application/json")
     @ResponseBody
-    public ResponseEntity<String> getUserJson(@PathVariable("id") String sprintNo) {
+    public ResponseEntity<String> getUserStoriesJson(@PathVariable("id") String sprintNo) {
         Sprint sprint = sprintDao.findBySprintNo(sprintNo);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");

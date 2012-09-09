@@ -89,7 +89,7 @@ public class UserStoryController {
 	 
     @RequestMapping(value = "/{id}",params="userstorydetails", headers = "Accept=application/json")
     @ResponseBody
-    public ResponseEntity<String> getUserJson(@PathVariable("id") String id) {
+    public ResponseEntity<String> getUserStoryJson(@PathVariable("id") String id) {
     	UserStory userStory = findById(new BigInteger(id));
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");
@@ -121,6 +121,37 @@ public class UserStoryController {
         userStoryDetail.completedTask=countCompleted;
         return new ResponseEntity<String>(userStoryDetail.toJson() , headers, HttpStatus.OK);
     }
+    
+    @RequestMapping(value = "/{id}",params="tasks", headers = "Accept=application/json")
+    @ResponseBody
+    public ResponseEntity<String> getTasksJson(@PathVariable("id") String id) {
+        UserStory us = findById(new BigInteger(id));
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json; charset=utf-8");
+        if (us == null) {
+            return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
+        }
+        List<Task> taskList = taskDao.findAllByUserStory(us);
+        //String userJson = new JSONSerializer().exclude("*.class").serialize(userList);
+        String jsonStr = Task.toJsonArray(taskList);
+        return new ResponseEntity<String>(jsonStr , headers, HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/{id}",params="exitcriterias", headers = "Accept=application/json")
+    @ResponseBody
+    public ResponseEntity<String> getExitCriteriasJson(@PathVariable("id") String id) {
+        UserStory us = findById(new BigInteger(id));
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json; charset=utf-8");
+        if (us == null) {
+            return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
+        }
+        List<ExitCriteria> ecList = exitCriteriaDao.findAllByUserStory(us);
+        //String userJson = new JSONSerializer().exclude("*.class").serialize(userList);
+        String jsonStr = ExitCriteria.toJsonArray(ecList);
+        return new ResponseEntity<String>(jsonStr , headers, HttpStatus.OK);
+    }
+    
 	private UserStory findById(BigInteger id){
 		List<UserStory> userStorys = userStoryDao.findAll();
 		for(UserStory userStory : userStorys){

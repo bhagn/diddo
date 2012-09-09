@@ -12,7 +12,7 @@ body {
 }
 
 .loginContainer {
-  width: 800px;
+  width: 850px;
   margin: auto;
   margin-top: 200px;
   display: inline-table;
@@ -27,7 +27,7 @@ body {
   font-size: 12px;
   font-style: italic;
   display: block;
-  margin-top: 50px;
+  margin-top: 20px;
 }
 .green-text {
   font-weight: 500;

@@ -13,11 +13,11 @@
     <spring:url value="/resources/j_spring_security_check" var="form_url" />
     <form id="loginForm" name="f" action="${fn:escapeXml(form_url)}" method="POST" class="loginFormContainer pull-right">
       <span class="loginFormLabel">Username</span>
-      <input type="text" placeholder="Username" name="j_username"/>
+      <input type="text" placeholder="Username" name="j_username" autofocus="autofocus"/>
       <span class="loginFormLabel">Password</span>
       <input type="password" placeholder="Password" name="j_password"/>
       <br/>
-      <input id="login" type="button" value="Login" class="btn btn-success btn-mini" style="margin-top: 5px;display:block; float:right;" />
+      <input id="login" type="submit" value="Login" class="btn btn-success btn-mini" style="margin-top: 5px;display:block; float:right;" />
       <script>
           require(["dojo/_base/fx", "dojo/fx", "dojo/dom", "dojo/on", "dojo/domReady!"], function(baseFx, fx, dom, on) {
         	var submitButton = dom.byId("login");

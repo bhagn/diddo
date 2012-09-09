@@ -9,7 +9,7 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 		done: false,
 		baseClass: "exitcriteria",
 		
-		constructor: function() {
+		constructor: function(exitCriteriaObject) {
 			this.service = new RestUI("exitcriterias");
 		},
 		

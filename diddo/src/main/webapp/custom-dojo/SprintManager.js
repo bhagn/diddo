@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo/dom-construct", "dojo/ready", "dojo/on", "dojo/_base/event", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin", "dijit/layout/_LayoutWidget", "dijit/_Container", "dojo/text!./templates/SprintManager.html", "custom/DiddoRestUI", "custom/Team", "custom/UserStory", "custom/UserStoryDetails",
+define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo/dom-construct", "dojo/ready", "dojo/on", "dojo/_base/event", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin", "dijit/layout/_LayoutWidget", "dijit/_Container", "dojo/text!./templates/SprintManager.html", "custom/DiddoRestUI", "custom/Team", "custom/UserStory", "custom/UserStoryDetails", "custom/Task",
         "dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dijit/form/Button", "dijit/form/Form", "dijit/form/TextBox", "dijit/form/ValidationTextBox", "dijit/form/Select", "dijit/form/CheckBox"],
 		function(declare, xhr, parser, dom, domConstruct, ready, on, event, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _LayoutWidget, _Container, template, RestUI, Team) {
 	return declare("SprintManager", [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _Container], {
@@ -12,7 +12,7 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 		constructor: function() {
 			this.sprintService = new RestUI("sprints");
 			this.userStoryService = new RestUI("userstorys");
-			this.taskStoryService = new RestUI("tasks");
+			this.taskService = new RestUI("tasks");
 			this.exitCriteriaService = new RestUI("exitcriterias");
 		},
 		
@@ -82,6 +82,7 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 		_showUserStories: function() {
 			var us = this.sprintDropdownNode.options[this.sprintDropdownNode.selectedIndex].userStories;
 			this._cleanup(this.userStoriesNode);
+			this._cleanup(this.userStoryNode);
 			if(us.length == 0) {
 				this.userStoriesNode.innerHTML = "There are no User Stories defined in this Sprint";
 			} else {
@@ -97,6 +98,9 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 			var widget = this;
 			this._cleanup(this.taskNode);
 			this.userStoryService.get(userStory.id, "tasks", function(tasks) {
+				if(tasks.length == 0) {
+					widget.taskNode.innerHTML = "There are no Tasks defined for this User Story.";
+				}
 				for(var i=0; i<tasks.length; i++) {
 					widget.taskNode.appendChild(new Task(tasks[i], taskService).domNode);
 				}
@@ -130,6 +134,13 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 				event.stop(evt);
 				widget.userStoryService.add(function(userStory) {
 					widget._addUserStoryToUI(userStory);
+				});
+			});
+			
+			on(this.addTaskButton, "click", function(evt) {
+				event.stop(evt);
+				widget.taskService.add(function(task) {
+					widget.taskNode.appendChild(new Task(tasks[i], widget.taskService).domNode);
 				});
 			});
 			
