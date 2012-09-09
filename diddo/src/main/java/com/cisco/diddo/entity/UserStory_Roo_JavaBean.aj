@@ -74,27 +74,27 @@ privileged aspect UserStory_Roo_JavaBean {
         this.color = color;
     }
     
-    public Boolean UserStory.getSpillOver() {
+    public boolean UserStory.getSpillOver() {
         return this.spillOver;
     }
     
-    public void UserStory.setSpillOver(Boolean spillOver) {
+    public void UserStory.setSpillOver(boolean spillOver) {
         this.spillOver = spillOver;
     }
     
-    public Boolean UserStory.getUnplanned() {
+    public boolean UserStory.getUnplanned() {
         return this.unplanned;
     }
     
-    public void UserStory.setUnplanned(Boolean unplanned) {
+    public void UserStory.setUnplanned(boolean unplanned) {
         this.unplanned = unplanned;
     }
     
-    public Boolean UserStory.getComplex() {
+    public boolean UserStory.getComplex() {
         return this.complex;
     }
     
-    public void UserStory.setComplex(Boolean complex) {
+    public void UserStory.setComplex(boolean complex) {
         this.complex = complex;
     }
     

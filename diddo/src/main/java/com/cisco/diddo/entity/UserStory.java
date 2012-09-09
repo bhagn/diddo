@@ -47,11 +47,11 @@ public class UserStory {
 
     private String color;
 
-    private Boolean spillOver;
+    private boolean spillOver;
 
-    private Boolean unplanned;
+    private boolean unplanned;
     
-    private Boolean complex;
+    private boolean complex;
 
     @NotNull
     @ManyToOne
