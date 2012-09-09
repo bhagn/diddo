@@ -39,7 +39,7 @@ privileged aspect ExitCriteriaController_Roo_Controller_Json {
         return new ResponseEntity<String>(ExitCriteria.toJsonArray(result), headers, HttpStatus.OK);
     }
     
-    @RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
+   /* @RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> ExitCriteriaController.createFromJson(@RequestBody String json) {
         ExitCriteria exitCriteria = ExitCriteria.fromJsonToExitCriteria(json);
         exitCriteraDao.save(exitCriteria);
@@ -47,7 +47,7 @@ privileged aspect ExitCriteriaController_Roo_Controller_Json {
         headers.add("Content-Type", "application/json");
         return new ResponseEntity<String>(headers, HttpStatus.CREATED);
     }
-    
+    */
     @RequestMapping(value = "/jsonArray", method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> ExitCriteriaController.createFromJsonArray(@RequestBody String json) {
         for (ExitCriteria exitCriteria: ExitCriteria.fromJsonArrayToExitCriterias(json)) {

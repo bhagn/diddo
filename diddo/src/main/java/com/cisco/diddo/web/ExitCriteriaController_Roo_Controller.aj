@@ -3,15 +3,12 @@
 
 package com.cisco.diddo.web;
 
-import com.cisco.diddo.dao.ExitCriteraDao;
-import com.cisco.diddo.dao.UserStoryDao;
-import com.cisco.diddo.entity.ExitCriteria;
-import com.cisco.diddo.web.ExitCriteriaController;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,13 +18,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
+import com.cisco.diddo.entity.ExitCriteria;
+
 privileged aspect ExitCriteriaController_Roo_Controller {
     
-    @Autowired
+   /* @Autowired
     ExitCriteraDao ExitCriteriaController.exitCriteraDao;
     
     @Autowired
-    UserStoryDao ExitCriteriaController.userStoryDao;
+    UserStoryDao ExitCriteriaController.userStoryDao;*/
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String ExitCriteriaController.create(@Valid ExitCriteria exitCriteria, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {

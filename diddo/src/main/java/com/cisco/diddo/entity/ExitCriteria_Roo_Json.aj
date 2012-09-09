@@ -4,16 +4,26 @@
 package com.cisco.diddo.entity;
 
 import com.cisco.diddo.entity.ExitCriteria;
+import com.cisco.diddo.entity.UserStory_Roo_Json.BigDecimalTransformer;
+import com.cisco.diddo.entity.UserStory_Roo_Json.CalendarTransformer;
+
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
+import flexjson.transformer.AbstractTransformer;
+
+import java.math.BigInteger;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 privileged aspect ExitCriteria_Roo_Json {
     
     public String ExitCriteria.toJson() {
-        return new JSONSerializer().exclude("*.class").serialize(this);
+    	 return new JSONSerializer().exclude("*.class", "*.locale").transform(new BigDecimalTransformer(),BigInteger.class).transform(new CalendarTransformer(), Calendar.class).serialize(this);
     }
     
     public static ExitCriteria ExitCriteria.fromJsonToExitCriteria(String json) {
@@ -21,11 +31,25 @@ privileged aspect ExitCriteria_Roo_Json {
     }
     
     public static String ExitCriteria.toJsonArray(Collection<ExitCriteria> collection) {
-        return new JSONSerializer().exclude("*.class").serialize(collection);
+    	return new JSONSerializer().exclude("*.class", "*.locale").transform(new BigDecimalTransformer(),BigInteger.class).transform(new CalendarTransformer(), Calendar.class).serialize(collection);
     }
     
     public static Collection<ExitCriteria> ExitCriteria.fromJsonArrayToExitCriterias(String json) {
         return new JSONDeserializer<List<ExitCriteria>>().use(null, ArrayList.class).use("values", ExitCriteria.class).deserialize(json);
     }
+    public static class BigDecimalTransformer extends AbstractTransformer{ 
+  	   public void transform(Object object)
+  	   { 
+  		   getContext().writeQuoted(((BigInteger)object).toString());
+  	   }
+     }
+     public static class CalendarTransformer extends AbstractTransformer{ 
+  	   public void transform(Object object)
+  	   { 
+  		   DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+  		   Date date = ((Calendar)object).getTime();
+  		   getContext().writeQuoted(format.format(date));
+  	   }
+     }
     
 }
