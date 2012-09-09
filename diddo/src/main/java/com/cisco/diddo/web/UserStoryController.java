@@ -101,11 +101,11 @@ public class UserStoryController {
         userStoryDetail.description = userStory.getDescription();
         userStoryDetail.startDate = userStory.getStartDate();
         userStoryDetail.endDate = userStory.getEndDate();
-        List<ExitCriteria> exitCriteriaList = exitCriteriaDao.findAllByUserStory(userStory);
+        List<ExitCriteria> exitCriteriaList = findExitCriteriaByUserStory(userStory);
         for(ExitCriteria exitCriteria : exitCriteriaList){
         	userStoryDetail.exitcriterias.put(exitCriteria.getDescription() , exitCriteria.getDone());
         }
-        List<Task> taskList = taskDao.findAllByUserStory(userStory);
+        List<Task> taskList = findTaskByUserStory(userStory);
         int countInprogress = 0;
         int countCompleted = 0;
         for(Task task :taskList){
@@ -131,7 +131,7 @@ public class UserStoryController {
         if (us == null) {
             return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
         }
-        List<Task> taskList = taskDao.findAllByUserStory(us);
+        List<Task> taskList = findTaskByUserStory(us);
         //String userJson = new JSONSerializer().exclude("*.class").serialize(userList);
         String jsonStr = Task.toJsonArray(taskList);
         return new ResponseEntity<String>(jsonStr , headers, HttpStatus.OK);
@@ -146,7 +146,7 @@ public class UserStoryController {
         if (us == null) {
             return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
         }
-        List<ExitCriteria> ecList = exitCriteriaDao.findAllByUserStory(us);
+        List<ExitCriteria> ecList = findExitCriteriaByUserStory(us);
         //String userJson = new JSONSerializer().exclude("*.class").serialize(userList);
         String jsonStr = ExitCriteria.toJsonArray(ecList);
         return new ResponseEntity<String>(jsonStr , headers, HttpStatus.OK);
@@ -179,6 +179,28 @@ public class UserStoryController {
 		}
 		return null;
 	}
+	private List<ExitCriteria> findExitCriteriaByUserStory(UserStory us){
+		List<ExitCriteria> list = exitCriteriaDao.findAll();
+		List<ExitCriteria> conList = new ArrayList<ExitCriteria>();
+		for(ExitCriteria ec : list){
+			if(ec.getUserStory().getId().equals(us.getId())){
+			   conList.add(ec);
+			}
+		}
+		return conList;
+	}
+	
+	private List<Task> findTaskByUserStory(UserStory us){
+		List<Task> list = taskDao.findAll();
+		List<Task> conList = new ArrayList<Task>();
+		for(Task t : list){
+			if(t.getUserStory().getId().equals(us.getId())){
+			   conList.add(t);
+			}
+		}
+		return conList;
+	}
+	
 	private UserStory fromJsonToUserStory(String jsonStr){
 		UserStory userStory = null;
 		Map<String, String> deserialized = new JSONDeserializer<Map<String, String>>().deserialize(jsonStr);

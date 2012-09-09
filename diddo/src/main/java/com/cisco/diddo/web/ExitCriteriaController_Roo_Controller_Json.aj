@@ -81,7 +81,7 @@ privileged aspect ExitCriteriaController_Roo_Controller_Json {
         return new ResponseEntity<String>(headers, HttpStatus.OK);
     }
     
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
+   /* @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
     public ResponseEntity<String> ExitCriteriaController.deleteFromJson(@PathVariable("id") BigInteger id) {
         ExitCriteria exitCriteria = exitCriteraDao.findOne(id);
         HttpHeaders headers = new HttpHeaders();
@@ -91,6 +91,6 @@ privileged aspect ExitCriteriaController_Roo_Controller_Json {
         }
         exitCriteraDao.delete(exitCriteria);
         return new ResponseEntity<String>(headers, HttpStatus.OK);
-    }
+    }*/
     
 }
