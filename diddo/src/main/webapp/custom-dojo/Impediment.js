@@ -44,11 +44,9 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 			on(this.deleteButton, "click", function(evt) {
 				service.remove("" + widget.id, function(response) {
 					console.log("deleted: ", widget.id);
-					baseFX.animateProperty({
-						node: widget,
+					baseFX.fadeOut({
+						node: widget.id,
 						duration: 500,
-						delay: 200,
-						properties: {width: 0, height: 0},
 						onEnd: function(evt) {
 							widget.destroyRecursive();
 						}

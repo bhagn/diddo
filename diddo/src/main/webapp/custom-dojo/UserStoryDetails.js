@@ -17,7 +17,8 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 		id: null,
 		
 		constructor: function(userstoryObject) {
-			userstoryObject.id = "us-" + userstoryObject.id;
+			//if(userstoryObject.id.indexOf("us-") != 0)
+			    userstoryObject.id = "us-" + userstoryObject.id;
 			this.userStoryService = new RestUI("userstorys");
 			this.exitCriteriaService = new RestUI("exitcriterias");
 		},

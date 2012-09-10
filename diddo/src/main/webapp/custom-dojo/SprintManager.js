@@ -117,7 +117,10 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 				widget._cleanup(widget.taskNode);
 				
 				widget._loadTasks(us);
-				var details = new UserStoryDetails(us);
+				var obj = new Object();
+				for(var property in us)
+					obj[property] = us[property];
+				var details = new UserStoryDetails(obj);
 				widget.userStoryNode.appendChild(details.domNode);
 			});
 			this.userStoriesNode.appendChild(userStory.domNode);

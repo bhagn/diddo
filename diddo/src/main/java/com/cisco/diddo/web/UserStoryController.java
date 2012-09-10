@@ -183,7 +183,7 @@ public class UserStoryController {
 		List<ExitCriteria> list = exitCriteriaDao.findAll();
 		List<ExitCriteria> conList = new ArrayList<ExitCriteria>();
 		for(ExitCriteria ec : list){
-			if(ec.getUserStory().getId().equals(us.getId())){
+			if(ec.getUserStory() != null && ec.getUserStory().getId().equals(us.getId())){
 			   conList.add(ec);
 			}
 		}
@@ -194,7 +194,7 @@ public class UserStoryController {
 		List<Task> list = taskDao.findAll();
 		List<Task> conList = new ArrayList<Task>();
 		for(Task t : list){
-			if(t.getUserStory().getId().equals(us.getId())){
+			if(t.getUserStory() != null && t.getUserStory().getId().equals(us.getId())){
 			   conList.add(t);
 			}
 		}
