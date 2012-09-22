@@ -9,7 +9,7 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 		burntPoints: null,
 		startDate: null,
 		endDate: null,
-		color: "white",
+		color: "blue",
 		unplanned: false,
 		spillOver: false,
 		sprint: null,

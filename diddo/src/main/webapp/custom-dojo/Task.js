@@ -1,4 +1,4 @@
-define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo/dom-construct", "dojo/ready", "dojo/on", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin", "dijit/layout/_LayoutWidget", "dijit/_Container", "dojo/text!./templates/Impediment.html", "custom/DiddoRestUI", "dojo/_base/fx", "dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dijit/form/Button"],
+define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo/dom-construct", "dojo/ready", "dojo/on", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin", "dijit/layout/_LayoutWidget", "dijit/_Container", "dojo/text!./templates/Task.html", "custom/DiddoRestUI", "dojo/_base/fx", "dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dijit/form/Button"],
 		function(declare, xhr, parser, dom, domConstruct, ready, on, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _LayoutWidget, _Container, template, RestUI, baseFX){
 			return declare("Task", [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _Container], {
 				templateString: template,
@@ -12,7 +12,7 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 				unplanned: false,
 				owner: null,
 				userStory: null,
-				baseClass: "task orange",
+				baseClass: "task white",
 				
 				constructor: function(taskObject, taskService){
 					this.taskService = taskService || new RestUI('tasks');
@@ -20,26 +20,37 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 				
 				postCreate: function(){
 					this.taskNumberNode.innerHTML = this.taskNumber;
-					this.descriptionNode.innerHTML = this.description;
-					this.statusNode.innerHTML = this.status;
 					this.ownerNode.innerHTML = this.owner.username;
-					this.userStoryNode.innerHTML = this.userStory.title;
-					this.startdateNode.innerHTML = this.startDate;
-					if(this.complex) {
-						this.set("class", "task red");
+					this.descriptionNode.innerHTML = this.description;
+					this.taskHeaderNode.setAttribute("class", "diddoTaskHeader " + this.userStory.color);
+					this.updateControls();
+					
+					//this.setupEventHandlers();
+				},
+				
+				updateControls: function() {
+					this.changeOwnerButton.style.display = "none";
+					this.moveBackButton.style.display = "none";
+					this.markAsDoneButton.style.display = "none";
+					this.putADotButton.style.display = "none";
+					
+					if(this.status == "NEW_TASK" || this.status == "IN_PROGRESS") {
+						this.changeOwnerButton.style.display = "";
 					}
-					if(this.endDate!=null) {
-						this.set("class", "task green");
-						this.completeButton.set("style", "display: none;");
+					if (this.status == "IN_PROGRESS" || this.status == "COMPLETED") {
+						this.moveBackButton.style.display = "";
 					}
-					this.setupEventHandlers();
+					if(this.status == "IN_PROGRESS") {
+						this.markAsDoneButton.style.display = "";
+						this.putADotButton.style.display = "";
+					}
 				},
 				
 				setupEventHandlers:function(){
 					var widget = this;
 					var service = this.taskService;
 					//when completeButton (defined in 'Task.html') is clicked
-					on(this.completeButton, "click", function(evt) {
+					on(this.markAsDoneButton, "click", function(evt) {
 						widget.taskService.get(widget.id, "close" ,function(response) {
 							widget.completeButton.destroy();
 							widget.set("class", "task green");
@@ -50,11 +61,9 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 					on(this.deleteButton, "click", function(evt) {
 						widget.taskService.remove("" + widget.id, function(response) {
 							console.log("deleted: ", widget.id);
-							baseFX.animateProperty({
-								node: widget,
+							baseFX.fadeOut({
+								node: widget.id,
 								duration: 500,
-								delay: 200,
-								properties: {width: 0, height: 0},
 								onEnd: function(evt) {
 									widget.destroyRecursive();
 								}

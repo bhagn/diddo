@@ -98,11 +98,13 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 			var widget = this;
 			this._cleanup(this.taskNode);
 			this.userStoryService.get(userStory.id, "tasks", function(tasks) {
+				console.log("Tasks: ", tasks);
 				if(tasks.length == 0) {
 					widget.taskNode.innerHTML = "There are no Tasks defined for this User Story.";
 				}
 				for(var i=0; i<tasks.length; i++) {
-					widget.taskNode.appendChild(new Task(tasks[i], taskService).domNode);
+					var task = new Task(tasks[i], widget.taskService, userStory.color);
+					widget.taskNode.appendChild(task.domNode);
 				}
 			});
 		},
@@ -172,6 +174,7 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 				if(widget)
 					widget.destroyRecursive();
 			}
+			container.innerHTML = "";
 		}
 		
 	});

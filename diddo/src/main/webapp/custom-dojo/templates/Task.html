@@ -1,12 +1,16 @@
 <div>
-  <div class="diddoControls">
-    <div data-dojo-type="dijit.form.Button" data-dojo-attach-point="completeButton" baseClass="btn btn-mini" alt="Complete"> <i class="icon-ok"></i> </div>
-    <div data-dojo-type="dijit.form.Button" data-dojo-attach-point="deleteButton" baseClass="btn btn-danger btn-mini" alt="Delete"> <i class="icon-trash icon-white"></i>    </div>
+  <div class="diddoTaskHeader blue" data-dojo-attach-point="taskHeaderNode">
+    <div class="diddoCircle white"><p data-dojo-attach-point="taskNumberNode"></p></div>
+    <div class="diddoTaskOwner" data-dojo-attach-point="ownerNode"></div>
+    <div class="diddoTaskControlBar">
+    <span data-dojo-attach-point="moveBackButton" title="Move back the task" style="display:none;"><i class="icon-circle-arrow-left" ></i></span>
+    <span data-dojo-attach-point="markAsDoneButton" title="Mark Task as Done" style="display:none;"><i class="icon-ok-sign"></i></span>
+    <span data-dojo-attach-point="changeOwnerButton" title="Assign/Change Owner" style="display:none;"><i class="icon-user"></i></span>
+    <span data-dojo-attach-point="editButton" title="Edit Task"><i class="icon-edit"></i></span>
+    <span data-dojo-attach-point="deleteButton" title="Delete Task"><i class="icon-remove-sign"></i></span>
+    <span data-dojo-attach-point="putADotButton" title="Put a DOT (Incomplete task)" style="display:none;"><i class="icon-certificate"></i></span>
   </div>
-  <span class="diddoData">Task Number: <span data-dojo-attach-point="taskNumberNode"></span></span><br/>
-  <span class="diddoData" data-dojo-attach-point="descriptionNode" class="diddoDescription"></span><br/>
-  <span class="diddoData">Status: <span data-dojo-attach-point="statusNode"></span></span><br/>
-  <span class="diddoData">Owner: <span data-dojo-attach-point="ownerNode"></span></span>
-  <span class="diddoData">User Story: <span data-dojo-attach-point="userStoryNode"></span></span>
-  <span class="diddoData">Start Date: <span data-dojo-attach-point="startdateNode"></span></span>
+  </div>
+  <div class="diddoTaskDescription" data-dojo-attach-point="descriptionNode"></div>
+  
 </div>
