@@ -45,6 +45,7 @@ public class DiddoAuthenticationProvider implements AuthenticationProvider{
 	        }
 	    	Properties props = PropertiesLoaderUtils.loadAllProperties(propertyFile);
 	        String val = props.getProperty(userName);
+	        System.out.println("Value: " + val + ", username: " + userName);
 	        if(passWord.equals(val)){
 	        	//@TODO Uncomment and comment previous  lines
           	    //authorities.add(new GrantedAuthorityImpl("ROLE_VIEW"));

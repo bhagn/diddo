@@ -29,7 +29,7 @@
                     <label for="_password_id">Password:</label>
                 </td>
                 <td>
-                    <input data-dojo-type="dijit.form.TextBox" id="_password_id" name="password" required="true" type="text"/>
+                    <input data-dojo-type="dijit.form.TextBox" id="_password_id" name="password" required="true" type="password"/>
                 </td>
             </tr>
             <tr>

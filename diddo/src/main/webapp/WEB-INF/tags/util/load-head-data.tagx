@@ -2,8 +2,9 @@
 
   <jsp:output omit-xml-declaration="yes" />
 
-  <spring:url value="http://ajax.googleapis.com/ajax/libs/dojo/1.8.0/dojo/dojo.js" var="dojo_url" />
-  <spring:url value="http://ajax.googleapis.com/ajax/libs/dojo/1.8.0/dijit/themes/claro/claro.css" var="claro_url" />
+  <spring:url value="http://ajax.googleapis.com/ajax/libs/dojo/1.8.3/dojo/dojo.js" var="dojo_url" />
+  <spring:url value="http://ajax.googleapis.com/ajax/libs/dojo/1.8.3/dijit/themes/claro/claro.css" var="claro_url" />
+  <spring:url value="http://ajax.googleapis.com/ajax/libs/dojo/1.8.3/dijit/themes/dijit.css" var="dijit_url" />
   <spring:url value="/resources/css/bootstrap.css" var="bootstrap_css_url" />
   <spring:url value="/resources/css/bootstrap-responsive.css" var="bootstrap_responsive_url" />
   <spring:url value="/resources/css/custom.css" var="custom_css_url" />
@@ -11,6 +12,7 @@
   <spring:url value="/resources/images/favicon.ico" var="favicon" />
   
   <link rel="stylesheet" type="text/css" href="${claro_url}" />
+  <link rel="stylesheet" type="text/css" href="${dijit_url}" />
   <link rel="stylesheet" type="text/css" media="screen" href="${bootstrap_css_url}" />
   <link rel="stylesheet" type="text/css" media="screen" href="${bootstrap_responsive_url}" />
   <link rel="stylesheet" type="text/css" media="screen" href="${custom_css_url}" />

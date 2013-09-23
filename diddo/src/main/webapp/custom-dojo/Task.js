@@ -1,5 +1,5 @@
-define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo/dom-construct", "dojo/ready", "dojo/on", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin", "dijit/layout/_LayoutWidget", "dijit/_Container", "dojo/text!./templates/Task.html", "custom/DiddoRestUI", "dojo/_base/fx", "dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dijit/form/Button"],
-		function(declare, xhr, parser, dom, domConstruct, ready, on, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _LayoutWidget, _Container, template, RestUI, baseFX){
+define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo/dom-construct", "dojo/ready", "dojo/on", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin", "dijit/layout/_LayoutWidget", "dijit/_Container", "dojo/text!./templates/Task.html", "custom/DiddoRestUI", "dojo/_base/fx", "dojo/dom-class", "dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dijit/form/Button"],
+		function(declare, xhr, parser, dom, domConstruct, ready, on, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _LayoutWidget, _Container, template, RestUI, baseFX, domClass){
 			return declare("Task", [_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, _Container], {
 				templateString: template,
 				taskNumber: null,
@@ -25,7 +25,7 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 					this.taskHeaderNode.setAttribute("class", "diddoTaskHeader " + this.userStory.color);
 					this.updateControls();
 					
-					//this.setupEventHandlers();
+					this.setupEventHandlers();
 				},
 				
 				updateControls: function() {
@@ -44,6 +44,11 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 						this.markAsDoneButton.style.display = "";
 						this.putADotButton.style.display = "";
 					}
+					
+					if(this.status === "COMPLETED") {
+						domClass.toggle(this.taskNumberNode.parentNode, "green");
+						domClass.toggle(this.descriptionNode, "task-done");
+					}
 				},
 				
 				setupEventHandlers:function(){
@@ -52,8 +57,9 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 					//when completeButton (defined in 'Task.html') is clicked
 					on(this.markAsDoneButton, "click", function(evt) {
 						widget.taskService.get(widget.id, "close" ,function(response) {
-							widget.completeButton.destroy();
-							widget.set("class", "task green");
+							widget.markAsDoneButton.style.display = "none";
+							domClass.toggle(widget.taskNumberNode.parentNode, "task green");
+							domClass.toggle(widget.descriptionNode, "task-done");
 						});
 					});
 					
