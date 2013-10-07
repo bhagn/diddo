@@ -49,6 +49,10 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 						domClass.toggle(this.taskNumberNode.parentNode, "green");
 						domClass.toggle(this.descriptionNode, "task-done");
 					}
+					
+					if(this.status == "IN_PROGRESS") {
+						domClass.toggle(this.taskNumberNode.parentNode, "red");
+					}
 				},
 				
 				setupEventHandlers:function(){

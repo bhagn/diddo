@@ -46,9 +46,13 @@ public class ExitCriteriaController {
 			if(exitCriteria == null){
 				exitCriteria = new ExitCriteria(); 
 			}
+			
 	        String usId = deserialized.get("userStory");
 	        UserStory us = findUserStoryById(new BigInteger(usId));
-	        exitCriteria.setUserStory(us);
+	        if(us != null) {
+		        exitCriteria.setUserStory(us);
+	        }
+	        
 	        exitCriteria.setDescription(deserialized.get("description"));
 			exitCriteraDao.save(exitCriteria);
 	        HttpHeaders headers = new HttpHeaders();

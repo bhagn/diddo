@@ -127,6 +127,8 @@
 	font-size: 10px;
 	padding: 5px;
 	text-align: justify;
+	height: 60px;
+	overflow-y: auto;
 }
 
 .diddoData {

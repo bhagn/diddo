@@ -8,6 +8,7 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 		description: null,
 		done: false,
 		baseClass: "exitcriteria",
+		userStory: null,
 		
 		constructor: function(exitCriteriaObject) {
 			this.service = new RestUI("exitcriterias");
@@ -30,7 +31,7 @@ define(["dojo/_base/declare", "dojo/_base/xhr", "dojo/parser", "dojo/dom", "dojo
 			var widget = this;
 			on(this.okButton, "click", function(evt) {
 				evt.stopPropagation();
-				widget.service.restAPI.updateItem({id:widget.id, description: widget.description, done: true}, function(response) {
+				widget.service.restAPI.updateItem({id:widget.id, description: widget.description, done: true, userStory: widget.userStory}, function(response) {
 					widget.done = true;
 					widget._loadExitCriteria();
 				}, widget.service.showError);
